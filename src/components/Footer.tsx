@@ -42,7 +42,7 @@ export function Footer() {
               <li>Fabriqué en France</li>
               <li>Formules non-dopantes, conformes FEI</li>
               <li>Expédition sous 48h</li>
-              <li>service.clients@nutrition-equine.example</li>
+              <li>contact@nutritionequine.com</li>
             </ul>
           </div>
           <div>
@@ -109,10 +109,7 @@ export function Footer() {
           © {new Date().getFullYear()} Nutrition Équine — Tous droits réservés
         </p>
 
-        <p className="mt-10 border-t border-oat-100/10 pt-6 text-xs text-oat-100/50">
-          Site de démonstration généré à titre d'exemple — aucune donnée réelle, aucune commande
-          réelle.
-        </p>
+        
       </div>
     </footer>
     </>
