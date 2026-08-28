@@ -109,10 +109,7 @@ export function Footer() {
           © {new Date().getFullYear()} Nutrition Équine — Tous droits réservés
         </p>
 
-        <p className="mt-10 border-t border-oat-100/10 pt-6 text-xs text-oat-100/50">
-          Site de démonstration généré à titre d'exemple — aucune donnée réelle, aucune commande
-          réelle.
-        </p>
+        
       </div>
     </footer>
     </>
