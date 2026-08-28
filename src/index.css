@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /*
+   * Psychologie des couleurs — Nutrition Équine
+   * ------------------------------------
+   * HUNTER (marine) : confiance, expertise, premium. Ancre e-commerce
+   *   (achat = décision « sérieuse »). Réduit l’anxiété sur un produit santé animale.
+   * OAT (crème) : chaleur, naturel, propreté. Évoque le fourrage / la lumière
+   *   d’écurie sans agressivité. Favorise le temps de lecture.
+   * LEATHER (vert) : nature, vitalité, « Vert » de la marque. Validation,
+   *   stock dispo, succès — pas le CTA d’achat principal (évite confusion
+   *   « bio marketing » saturé).
+   * STRAW (or) : récompense, qualité, avis. Attire l’œil sans crier « promo ».
+   * FLAG : ancrage France (confiance réglementaire / fabrication locale).
+   * INK : lisibilité, sérieux éditorial.
+   */
+
+  /* Marine — confiance & autorité (CTA principal, header, titres) */
+  --color-hunter-950: #0a1728;
+  --color-hunter-900: #10233d;
+  --color-hunter-800: #163254;
+  --color-hunter-700: #1e4270;
+  --color-hunter-600: #2c5690;
+
+  /* Crème — fond « naturel », repos visuel */
+  --color-oat-50: #fffdf8;
+  --color-oat-100: #f7f3e9;
+  --color-oat-200: #f1ebda;
+  --color-oat-300: #e6ddc2;
+
+  /* Vert prairie — nature, validation, marque */
+  --color-leather-700: #145c34;
+  --color-leather-600: #1c8a4c;
+  --color-leather-500: #24a45c;
+
+  /* Or paille — social proof, distinction */
+  --color-straw-500: #f2a733;
+  --color-straw-400: #f5bc5c;
+
+  /* France */
+  --color-flag-blue: #1e4270;
+  --color-flag-red: #c8102e;
+
+  /* Texte */
+  --color-ink-900: #1c2333;
+  --color-ink-600: #58607a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-oat-100);
+  color: var(--color-ink-900);
+  font-family: var(--font-body);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-leather-600);
+  outline-offset: 2px;
+}
+
+/* Animations toasts : Framer Motion (src/context/ToastContext.tsx) */
+
+
+/* —— Hiérarchie CTA ———————————————————————————————————— */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-hunter-900);
+  color: var(--color-oat-50);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.875rem 1.5rem;
+  transition: background-color 0.15s ease;
+}
+.btn-primary:hover { background-color: var(--color-hunter-800); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-primary-inverse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-oat-50);
+  color: var(--color-hunter-900);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.875rem 1.5rem;
+  transition: background-color 0.15s ease;
+}
+.btn-primary-inverse:hover { background-color: var(--color-oat-200); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1.5px solid var(--color-hunter-900);
+  background: transparent;
+  color: var(--color-hunter-900);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.8125rem 1.5rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.btn-secondary:hover {
+  background-color: var(--color-hunter-900);
+  color: var(--color-oat-50);
+}
+
+.btn-ghost {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--color-hunter-900);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+.btn-ghost:hover { color: var(--color-leather-600); }
+
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--color-hunter-800) 20%, transparent);
+  background: var(--color-oat-50);
+  color: var(--color-hunter-900);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 0.625rem 1rem;
+  transition: background-color 0.15s ease;
+}
+.btn-quiet:hover { background-color: var(--color-oat-200); }
+
+.btn-block { width: 100%; }

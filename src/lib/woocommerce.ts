@@ -1,0 +1,322 @@
+import type { Product, Category } from '../types'
+import { PRODUCTS } from '../data/products'
+
+// --- Connexion à un backend WooCommerce (optionnel) -----------------------
+// Renseigne ces variables dans .env (voir .env.example).
+// Sans elles : mode démo (localStorage pour les comptes).
+
+const WC_URL = import.meta.env.VITE_WC_URL as string | undefined
+const WC_KEY = import.meta.env.VITE_WC_CONSUMER_KEY as string | undefined
+const WC_SECRET = import.meta.env.VITE_WC_CONSUMER_SECRET as string | undefined
+/** Optionnel — endpoint JWT (plugin JWT Authentication for WP-API) */
+const JWT_ENDPOINT =
+  (import.meta.env.VITE_WC_JWT_ENDPOINT as string | undefined) ||
+  (WC_URL ? `${WC_URL}/wp-json/jwt-auth/v1/token` : undefined)
+
+const isConfigured = Boolean(WC_URL && WC_KEY && WC_SECRET)
+
+function authHeader(): HeadersInit {
+  return { Authorization: `Basic ${btoa(`${WC_KEY}:${WC_SECRET}`)}` }
+}
+
+function mapCategory(wcCategorySlug: string | undefined): Category {
+  const known: Category[] = [
+    'alimentation',
+    'digestion',
+    'articulations',
+    'respiration',
+    'recuperation',
+    'senior',
+    'sabots',
+    'robe-peau',
+    'stress',
+    'electrolytes',
+    'aliments',
+  ]
+  return (known.find((c) => c === wcCategorySlug) ?? 'alimentation') as Category
+}
+
+function mapWooCommerceProduct(wc: any): Product {
+  const meta = (key: string) => wc.meta_data?.find((m: any) => m.key === key)?.value
+
+  return {
+    id: String(wc.id),
+    slug: wc.slug,
+    sku: wc.sku || `CV-${wc.id}`,
+    name: wc.name,
+    category: mapCategory(wc.categories?.[0]?.slug),
+    tagline: wc.short_description?.replace(/<[^>]+>/g, '') || '',
+    price: Number(wc.price) || 0,
+    compareAtPrice: wc.regular_price !== wc.price ? Number(wc.regular_price) : undefined,
+    rating: Number(wc.average_rating) || 4.5,
+    reviewCount: wc.rating_count || 0,
+    format: meta('format') || '—',
+    sizes: meta('sizes') ? meta('sizes').split('|') : [meta('format') || '—'],
+    description: wc.description?.replace(/<[^>]+>/g, '') || '',
+    benefits: meta('benefits')?.split('|') || [],
+    composition: meta('composition')
+      ? JSON.parse(meta('composition'))
+      : [{ label: 'Composition', value: 'À renseigner dans WooCommerce' }],
+    posologie: meta('posologie') || 'À renseigner dans WooCommerce',
+    image: wc.images?.[0]?.src || '',
+  }
+}
+
+export async function getProducts(): Promise<Product[]> {
+  if (!isConfigured) return PRODUCTS
+
+  const res = await fetch(`${WC_URL}/wp-json/wc/v3/products?per_page=50`, {
+    headers: { ...authHeader() },
+  })
+  if (!res.ok) {
+    console.warn('WooCommerce API indisponible, utilisation des données de démo.')
+    return PRODUCTS
+  }
+  const data = await res.json()
+  return data.map(mapWooCommerceProduct)
+}
+
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const products = await getProducts()
+  return products.find((p) => p.slug === slug)
+}
+
+export const wooCommerceConfigured = isConfigured
+
+// —— Comptes clients ——————————————————————————————————————
+
+export type CustomerAccountType = 'particulier' | 'professionnel'
+
+export interface RegisterCustomerPayload {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  accountType: CustomerAccountType
+  company?: string
+  vat?: string
+  newsletter?: boolean
+}
+
+export interface CustomerSession {
+  id: number | string
+  email: string
+  firstName: string
+  lastName: string
+  accountType: CustomerAccountType
+  /** Présent si JWT branché */
+  token?: string
+  /** true = stocké localement (mode démo) */
+  demo: boolean
+}
+
+export class ApiError extends Error {
+  status?: number
+  code?: string
+  constructor(message: string, status?: number, code?: string) {
+    super(message)
+    this.name = 'ApiError'
+    this.status = status
+    this.code = code
+  }
+}
+
+const DEMO_ACCOUNTS_KEY = 'crin-vert-demo-accounts'
+const SESSION_KEY = 'crin-vert-session'
+
+interface DemoAccount {
+  id: string
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  accountType: CustomerAccountType
+  company?: string
+  vat?: string
+  newsletter?: boolean
+  createdAt: string
+}
+
+function readDemoAccounts(): DemoAccount[] {
+  try {
+    const raw = localStorage.getItem(DEMO_ACCOUNTS_KEY)
+    return raw ? (JSON.parse(raw) as DemoAccount[]) : []
+  } catch {
+    return []
+  }
+}
+
+function writeDemoAccounts(list: DemoAccount[]) {
+  localStorage.setItem(DEMO_ACCOUNTS_KEY, JSON.stringify(list))
+}
+
+function sessionFromDemo(acc: DemoAccount): CustomerSession {
+  return {
+    id: acc.id,
+    email: acc.email,
+    firstName: acc.firstName,
+    lastName: acc.lastName,
+    accountType: acc.accountType,
+    demo: true,
+  }
+}
+
+/** Crée un client WooCommerce (ou en local si API non configurée). */
+export async function registerCustomer(
+  payload: RegisterCustomerPayload,
+): Promise<CustomerSession> {
+  if (!isConfigured) {
+    // —— Mode démo : localStorage ——————————————————————
+    const accounts = readDemoAccounts()
+    const email = payload.email.trim().toLowerCase()
+    if (accounts.some((a) => a.email === email)) {
+      throw new ApiError('Un compte existe déjà avec cette adresse e-mail.', 400, 'email_exists')
+    }
+    const account: DemoAccount = {
+      id: `demo-${Date.now()}`,
+      email,
+      password: payload.password,
+      firstName: payload.firstName.trim(),
+      lastName: payload.lastName.trim(),
+      accountType: payload.accountType,
+      company: payload.company,
+      vat: payload.vat,
+      newsletter: payload.newsletter,
+      createdAt: new Date().toISOString(),
+    }
+    accounts.push(account)
+    writeDemoAccounts(accounts)
+    const session = sessionFromDemo(account)
+    persistSession(session)
+    return session
+  }
+
+  // —— WooCommerce REST ————————————————————————————————
+  const body: Record<string, unknown> = {
+    email: payload.email.trim(),
+    first_name: payload.firstName.trim(),
+    last_name: payload.lastName.trim(),
+    username: payload.email.trim(),
+    password: payload.password,
+    meta_data: [
+      { key: 'account_type', value: payload.accountType },
+      { key: 'newsletter', value: payload.newsletter ? '1' : '0' },
+    ],
+  }
+
+  if (payload.accountType === 'professionnel') {
+    body.billing = {
+      company: payload.company?.trim() || '',
+      email: payload.email.trim(),
+      first_name: payload.firstName.trim(),
+      last_name: payload.lastName.trim(),
+    }
+    ;(body.meta_data as { key: string; value: string }[]).push(
+      { key: 'vat_number', value: payload.vat?.trim() || '' },
+      { key: 'billing_vat', value: payload.vat?.trim() || '' },
+    )
+  }
+
+  const res = await fetch(`${WC_URL}/wp-json/wc/v3/customers`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...authHeader(),
+    },
+    body: JSON.stringify(body),
+  })
+
+  const data = await res.json().catch(() => ({}))
+
+  if (!res.ok) {
+    const msg =
+      data?.message ||
+      (data?.code === 'registration-error-email-exists'
+        ? 'Un compte existe déjà avec cette adresse e-mail.'
+        : 'Impossible de créer le compte. Réessayez plus tard.')
+    throw new ApiError(msg, res.status, data?.code)
+  }
+
+  const session: CustomerSession = {
+    id: data.id,
+    email: data.email,
+    firstName: data.first_name || payload.firstName,
+    lastName: data.last_name || payload.lastName,
+    accountType: payload.accountType,
+    demo: false,
+  }
+  persistSession(session)
+  return session
+}
+
+/** Connexion : JWT si configuré, sinon comptes démo localStorage. */
+export async function loginCustomer(
+  email: string,
+  password: string,
+): Promise<CustomerSession> {
+  const normalized = email.trim().toLowerCase()
+
+  // JWT (plugin WordPress)
+  if (JWT_ENDPOINT && isConfigured) {
+    const res = await fetch(JWT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: email.trim(), password }),
+    })
+    const data = await res.json().catch(() => ({}))
+    if (!res.ok) {
+      throw new ApiError(
+        data?.message || 'Identifiants incorrects.',
+        res.status,
+        data?.code,
+      )
+    }
+    const session: CustomerSession = {
+      id: data.user_id ?? data.data?.user?.id ?? email,
+      email: data.user_email || email,
+      firstName: data.user_display_name?.split(' ')[0] || '',
+      lastName: data.user_display_name?.split(' ').slice(1).join(' ') || '',
+      accountType: 'particulier',
+      token: data.token,
+      demo: false,
+    }
+    persistSession(session)
+    return session
+  }
+
+  // Mode démo
+  if (!isConfigured) {
+    const accounts = readDemoAccounts()
+    const acc = accounts.find((a) => a.email === normalized && a.password === password)
+    if (!acc) {
+      throw new ApiError('E-mail ou mot de passe incorrect.', 401, 'invalid_credentials')
+    }
+    const session = sessionFromDemo(acc)
+    persistSession(session)
+    return session
+  }
+
+  // WC configuré mais pas de JWT : on ne peut pas authentifier côté client de façon sûre
+  throw new ApiError(
+    'Connexion API non configurée. Ajoutez le plugin JWT Authentication et VITE_WC_JWT_ENDPOINT, ou testez en mode démo (sans clés WC).',
+    501,
+    'auth_not_configured',
+  )
+}
+
+export function persistSession(session: CustomerSession) {
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+}
+
+export function loadSession(): CustomerSession | null {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY)
+    return raw ? (JSON.parse(raw) as CustomerSession) : null
+  } catch {
+    return null
+  }
+}
+
+export function clearSession() {
+  localStorage.removeItem(SESSION_KEY)
+}
