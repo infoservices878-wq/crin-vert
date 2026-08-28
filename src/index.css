@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-display: "Baloo 2", ui-rounded, "Source Sans 3", sans-serif;
   --font-body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
@@ -93,6 +93,7 @@ body {
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
   transition: background-color 0.15s ease;
 }
 .btn-primary:hover { background-color: var(--color-hunter-800); }
@@ -109,6 +110,7 @@ body {
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.875rem 1.5rem;
+  border-radius: 0.5rem;
   transition: background-color 0.15s ease;
 }
 .btn-primary-inverse:hover { background-color: var(--color-oat-200); }
@@ -125,6 +127,7 @@ body {
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.8125rem 1.5rem;
+  border-radius: 0.5rem;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 .btn-secondary:hover {
@@ -154,8 +157,23 @@ body {
   font-weight: 600;
   font-size: 0.8125rem;
   padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
   transition: background-color 0.15s ease;
 }
 .btn-quiet:hover { background-color: var(--color-oat-200); }
 
 .btn-block { width: 100%; }
+
+/* —— Coins arrondis par défaut ————————————————————————————
+   Boutons, champs et cadres gardent un léger arrondi par défaut.
+   Les classes utilitaires explicites (rounded-full, rounded-none…)
+   restent prioritaires : Tailwind les injecte dans la couche
+   "utilities", après cette couche "base". */
+@layer base {
+  button,
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea {
+    border-radius: 0.5rem;
+  }
+}

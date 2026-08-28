@@ -53,24 +53,28 @@ const PAYMENTS: {
     label: 'PayPal',
     bg: 'bg-white',
     Logo: () => (
-      <svg viewBox="0 0 48 32" className="h-6 w-9" aria-hidden="true">
+      <svg viewBox="0 0 48 32" className="h-7 w-9" aria-hidden="true">
         <text
-          x="14"
-          y="21"
+          x="23"
+          y="23"
+          textAnchor="middle"
           fontFamily="Arial, Helvetica, sans-serif"
-          fontWeight="700"
-          fontSize="16"
-          fill="#003087"
+          fontWeight="800"
+          fontStyle="italic"
+          fontSize="21"
+          fill="#009CDE"
         >
           P
         </text>
         <text
-          x="24"
-          y="21"
+          x="18"
+          y="23"
+          textAnchor="middle"
           fontFamily="Arial, Helvetica, sans-serif"
-          fontWeight="700"
-          fontSize="16"
-          fill="#009CDE"
+          fontWeight="800"
+          fontStyle="italic"
+          fontSize="21"
+          fill="#003087"
         >
           P
         </text>
@@ -83,30 +87,17 @@ const PAYMENTS: {
     bg: 'bg-[#1a1a1a]',
     Logo: () => (
       <svg viewBox="0 0 48 32" className="h-5 w-9" aria-hidden="true">
-        {/* CB monogram stylisé */}
-        <rect x="6" y="8" width="16" height="16" rx="2" fill="#fff" />
-        <rect x="26" y="8" width="16" height="16" rx="2" fill="#fff" />
         <text
-          x="14"
+          x="24"
           y="20"
           textAnchor="middle"
-          fontFamily="Arial, sans-serif"
+          fontFamily="Arial, Helvetica, sans-serif"
           fontWeight="800"
-          fontSize="11"
-          fill="#1a1a1a"
+          fontSize="14"
+          fill="#fff"
+          letterSpacing="0.5"
         >
-          C
-        </text>
-        <text
-          x="34"
-          y="20"
-          textAnchor="middle"
-          fontFamily="Arial, sans-serif"
-          fontWeight="800"
-          fontSize="11"
-          fill="#1a1a1a"
-        >
-          B
+          CB
         </text>
       </svg>
     ),

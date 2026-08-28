@@ -4,7 +4,7 @@ import { ProductIllustration } from './ProductIllustration'
 
 export function ProtocolCard({ protocol }: { protocol: Protocol }) {
   return (
-    <div className="flex flex-col border border-hunter-800/10 bg-oat-50 p-5">
+    <div className="flex flex-col rounded-lg border border-hunter-800/10 bg-oat-50 p-5">
       <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-hunter-900 px-3 py-1 font-display text-xs font-semibold text-oat-50">
         {protocol.duration}
       </span>

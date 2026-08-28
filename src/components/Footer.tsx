@@ -21,7 +21,7 @@ export function Footer() {
             </p>
           </div>
           <div>
-            <p className="font-display text-sm font-semibold uppercase tracking-wide text-straw-400">
+            <p className="font-display text-sm font-semibold uppercase tracking-wide text-oat-50">
               Catégories
             </p>
             <ul className="mt-3 space-y-2 text-sm text-oat-100/80">
@@ -35,18 +35,18 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <p className="font-display text-sm font-semibold uppercase tracking-wide text-straw-400">
+            <p className="font-display text-sm font-semibold uppercase tracking-wide text-oat-50">
               Le nécessaire
             </p>
             <ul className="mt-3 space-y-2 text-sm text-oat-100/80">
               <li>Fabriqué en France</li>
               <li>Formules non-dopantes, conformes FEI</li>
               <li>Expédition sous 48h</li>
-              <li>contact@nutritionequine.com</li>
+              <li>service.clients@nutrition-equine.example</li>
             </ul>
           </div>
           <div>
-            <p className="font-display text-sm font-semibold uppercase tracking-wide text-straw-400">
+            <p className="font-display text-sm font-semibold uppercase tracking-wide text-oat-50">
               Informations légales
             </p>
             <ul className="mt-3 space-y-2 text-sm text-oat-100/80">
@@ -109,7 +109,10 @@ export function Footer() {
           © {new Date().getFullYear()} Nutrition Équine — Tous droits réservés
         </p>
 
-        
+        <p className="mt-10 border-t border-oat-100/10 pt-6 text-xs text-oat-100/50">
+          Site de démonstration généré à titre d'exemple — aucune donnée réelle, aucune commande
+          réelle.
+        </p>
       </div>
     </footer>
     </>

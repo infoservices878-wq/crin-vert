@@ -8,7 +8,7 @@ export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
 
   return (
-    <div className="group flex flex-col border border-hunter-800/10 bg-oat-50 transition-shadow hover:shadow-md">
+    <div className="group flex flex-col overflow-hidden rounded-lg border border-hunter-800/10 bg-oat-50 transition-shadow hover:shadow-md">
       <Link to={`/produit/${product.slug}`} className="focus-ring">
         <ProductIllustration product={product} />
       </Link>

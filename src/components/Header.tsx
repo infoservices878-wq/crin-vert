@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ShoppingBag, Menu, X, ChevronDown, User, MessageCircle, Search, Heart } from 'lucide-react'
+import { ShoppingCart, Menu, X, ChevronDown, User, MessageCircle, Search, Heart } from 'lucide-react'
 import { MegaMenu } from './MegaMenu'
 import { HeaderSearch } from './HeaderSearch'
 import { SearchPanel } from './SearchPanel'
@@ -66,7 +66,7 @@ export function Header() {
                 <ChevronDown className="h-4 w-4" strokeWidth={2} />
               </Link>
               {menuOpen && (
-                <div className="absolute left-1/2 top-full w-[380px] -translate-x-1/2 border border-hunter-800/10 bg-oat-50 shadow-lg">
+                <div className="absolute left-1/2 top-full w-[380px] -translate-x-1/2 overflow-hidden rounded-lg border border-hunter-800/10 bg-oat-50 shadow-lg">
                   <MegaMenu onNavigate={() => setMenuOpen(false)} />
                 </div>
               )}
@@ -131,7 +131,7 @@ export function Header() {
               className="focus-ring relative rounded-sm p-2 text-hunter-900 hover:text-leather-600"
               aria-label={`Panier, ${count} article${count > 1 ? 's' : ''}`}
             >
-              <ShoppingBag className="h-5 w-5" strokeWidth={1.75} />
+              <ShoppingCart className="h-5 w-5" strokeWidth={1.75} />
               {count > 0 && (
                 <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-leather-600 font-mono text-[10px] font-semibold text-oat-50">
                   {count}
@@ -149,14 +149,15 @@ export function Header() {
             </button>
           </div>
         </div>
+      </header>
 
-        {mobileOpen && (
-          <div className="fixed inset-0 z-40 md:hidden">
-            <div
-              className="absolute inset-0 bg-ink-900/50"
-              onClick={() => setMobileOpen(false)}
-              aria-hidden="true"
-            />
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 md:hidden">
+          <div
+            className="absolute inset-0 bg-ink-900/50"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
             <div className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col overflow-y-auto bg-hunter-900 px-6 py-5">
               <div className="flex items-center justify-between">
                 <Link
@@ -237,7 +238,7 @@ export function Header() {
               </div>
 
               <a
-                href="https://wa.me/33123456789?text=Bonjour%20Crin%20Vert%2C%20j%27ai%20une%20question."
+                href="https://wa.me/33123456789?text=Bonjour%20Nutrition%20%C3%89quine%2C%20j%27ai%20une%20question."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="focus-ring mt-8 flex items-center justify-center gap-2 bg-leather-600 py-3.5 font-display font-bold text-oat-50 transition-colors hover:bg-leather-500"
@@ -248,7 +249,6 @@ export function Header() {
             </div>
           </div>
         )}
-      </header>
 
       <SearchPanel open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>

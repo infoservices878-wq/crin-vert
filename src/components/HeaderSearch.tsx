@@ -39,7 +39,7 @@ export function HeaderSearch() {
 
   return (
     <div ref={wrapRef} className="relative hidden flex-1 max-w-md md:block">
-      <div className="flex items-center gap-2 border border-hunter-800/15 bg-oat-100 px-3 py-2">
+      <div className="flex items-center gap-2 rounded-lg border border-hunter-800/15 bg-oat-100 px-3 py-2">
         <Search className="h-4 w-4 shrink-0 text-ink-600" strokeWidth={1.75} />
         <input
           type="search"
@@ -63,7 +63,7 @@ export function HeaderSearch() {
       </div>
 
       {open && (
-        <div className="absolute left-0 top-full z-40 mt-1 w-full border border-hunter-800/10 bg-oat-50 shadow-lg">
+        <div className="absolute left-0 top-full z-40 mt-1 w-full overflow-hidden rounded-lg border border-hunter-800/10 bg-oat-50 shadow-lg">
           {results.length === 0 ? (
             <p className="px-4 py-6 text-center text-sm text-ink-600">
               Aucun résultat pour « {query.trim()} »

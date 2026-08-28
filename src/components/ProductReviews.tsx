@@ -42,7 +42,7 @@ export function ProductReviews({ product }: { product: Product }) {
             <span>/ 5 — {product.reviewCount} avis</span>
           </p>
         </div>
-        <p className="text-xs text-ink-600">Google</p>
+        <p className="text-xs text-ink-600">Avis de démonstration à des fins d’illustration.</p>
       </div>
 
       <ul className="mt-6 grid gap-4 sm:grid-cols-3">
