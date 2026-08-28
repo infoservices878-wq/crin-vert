@@ -81,9 +81,9 @@ export function CartDrawer() {
               >
                 Voir mon panier
               </Link>
-              <p className="mt-2 text-center text-xs text-ink-600">
+              {/*<p className="mt-2 text-center text-xs text-ink-600">
                 Site de démonstration — aucune commande réelle n'est passée.
-              </p>
+              </p>*/}
             </div>
           </div>
         )}
