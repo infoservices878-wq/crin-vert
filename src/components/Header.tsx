@@ -7,6 +7,7 @@ import { SearchPanel } from './SearchPanel'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { useWishlist } from '../context/WishlistContext'
+import { CATEGORY_LABELS, CATEGORY_ORDER } from '../types'
 
 function HorseshoeMark() {
   return (
@@ -158,8 +159,8 @@ export function Header() {
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
-            <div className="absolute inset-y-0 right-0 flex w-4/5 max-w-sm flex-col overflow-y-auto bg-hunter-900 px-6 py-5">
-              <div className="flex items-center justify-between">
+            <div className="absolute inset-y-0 right-0 flex h-full w-[min(100%,20rem)] max-w-[85vw] flex-col overflow-hidden bg-hunter-900 px-5 py-5 sm:max-w-sm">
+              <div className="flex shrink-0 items-center justify-between gap-2">
                 <Link
                   to="/"
                   onClick={() => setMobileOpen(false)}
@@ -177,31 +178,51 @@ export function Header() {
                 </button>
               </div>
 
-              <nav className="mt-10 flex flex-col gap-6">
+              <nav className="mt-6 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain pb-4">
+                <p className="mb-1 font-display text-[11px] font-semibold uppercase tracking-[0.15em] text-oat-100/45">
+                  Catalogue
+                </p>
                 <Link
                   to="/catalogue"
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-base font-medium uppercase tracking-wide text-oat-50"
+                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
                 >
                   Tous les produits
                 </Link>
+                <ul className="mb-4 space-y-0.5 border-l border-oat-50/15 pl-3">
+                  {CATEGORY_ORDER.map((cat) => (
+                    <li key={cat}>
+                      <Link
+                        to={`/catalogue?categorie=${cat}`}
+                        onClick={() => setMobileOpen(false)}
+                        className="focus-ring block truncate rounded-sm px-1 py-2 text-sm text-oat-100/80 hover:text-oat-50"
+                      >
+                        {CATEGORY_LABELS[cat]}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="mb-1 mt-2 font-display text-[11px] font-semibold uppercase tracking-[0.15em] text-oat-100/45">
+                  Infos
+                </p>
                 <Link
                   to="/a-propos"
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-base font-medium uppercase tracking-wide text-oat-50"
+                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
                 >
                   À propos
                 </Link>
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-base font-medium uppercase tracking-wide text-oat-50"
+                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
                 >
                   Contact
                 </Link>
               </nav>
 
-              <div className="mt-8 border-t border-oat-50/15 pt-6">
+              <div className="mt-auto shrink-0 border-t border-oat-50/15 pt-4">
                 <Link
                   to={isAuthenticated ? "/compte" : "/connexion"}
                   onClick={() => setMobileOpen(false)}
@@ -210,17 +231,16 @@ export function Header() {
                   <User className="h-4 w-4" strokeWidth={1.75} />
                   {isAuthenticated ? 'Mon compte' : 'Connexion'}
                 </Link>
+                <a
+                  href="https://wa.me/33123456789?text=Bonjour%20Nutrition%20%C3%89quine%2C%20j%27ai%20une%20question."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring mt-4 flex w-full items-center justify-center gap-2 rounded-md bg-leather-600 py-3 font-display text-sm font-bold text-oat-50 transition-colors hover:bg-leather-500"
+                >
+                  <MessageCircle className="h-5 w-5" strokeWidth={2} />
+                  WhatsApp
+                </a>
               </div>
-
-              <a
-                href="https://wa.me/33123456789?text=Bonjour%20Nutrition%20%C3%89quine%2C%20j%27ai%20une%20question."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="focus-ring mt-8 flex items-center justify-center gap-2 bg-leather-600 py-3.5 font-display font-bold text-oat-50 transition-colors hover:bg-leather-500"
-              >
-                <MessageCircle className="h-5 w-5" strokeWidth={2} />
-                WhatsApp
-              </a>
             </div>
           </div>
         )}
