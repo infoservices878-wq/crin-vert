@@ -25,6 +25,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [categoriesOpen, setCategoriesOpen] = useState(false)
   const { count } = useCart()
   const { isAuthenticated, user } = useAuth()
   const { count: wishCount } = useWishlist()
@@ -141,7 +142,12 @@ export function Header() {
             </Link>
 
             <button
-              onClick={() => setMobileOpen((v) => !v)}
+              onClick={() => {
+                setMobileOpen((v) => {
+                  if (v) setCategoriesOpen(false)
+                  return !v
+                })
+              }}
               className="focus-ring rounded-sm p-2 text-hunter-900 md:hidden"
               aria-label="Ouvrir le menu"
               aria-expanded={mobileOpen}
@@ -156,7 +162,10 @@ export function Header() {
         <div className="fixed inset-0 z-40 md:hidden">
           <div
             className="absolute inset-0 bg-ink-900/50"
-            onClick={() => setMobileOpen(false)}
+            onClick={() => {
+              setMobileOpen(false)
+              setCategoriesOpen(false)
+            }}
             aria-hidden="true"
           />
             <div className="absolute inset-y-0 right-0 flex h-full w-[min(100%,20rem)] max-w-[85vw] flex-col overflow-hidden bg-hunter-900 px-5 py-5 sm:max-w-sm">
@@ -170,7 +179,10 @@ export function Header() {
                   <span className="font-display text-xl font-bold tracking-tight">Nutrition Équine</span>
                 </Link>
                 <button
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    setMobileOpen(false)
+                    setCategoriesOpen(false)
+                  }}
                   className="focus-ring rounded-full border border-oat-50/25 p-1.5 text-oat-50"
                   aria-label="Fermer le menu"
                 >
@@ -182,26 +194,42 @@ export function Header() {
                 <p className="mb-1 font-display text-[11px] font-semibold uppercase tracking-[0.15em] text-oat-100/45">
                   Catalogue
                 </p>
-                <Link
-                  to="/catalogue"
-                  onClick={() => setMobileOpen(false)}
-                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
+                <button
+                  type="button"
+                  onClick={() => setCategoriesOpen((v) => !v)}
+                  className="focus-ring flex w-full items-center justify-between rounded-sm px-1 py-2.5 text-left font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
+                  aria-expanded={categoriesOpen}
                 >
                   Tous les produits
-                </Link>
-                <ul className="mb-4 space-y-0.5 border-l border-oat-50/15 pl-3">
-                  {CATEGORY_ORDER.map((cat) => (
-                    <li key={cat}>
+                  <ChevronDown
+                    className={`h-4 w-4 shrink-0 transition-transform ${categoriesOpen ? 'rotate-180' : ''}`}
+                    strokeWidth={2}
+                  />
+                </button>
+                {categoriesOpen && (
+                  <ul className="mb-4 max-h-[40vh] space-y-0.5 overflow-y-auto overscroll-contain border-l border-oat-50/15 pl-3">
+                    <li>
                       <Link
-                        to={`/catalogue?categorie=${cat}`}
+                        to="/catalogue"
                         onClick={() => setMobileOpen(false)}
-                        className="focus-ring block truncate rounded-sm px-1 py-2 text-sm text-oat-100/80 hover:text-oat-50"
+                        className="focus-ring block truncate rounded-sm px-1 py-2 text-sm font-medium text-oat-50"
                       >
-                        {CATEGORY_LABELS[cat]}
+                        Voir tout le catalogue
                       </Link>
                     </li>
-                  ))}
-                </ul>
+                    {CATEGORY_ORDER.map((cat) => (
+                      <li key={cat}>
+                        <Link
+                          to={`/catalogue?categorie=${cat}`}
+                          onClick={() => setMobileOpen(false)}
+                          className="focus-ring block truncate rounded-sm px-1 py-2 text-sm text-oat-100/80 hover:text-oat-50"
+                        >
+                          {CATEGORY_LABELS[cat]}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
                 <p className="mb-1 mt-2 font-display text-[11px] font-semibold uppercase tracking-[0.15em] text-oat-100/45">
                   Infos
