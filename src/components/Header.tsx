@@ -34,19 +34,27 @@ export function Header() {
     <>
       <header className="sticky top-0 z-30 border-b border-hunter-800/10 bg-oat-50/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6 lg:gap-6">
-          <Link to="/" className="focus-ring flex items-center gap-2 text-hunter-900">
+          <Link
+            to="/"
+            className="focus-ring flex items-center gap-2.5 text-hunter-900"
+            aria-label="Nutrition Équine — Accueil"
+          >
             <HorseshoeMark />
-            <span>
-              <span className="block font-display text-xl font-bold leading-none tracking-tight">
-                Nutrition Équine
+            <span className="flex flex-col leading-none">
+              <span className="font-display text-lg font-bold tracking-tight sm:text-xl">
+                Nutrition
               </span>
-              <span className="mt-1 flex items-center gap-1.5">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-ink-600">
-                  Compléments naturels
+              <span className="mt-0.5 flex items-center gap-2">
+                <span className="font-display text-lg font-bold tracking-tight sm:text-xl">
+                  Équine
                 </span>
-                <span className="flex h-[3px] w-6 overflow-hidden rounded-full">
+                <span
+                  className="flex h-2.5 w-4 shrink-0 overflow-hidden rounded-[1px] shadow-sm"
+                  title="Fabriqué en France"
+                  aria-hidden="true"
+                >
                   <span className="w-1/3 bg-flag-blue" />
-                  <span className="w-1/3 bg-oat-300" />
+                  <span className="w-1/3 bg-oat-50" />
                   <span className="w-1/3 bg-flag-red" />
                 </span>
               </span>
@@ -176,7 +184,17 @@ export function Header() {
                   className="focus-ring flex items-center gap-2 text-oat-50"
                 >
                   <HorseshoeMark />
-                  <span className="font-display text-xl font-bold tracking-tight">Nutrition Équine</span>
+                  <span className="flex flex-col leading-none">
+                    <span className="font-display text-lg font-bold tracking-tight">Nutrition</span>
+                    <span className="mt-0.5 flex items-center gap-2">
+                      <span className="font-display text-lg font-bold tracking-tight">Équine</span>
+                      <span className="flex h-2.5 w-4 shrink-0 overflow-hidden rounded-[1px]" aria-hidden="true">
+                        <span className="w-1/3 bg-flag-blue" />
+                        <span className="w-1/3 bg-oat-50" />
+                        <span className="w-1/3 bg-flag-red" />
+                      </span>
+                    </span>
+                  </span>
                 </Link>
                 <button
                   onClick={() => {
