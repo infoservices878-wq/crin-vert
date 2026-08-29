@@ -205,7 +205,39 @@ export function Header() {
                 </button>
               </div>
 
-              <nav className="mt-6 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain pb-4">
+              <div className="mt-5 shrink-0 space-y-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false)
+                    setCategoriesOpen(false)
+                    setSearchOpen(true)
+                  }}
+                  className="focus-ring flex w-full items-center gap-2 rounded-md border border-oat-50/20 bg-oat-50/10 px-3 py-2.5 text-left text-sm text-oat-100/70"
+                  aria-label="Rechercher un produit"
+                >
+                  <Search className="h-4 w-4 shrink-0 text-oat-50" strokeWidth={1.75} />
+                  <span>Rechercher un produit…</span>
+                </button>
+                <Link
+                  to="/favoris"
+                  onClick={() => {
+                    setMobileOpen(false)
+                    setCategoriesOpen(false)
+                  }}
+                  className="focus-ring flex items-center gap-2.5 px-1 py-1 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
+                >
+                  <Heart className="h-4 w-4 shrink-0" strokeWidth={1.75} />
+                  Favoris
+                  {wishCount > 0 && (
+                    <span className="rounded-full bg-leather-600 px-1.5 py-0.5 font-mono text-[10px] font-semibold text-oat-50">
+                      {wishCount}
+                    </span>
+                  )}
+                </Link>
+              </div>
+
+              <nav className="mt-5 flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain pb-4">
                 <p className="mb-1 font-display text-[11px] font-semibold uppercase tracking-[0.15em] text-oat-100/45">
                   Catalogue
                 </p>
