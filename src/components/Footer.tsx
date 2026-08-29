@@ -42,7 +42,7 @@ export function Footer() {
               <li>Fabriqué en France</li>
               <li>Formules non-dopantes, conformes FEI</li>
               <li>Expédition sous 48h</li>
-              <li>contact@nutritionequine.com</li>
+              <li>service.clients@nutrition-equine.example</li>
             </ul>
           </div>
           <div>
@@ -96,20 +96,23 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="focus-ring flex h-16 w-20 items-center justify-center border-r border-oat-100/20 text-oat-50 last:border-r-0 hover:bg-oat-50/10"
+              className="focus-ring flex h-11 w-14 items-center justify-center border-r border-oat-100/20 text-oat-50 last:border-r-0 hover:bg-oat-50/10"
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="h-4 w-4" />
             </a>
           ))}
         </div>
 
         <PaymentMethodsRow className="mt-8" />
 
-        <p className="mt-8 text-sm text-oat-100/70">
+        <p className="mt-8 text-center text-sm text-oat-100/70">
           © {new Date().getFullYear()} Nutrition Équine — Tous droits réservés
         </p>
 
-        
+        <p className="mt-10 border-t border-oat-100/10 pt-6 text-center text-xs text-oat-100/50">
+          Site de démonstration généré à titre d'exemple — aucune donnée réelle, aucune commande
+          réelle.
+        </p>
       </div>
     </footer>
     </>

@@ -16,7 +16,7 @@ const PAYMENTS: {
     label: 'Mastercard',
     bg: 'bg-white',
     Logo: () => (
-      <svg viewBox="0 0 48 32" className="h-6 w-9" aria-hidden="true">
+      <svg viewBox="0 0 48 32" className="h-5 w-7" aria-hidden="true">
         <circle cx="18" cy="16" r="10" fill="#EB001B" />
         <circle cx="30" cy="16" r="10" fill="#F79E1B" />
         <path
@@ -31,7 +31,7 @@ const PAYMENTS: {
     label: 'Visa',
     bg: 'bg-white',
     Logo: () => (
-      <svg viewBox="0 0 48 32" className="h-5 w-10" aria-hidden="true">
+      <svg viewBox="0 0 48 32" className="h-4 w-8" aria-hidden="true">
         <text
           x="24"
           y="21"
@@ -53,7 +53,7 @@ const PAYMENTS: {
     label: 'PayPal',
     bg: 'bg-white',
     Logo: () => (
-      <svg viewBox="0 0 48 32" className="h-7 w-9" aria-hidden="true">
+      <svg viewBox="0 0 48 32" className="h-5 w-7" aria-hidden="true">
         <text
           x="23"
           y="23"
@@ -86,7 +86,7 @@ const PAYMENTS: {
     label: 'Carte Bancaire',
     bg: 'bg-[#1a1a1a]',
     Logo: () => (
-      <svg viewBox="0 0 48 32" className="h-5 w-9" aria-hidden="true">
+      <svg viewBox="0 0 48 32" className="h-4 w-7" aria-hidden="true">
         <text
           x="24"
           y="20"
@@ -107,7 +107,7 @@ const PAYMENTS: {
     label: 'Orange Bank / OPay',
     bg: 'bg-[#5B2EFF]',
     Logo: () => (
-      <svg viewBox="0 0 56 32" className="h-5 w-12" aria-hidden="true">
+      <svg viewBox="0 0 56 32" className="h-4 w-9" aria-hidden="true">
         <circle cx="12" cy="16" r="7" fill="none" stroke="#fff" strokeWidth="2.2" />
         <text
           x="24"
@@ -127,7 +127,7 @@ const PAYMENTS: {
     label: 'American Express',
     bg: 'bg-[#006FCF]',
     Logo: () => (
-      <svg viewBox="0 0 56 32" className="h-5 w-12" aria-hidden="true">
+      <svg viewBox="0 0 56 32" className="h-4 w-9" aria-hidden="true">
         <text
           x="28"
           y="20"
@@ -157,7 +157,7 @@ export function PaymentBadge({
   const item = PAYMENTS.find((p) => p.id === id) ?? PAYMENTS[0]
   return (
     <span
-      className={`inline-flex h-9 min-w-[3.25rem] items-center justify-center rounded-sm px-1.5 shadow-sm ${item.bg} ${className}`}
+      className={`inline-flex h-7 min-w-[2.5rem] items-center justify-center rounded-sm px-1 shadow-sm ${item.bg} ${className}`}
       title={item.label}
       role="img"
       aria-label={item.label}
@@ -170,7 +170,7 @@ export function PaymentBadge({
 /** Rangée complète des moyens de paiement (pied de page) */
 export function PaymentMethodsRow({ className = '' }: { className?: string }) {
   return (
-    <div className={`flex flex-wrap items-center gap-2 ${className}`} aria-label="Moyens de paiement acceptés">
+    <div className={`flex flex-wrap items-center justify-center gap-2 ${className}`} aria-label="Moyens de paiement acceptés">
       {PAYMENTS.map((p) => (
         <PaymentBadge key={p.id} id={p.id} />
       ))}

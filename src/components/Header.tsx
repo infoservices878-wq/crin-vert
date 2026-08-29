@@ -158,7 +158,7 @@ export function Header() {
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
-            <div className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col overflow-y-auto bg-hunter-900 px-6 py-5">
+            <div className="absolute inset-y-0 right-0 flex w-4/5 max-w-sm flex-col overflow-y-auto bg-hunter-900 px-6 py-5">
               <div className="flex items-center justify-between">
                 <Link
                   to="/"
@@ -177,63 +177,38 @@ export function Header() {
                 </button>
               </div>
 
-              <nav className="mt-10 flex flex-col gap-7">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileOpen(false)
-                    setSearchOpen(true)
-                  }}
-                  className="focus-ring flex items-center gap-2 text-left font-display text-lg font-bold uppercase tracking-wide text-oat-50"
-                >
-                  <Search className="h-5 w-5" strokeWidth={1.75} />
-                  Rechercher
-                </button>
+              <nav className="mt-10 flex flex-col gap-6">
                 <Link
                   to="/catalogue"
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-lg font-bold uppercase tracking-wide text-oat-50"
+                  className="focus-ring font-display text-base font-medium uppercase tracking-wide text-oat-50"
                 >
-                  Catalogue
-                </Link>
-                <Link
-                  to="/favoris"
-                  onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-lg font-bold uppercase tracking-wide text-oat-50"
-                >
-                  Favoris
-                </Link>
-                <Link
-                  to="/#protocoles"
-                  onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-lg font-bold uppercase tracking-wide text-oat-50"
-                >
-                  Nos protocoles
+                  Tous les produits
                 </Link>
                 <Link
                   to="/a-propos"
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-lg font-bold uppercase tracking-wide text-oat-50"
+                  className="focus-ring font-display text-base font-medium uppercase tracking-wide text-oat-50"
                 >
                   À propos
                 </Link>
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring font-display text-lg font-bold uppercase tracking-wide text-oat-50"
+                  className="focus-ring font-display text-base font-medium uppercase tracking-wide text-oat-50"
                 >
                   Contact
                 </Link>
               </nav>
 
-              <div className="mt-10 border-t border-oat-50/15 pt-6">
+              <div className="mt-8 border-t border-oat-50/15 pt-6">
                 <Link
                   to={isAuthenticated ? "/compte" : "/connexion"}
                   onClick={() => setMobileOpen(false)}
-                  className="focus-ring flex items-center gap-2.5 font-display text-sm font-bold uppercase tracking-wide text-oat-100/70 hover:text-oat-50"
+                  className="focus-ring flex items-center gap-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-100/70 hover:text-oat-50"
                 >
                   <User className="h-4 w-4" strokeWidth={1.75} />
-                  Connexion / Mon compte
+                  {isAuthenticated ? 'Mon compte' : 'Connexion'}
                 </Link>
               </div>
 

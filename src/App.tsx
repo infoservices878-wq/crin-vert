@@ -9,6 +9,7 @@ import { CartDrawer } from './components/CartDrawer'
 import { AnnouncementBar } from './components/AnnouncementBar'
 import { FloatingContactButton } from './components/FloatingContactButton'
 import { CookieConsent } from './components/CookieConsent'
+import { ScrollToTop } from './components/ScrollToTop'
 import { Home } from './pages/Home'
 import { Catalogue } from './pages/Catalogue'
 import { ProductDetail } from './pages/ProductDetail'
@@ -31,6 +32,7 @@ export default function App() {
     <WishlistProvider>
     <CartProvider>
       <div className="flex min-h-screen flex-col">
+        <ScrollToTop />
         <AnnouncementBar />
         <Header />
         <main className="flex-1">

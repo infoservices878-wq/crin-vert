@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Star, Plus } from 'lucide-react'
+import { Star, ShoppingCart } from 'lucide-react'
 import type { Product } from '../types'
 import { ProductIllustration } from './ProductIllustration'
 import { useCart } from '../context/CartContext'
@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
           <span>({product.reviewCount})</span>
         </div>
 
-        <div className="mt-auto flex items-center justify-between pt-4">
+        <div className="mt-auto flex flex-col gap-2 pt-4">
           <div className="flex items-baseline gap-2 font-mono">
             <span className="text-lg font-semibold text-hunter-900">
               {product.price.toFixed(2)} €
@@ -41,11 +41,10 @@ export function ProductCard({ product }: { product: Product }) {
           <button
             type="button"
             onClick={() => addItem(product)}
-            className="focus-ring btn-quiet gap-1 px-2.5 py-1.5 text-xs"
+            className="focus-ring btn-quiet ml-auto flex h-9 w-9 items-center justify-center p-0"
             aria-label={`Ajouter ${product.name} au panier`}
           >
-            <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
-            Ajouter
+            <ShoppingCart className="h-4 w-4" strokeWidth={2} />
           </button>
         </div>
       </div>
