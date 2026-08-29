@@ -5,6 +5,7 @@ import { PRODUCTS } from '../data/products'
 import { CATEGORY_LABELS, CATEGORY_ORDER, type Category } from '../types'
 import { ProductCard } from '../components/ProductCard'
 import { EmptyState } from '../components/EmptyState'
+import { Breadcrumb } from '../components/Breadcrumb'
 import { usePageMeta } from '../hooks/usePageMeta'
 
 type SortKey = 'populaire' | 'prix-asc' | 'prix-desc'
@@ -89,7 +90,14 @@ export function Catalogue() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="font-display text-3xl font-bold text-hunter-900">
+      <Breadcrumb
+        items={[
+          { label: 'Accueil', to: '/' },
+          { label: 'Catalogue', to: activeCategory ? '/catalogue' : undefined },
+          ...(activeCategory ? [{ label: CATEGORY_LABELS[activeCategory] }] : []),
+        ]}
+      />
+      <h1 className="mt-3 font-display text-3xl font-bold text-hunter-900">
         {activeCategory ? CATEGORY_LABELS[activeCategory] : 'Tout le catalogue'}
       </h1>
       <p className="mt-1 text-sm text-ink-600">{products.length} produit(s)</p>

@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Star, Plus, Minus, Check, Heart } from 'lucide-react'
 import type { Product } from '../types'
+import { CATEGORY_LABELS } from '../types'
 import { getProductBySlug } from '../lib/woocommerce'
 import { ProductGallery } from '../components/ProductGallery'
+import { Breadcrumb } from '../components/Breadcrumb'
 import { StickyMobileCta } from '../components/StickyMobileCta'
 import { CompositionLabel } from '../components/CompositionLabel'
 import { NutritionAnalysisPanel } from '../components/NutritionAnalysisPanel'
@@ -87,7 +89,14 @@ export function ProductDetail() {
     <>
       {/* pb-24 : place pour la barre sticky mobile */}
       <div className="mx-auto max-w-6xl px-4 py-10 pb-28 sm:px-6 md:pb-10">
-        <div className="grid gap-10 md:grid-cols-2">
+        <Breadcrumb
+          items={[
+            { label: 'Accueil', to: '/' },
+            { label: CATEGORY_LABELS[product.category], to: `/catalogue?categorie=${product.category}` },
+            { label: product.name },
+          ]}
+        />
+        <div className="mt-4 grid gap-10 md:grid-cols-2">
           {/* Galerie */}
           <div className="relative">
             <ProductGallery product={product} priority />
