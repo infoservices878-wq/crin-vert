@@ -8,6 +8,7 @@ import { Footer } from './components/Footer'
 import { CartDrawer } from './components/CartDrawer'
 import { AnnouncementBar } from './components/AnnouncementBar'
 import { FloatingContactButton } from './components/FloatingContactButton'
+import { VirtualAssistant } from './components/VirtualAssistant'
 import { CookieConsent } from './components/CookieConsent'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Home } from './pages/Home'
@@ -63,6 +64,7 @@ export default function App() {
         <Footer />
         <CartDrawer />
         <FloatingContactButton />
+        <VirtualAssistant />
         <CookieConsent />
       </div>
     </CartProvider>
