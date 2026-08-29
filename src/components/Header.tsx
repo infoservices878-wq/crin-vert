@@ -40,23 +40,18 @@ export function Header() {
             aria-label="Nutrition Équine — Accueil"
           >
             <HorseshoeMark />
-            <span className="flex flex-col leading-none">
-              <span className="font-display text-lg font-bold tracking-tight sm:text-xl">
-                Nutrition
+            <span className="flex flex-col">
+              <span className="font-display text-lg font-bold leading-none tracking-tight sm:text-xl">
+                Nutrition&nbsp;Équine
               </span>
-              <span className="mt-0.5 flex items-center gap-2">
-                <span className="font-display text-lg font-bold tracking-tight sm:text-xl">
-                  Équine
-                </span>
-                <span
-                  className="flex h-2.5 w-4 shrink-0 overflow-hidden rounded-[1px] shadow-sm"
-                  title="Fabriqué en France"
-                  aria-hidden="true"
-                >
-                  <span className="w-1/3 bg-flag-blue" />
-                  <span className="w-1/3 bg-oat-50" />
-                  <span className="w-1/3 bg-flag-red" />
-                </span>
+              <span
+                className="mt-1.5 flex h-[3px] w-full min-w-[4.5rem] overflow-hidden rounded-full"
+                title="Fabriqué en France"
+                aria-hidden="true"
+              >
+                <span className="w-[32%] bg-flag-blue" />
+                <span className="w-[36%] bg-oat-200" />
+                <span className="w-[32%] bg-flag-red" />
               </span>
             </span>
           </Link>
@@ -184,15 +179,17 @@ export function Header() {
                   className="focus-ring flex items-center gap-2 text-oat-50"
                 >
                   <HorseshoeMark />
-                  <span className="flex flex-col leading-none">
-                    <span className="font-display text-lg font-bold tracking-tight">Nutrition</span>
-                    <span className="mt-0.5 flex items-center gap-2">
-                      <span className="font-display text-lg font-bold tracking-tight">Équine</span>
-                      <span className="flex h-2.5 w-4 shrink-0 overflow-hidden rounded-[1px]" aria-hidden="true">
-                        <span className="w-1/3 bg-flag-blue" />
-                        <span className="w-1/3 bg-oat-50" />
-                        <span className="w-1/3 bg-flag-red" />
-                      </span>
+                  <span className="flex flex-col">
+                    <span className="font-display text-lg font-bold leading-none tracking-tight">
+                      Nutrition&nbsp;Équine
+                    </span>
+                    <span
+                      className="mt-1.5 flex h-[3px] w-full min-w-[4.5rem] overflow-hidden rounded-full"
+                      aria-hidden="true"
+                    >
+                      <span className="w-[32%] bg-flag-blue" />
+                      <span className="w-[36%] bg-oat-200" />
+                      <span className="w-[32%] bg-flag-red" />
                     </span>
                   </span>
                 </Link>
