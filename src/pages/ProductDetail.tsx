@@ -258,12 +258,7 @@ export function ProductDetail() {
         <ProductReviews product={product} />
       </div>
 
-      <StickyMobileCta
-        price={product.price}
-        productName={product.name}
-        added={added}
-        onAdd={handleAdd}
-      />
+      <StickyMobileCta added={added} onAdd={handleAdd} />
     </>
   )
 }
