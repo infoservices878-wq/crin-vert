@@ -92,8 +92,8 @@ export function Header() {
 
           <HeaderSearch />
 
-          <div className="flex shrink-0 items-center gap-0.5">
-            {/* Favoris — desktop uniquement (mobile : dans le menu hamburger) */}
+          <div className="ml-auto flex shrink-0 items-center gap-0.5">
+            {/* Favoris — desktop uniquement (mobile : menu) */}
             <Link
               to="/favoris"
               className="focus-ring relative hidden rounded-sm p-2 text-hunter-900 hover:text-leather-600 md:inline-flex"
@@ -107,10 +107,10 @@ export function Header() {
               )}
             </Link>
 
-            {/* Connexion */}
+            {/* Connexion — desktop uniquement (mobile : menu) */}
             <Link
               to={isAuthenticated ? '/compte' : '/connexion'}
-              className="focus-ring relative rounded-sm p-2 text-hunter-900 hover:text-leather-600"
+              className="focus-ring relative hidden rounded-sm p-2 text-hunter-900 hover:text-leather-600 md:inline-flex"
               aria-label={isAuthenticated ? `Mon compte (${user?.email})` : 'Connexion / Mon compte'}
               title={isAuthenticated ? user?.firstName || user?.email : 'Connexion'}
             >
@@ -134,7 +134,9 @@ export function Header() {
               )}
             </Link>
 
+            {/* Menu hamburger — mobile uniquement */}
             <button
+              type="button"
               onClick={() => {
                 setMobileOpen((v) => {
                   if (v) setCategoriesOpen(false)
