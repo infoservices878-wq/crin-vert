@@ -1,8 +1,50 @@
 import { ShoppingCart } from 'lucide-react'
 import type { Protocol } from '../types'
 import { ProductIllustration } from './ProductIllustration'
+import { PRODUCTS } from '../data/products'
+import { useCart } from '../context/CartContext'
+import { useToast } from '../context/ToastContext'
 
 export function ProtocolCard({ protocol }: { protocol: Protocol }) {
+    const { addItem } = useCart()
+  const { toast } = useToast()
+
+    const handleAdd = () => {
+    try {
+      if (!protocol?.categories?.length) {
+        toast('Protocole incomplet : aucune catégorie associée.', 'error')
+        return
+      }
+
+      const uniqueCats = [...new Set(protocol.categories)]
+      const products = uniqueCats
+        .map((cat) => PRODUCTS.find((p) => p.category === cat))
+        .filter((p): p is NonNullable<typeof p> => Boolean(p))
+
+      if (products.length === 0) {
+        toast(
+          'Aucun produit disponible pour ce protocole. Réessayez plus tard.',
+          'error',
+        )
+        return
+      }
+
+      products.forEach((p) => addItem(p))
+
+      toast(
+        products.length === 1
+          ? `${products[0].name} ajouté au panier`
+          : `${products.length} produits du protocole ajoutés au panier`,
+        'success',
+      )
+    } catch (err) {
+      console.error('[ProtocolCard] handleAdd', err)
+      toast(
+        "Impossible d'ajouter le protocole au panier. Veuillez réessayer.",
+        'error',
+      )
+    }
+  }
   return (
     <div className="flex flex-col rounded-lg border border-hunter-800/10 bg-oat-50 p-5">
       <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-hunter-900 px-3 py-1 font-display text-xs font-semibold text-oat-50">
@@ -29,7 +71,10 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
             {protocol.price.toFixed(2)} €
           </span>
         </div>
-        <button className="focus-ring flex items-center gap-2 bg-leather-600 px-4 py-2 font-display text-sm font-semibold text-oat-50 transition-colors hover:bg-leather-500">
+        <button 
+        className="focus-ring flex items-center gap-2 bg-leather-600 px-4 py-2 font-display text-sm font-semibold text-oat-50 transition-colors hover:bg-leather-500"
+        onClick={handleAdd}
+        >
           <ShoppingCart className="h-4 w-4" strokeWidth={2.25} />
           Ajouter
         </button>

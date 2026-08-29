@@ -26,25 +26,25 @@ export function ProductCard({ product }: { product: Product }) {
           <span>({product.reviewCount})</span>
         </div>
 
-        <div className="mt-auto flex flex-col gap-2 pt-4">
-          <div className="flex items-baseline gap-2 font-mono">
-            <span className="text-lg font-semibold text-hunter-900">
+                <div className="mt-auto flex items-center justify-between gap-2 pt-4">
+          <div className="min-w-0 flex items-baseline gap-1.5 font-mono">
+            <span className="truncate text-base font-semibold text-hunter-900 sm:text-lg">
               {product.price.toFixed(2)} €
             </span>
             {product.compareAtPrice && (
-              <span className="text-sm text-ink-600 line-through">
+              <span className="hidden text-sm text-ink-600 line-through sm:inline">
                 {product.compareAtPrice.toFixed(2)} €
               </span>
             )}
           </div>
-          {/* Secondaire : le clic carte / titre reste l’action principale */}
           <button
             type="button"
             onClick={() => addItem(product)}
-            className="focus-ring btn-quiet ml-auto flex h-9 w-9 items-center justify-center p-0"
+            className="focus-ring flex shrink-0 items-center gap-1.5 rounded-md bg-leather-600 px-3 py-2 font-display text-xs font-semibold text-oat-50 transition-colors hover:bg-leather-500 sm:gap-2 sm:px-4 sm:text-sm"
             aria-label={`Ajouter ${product.name} au panier`}
           >
-            <ShoppingCart className="h-4 w-4" strokeWidth={2} />
+            <ShoppingCart className="h-4 w-4" strokeWidth={2.25} />
+            Ajouter
           </button>
         </div>
       </div>
