@@ -54,9 +54,9 @@ export function Contact() {
       </p>
 
       <div className="mt-10 space-y-4">
-        <ContactInfoCard icon={Mail} title="Email" detail="service.clients@nutrition-equine.example" />
+        <ContactInfoCard icon={Mail} title="Email" detail="contact@nutritionequine.com" />
         <ContactInfoCard icon={Phone} title="Téléphone" detail="+33 1 23 45 67 89" />
-        <ContactInfoCard icon={MapPin} title="Adresse" detail="France" />
+        <ContactInfoCard icon={MapPin} title="Adresse" detail="LA FOLIE, 28130 MAINTENON" />
       </div>
 
       <form
