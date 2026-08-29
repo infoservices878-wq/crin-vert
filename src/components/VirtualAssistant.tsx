@@ -5,6 +5,8 @@ import { answerQuestion, ASSISTANT_STARTERS } from '../lib/assistant'
 interface Message {
   role: 'user' | 'assistant'
   text: string
+  /** Renseigné quand le site n'a pas de réponse — propose une recherche Google */
+  googleQuery?: string
 }
 
 const GREETING: Message = {
@@ -28,13 +30,17 @@ export function VirtualAssistant() {
   const send = (text: string) => {
     const trimmed = text.trim()
     if (!trimmed) return
-    const { answer } = answerQuestion(trimmed)
-    setMessages((prev) => [...prev, { role: 'user', text: trimmed }, { role: 'assistant', text: answer }])
+    const { answer, matched } = answerQuestion(trimmed)
+    setMessages((prev) => [
+      ...prev,
+      { role: 'user', text: trimmed },
+      { role: 'assistant', text: answer, googleQuery: matched ? undefined : trimmed },
+    ])
     setInput('')
   }
 
   return (
-    <div className="fixed bottom-24 left-5 z-40 flex flex-col-reverse items-start gap-3 md:bottom-5">
+    <div className="fixed bottom-24 right-5 z-40 flex flex-col-reverse items-end gap-3 md:bottom-5">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -58,13 +64,23 @@ export function VirtualAssistant() {
           <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <p
+                <div
                   className={`max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
                     m.role === 'user' ? 'bg-leather-600 text-oat-50' : 'bg-oat-200 text-ink-900'
                   }`}
                 >
-                  {m.text}
-                </p>
+                  <p>{m.text}</p>
+                  {m.googleQuery && (
+                    <a
+                      href={`https://www.google.com/search?q=${encodeURIComponent(m.googleQuery)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="focus-ring mt-1.5 block text-xs font-semibold text-hunter-900 underline hover:text-leather-600"
+                    >
+                      Rechercher « {m.googleQuery} » sur Google →
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
 
@@ -106,7 +122,15 @@ export function VirtualAssistant() {
             </button>
           </form>
           <p className="border-t border-hunter-800/10 px-4 py-2 text-center text-[11px] text-ink-600">
-            Réponses automatiques basées sur nos fiches produits et notre FAQ.
+            Cet assistant répond aux questions générales. Pour une question précise, contactez-nous
+            par{' '}
+            <a
+              href="mailto:contact@nutritionequine.com"
+              className="focus-ring font-semibold text-leather-600 underline hover:text-leather-700"
+            >
+              e-mail
+            </a>
+            .
           </p>
         </div>
       )}
