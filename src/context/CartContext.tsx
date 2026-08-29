@@ -42,7 +42,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { product, qty: 1, size: chosen }]
     })
-    setIsOpen(true)
+    // Ne pas ouvrir le tiroir : l'ajout se fait en silence
   }
 
   const removeItem = (productId: string, size: string) => {

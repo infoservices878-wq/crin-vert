@@ -2,15 +2,9 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 
 /**
- * Barre sticky mobile : total panier (réactif) + CTA ajouter au panier.
+ * Barre sticky mobile : total panier + lien vers la page panier.
  */
-export function StickyMobileCta({
-  added,
-  onAdd,
-}: {
-  added: boolean
-  onAdd: () => void
-}) {
+export function StickyMobileCta() {
   const { total, count } = useCart()
 
   return (
@@ -21,7 +15,7 @@ export function StickyMobileCta({
       aria-label="Votre panier"
     >
       <div className="mx-auto flex max-w-lg items-center gap-3">
-        <Link to="/panier" className="focus-ring min-w-0 flex-1">
+        <div className="min-w-0 flex-1">
           <p className="font-display text-xs font-semibold text-ink-600">
             Votre panier
             {count > 0 ? (
@@ -31,14 +25,13 @@ export function StickyMobileCta({
           <p className="font-mono text-lg font-semibold text-hunter-900">
             {total.toFixed(2)} €
           </p>
-        </Link>
-        <button
-          type="button"
-          onClick={onAdd}
+        </div>
+        <Link
+          to="/panier"
           className="focus-ring btn-primary shrink-0 active:scale-[0.98]"
         >
-          {added ? 'Ajouté ✓' : 'Ajouter au panier'}
-        </button>
+          Accéder au panier
+        </Link>
       </div>
     </div>
   )

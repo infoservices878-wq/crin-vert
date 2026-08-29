@@ -258,7 +258,7 @@ export function ProductDetail() {
         <ProductReviews product={product} />
       </div>
 
-      <StickyMobileCta added={added} onAdd={handleAdd} />
+      <StickyMobileCta />
     </>
   )
 }
