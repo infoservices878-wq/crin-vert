@@ -93,20 +93,10 @@ export function Header() {
           <HeaderSearch />
 
           <div className="flex shrink-0 items-center gap-0.5">
-            {/* Recherche (icône) — mobile uniquement, la barre étendue prend le relais en desktop */}
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              className="focus-ring rounded-sm p-2 text-hunter-900 hover:text-leather-600 md:hidden"
-              aria-label="Rechercher un produit"
-            >
-              <Search className="h-5 w-5" strokeWidth={1.75} />
-            </button>
-
-            {/* Favoris */}
+            {/* Favoris — desktop uniquement (mobile : dans le menu hamburger) */}
             <Link
               to="/favoris"
-              className="focus-ring relative rounded-sm p-2 text-hunter-900 hover:text-leather-600"
+              className="focus-ring relative hidden rounded-sm p-2 text-hunter-900 hover:text-leather-600 md:inline-flex"
               aria-label={`Favoris, ${wishCount} produit${wishCount > 1 ? 's' : ''}`}
             >
               <Heart className="h-5 w-5" strokeWidth={1.75} />
