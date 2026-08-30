@@ -62,4 +62,45 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/28240-large_default/cheval-energy-cmv-entretien-performance.jpg',
   },
+  {
+    id: '2',
+    slug: 'reverdy-racing-balancer',
+    sku: 'RV1031',
+    name: 'Reverdy - Racing Balancer',
+    category: 'aliments',
+    categoryLabel: 'Aliments pour chevaux',
+    tagline:
+      'Aliment en granulés correcteur de céréales — cheval de course et de sport',
+    price: 80,
+    rating: 0,
+    reviewCount: 0,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Racing Balancer de Reverdy — aliment en granulés avec flocons de maïs, correcteur de céréales pour corriger les déséquilibres des céréales utilisées dans l'alimentation du cheval de course ou de sport soumis à des efforts réguliers.\n\nDistribué en complément d'une base de céréales, il joue le rôle de correcteur de ration. Distribué seul, il devient l'aliment principal, avec des quantités journalières plus élevées.\n\nLa quantité journalière se distribue en trois repas répartis sur la journée. La ration se pèse plutôt qu'elle ne se mesure au volume. Tout changement s'installe par paliers sur une à deux semaines.\n\nPour le cheval de course ou de sport à l'effort régulier. Chez le cheval de course, privilégier l'avoine plutôt que l'orge.",
+    benefits: [
+      'Aliment en granulés pour chevaux',
+      'Correcteur de ration céréalière ou aliment principal',
+      'Cheval de course ou de sport à l\'effort régulier',
+      'Distribution en trois repas par jour',
+      'Transition progressive sur 1 à 2 semaines',
+    ],
+    composition: [
+      { label: 'Composition', value: 'Non communiquée par le fabricant' },
+    ],
+    posologie:
+      "Adapter la quantité selon l'usage (correcteur de céréales ou aliment principal). Fractionner en 3 repas répartis dans la journée. Adapter activité, mode de vie et état de santé. Pour un cheval de course, privilégier des repas à base d'avoine plutôt que d'orge. Stocker dans un local sec et ventilé, à l'abri des rongeurs.",
+    image:
+      'https://www.cheval-energy.com/fr/26613-large_default/reverdy-racing-balancer-prix-degressif.jpg',
+  },
 ]

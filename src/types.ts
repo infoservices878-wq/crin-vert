@@ -30,6 +30,7 @@ export interface Product {
   sku: string
   name: string
   category: Category
+  categoryLabel?: string
   tagline: string
   price: number
   compareAtPrice?: number
@@ -38,6 +39,7 @@ export interface Product {
   format: string
   sizes: string[]
   description: string
+  descriptionHtml?: string
   benefits: string[]
   composition: CompositionItem[]
   posologie: string
