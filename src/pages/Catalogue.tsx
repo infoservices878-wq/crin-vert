@@ -16,7 +16,7 @@ function CategoryList({
   selectCategory,
   onPicked,
 }: {
-  categories: Category[]
+  categories: { slug: string; label: string }[]
   activeCategory: Category | null
   selectCategory: (cat: Category | null) => void
   onPicked?: () => void
@@ -40,20 +40,20 @@ function CategoryList({
         </button>
       </li>
       {categories.map((cat) => (
-        <li key={cat}>
+        <li key={cat.slug}>
           <button
             type="button"
             onClick={() => {
-              selectCategory(cat)
+              selectCategory(cat.slug as Category)
               onPicked?.()
             }}
             className={`focus-ring w-full border-l-4 px-3 py-2 text-left font-display text-sm font-semibold transition-colors ${
-              activeCategory === cat
+              activeCategory === cat.slug
                 ? 'border-leather-600 bg-oat-200 text-hunter-900'
                 : 'border-transparent text-ink-600 hover:bg-oat-200/60'
             }`}
           >
-            {CATEGORY_LABELS[cat]}
+            {cat.label}
           </button>
         </li>
       ))}
@@ -69,7 +69,7 @@ export function Catalogue() {
   const [allProducts, setAllProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   usePageMeta(
-    activeCategory ? CATEGORY_LABELS[activeCategory] : 'Catalogue',
+    activeCategory ? (CATEGORY_LABELS[activeCategory as Category] || String(activeCategory)) : 'Catalogue',
     'Parcourez nos compléments et aliments pour chevaux : CMV, digestion, articulations, sabots, stress…',
   )
 
@@ -88,7 +88,19 @@ export function Catalogue() {
     }
   }, [])
 
-  const categories = CATEGORY_ORDER
+  const categories = useMemo(() => {
+    const map = new Map<string, string>()
+    for (const prod of allProducts) {
+      const slug = prod.category
+      const label =
+        prod.categoryLabel ||
+        CATEGORY_LABELS[prod.category as Category] ||
+        prod.category
+      if (slug) map.set(slug, label)
+    }
+    return Array.from(map.entries()).map(([slug, label]) => ({ slug, label }))
+  }, [allProducts])
+
 
   const products = useMemo(() => {
     let list = activeCategory
@@ -113,11 +125,11 @@ export function Catalogue() {
         items={[
           { label: 'Accueil', to: '/' },
           { label: 'Catalogue', to: activeCategory ? '/catalogue' : undefined },
-          ...(activeCategory ? [{ label: CATEGORY_LABELS[activeCategory] }] : []),
+          ...(activeCategory ? [{ label: categories.find((c) => c.slug === activeCategory)?.label || activeCategory }] : []),
         ]}
       />
       <h1 className="mt-3 font-display text-3xl font-bold text-hunter-900">
-        {activeCategory ? CATEGORY_LABELS[activeCategory] : 'Tout le catalogue'}
+        {activeCategory ? (categories.find((c) => c.slug === activeCategory)?.label || activeCategory) : 'Tout le catalogue'}
       </h1>
       <p className="mt-1 text-sm text-ink-600">{loading ? 'Chargement…' : `${products.length} produit(s)`}</p>
 

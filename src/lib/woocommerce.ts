@@ -33,39 +33,143 @@ function mapCategory(wcCategorySlug: string | undefined): Category {
     'electrolytes',
     'aliments',
   ]
-  return (known.find((c) => c === wcCategorySlug) ?? 'alimentation') as Category
+  if (wcCategorySlug && known.includes(wcCategorySlug as Category)) {
+    return wcCategorySlug as Category
+  }
+  return (wcCategorySlug || 'alimentation') as Category
+}
+
+function htmlToText(html: string | undefined): string {
+  if (!html) return ''
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n\n')
+    .replace(/<\/li>/gi, '\n')
+    .replace(/<li[^>]*>/gi, '• ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&eacute;/g, 'é')
+    .replace(/&Eacute;/g, 'É')
+    .replace(/&egrave;/g, 'è')
+    .replace(/&agrave;/g, 'à')
+    .replace(/&acirc;/g, 'â')
+    .replace(/&ocirc;/g, 'ô')
+    .replace(/&ucirc;/g, 'û')
+    .replace(/&ccedil;/g, 'ç')
+    .replace(/&euro;/g, '€')
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+function attrOptions(wc: any, ...nameParts: string[]): string[] {
+  const attrs: any[] = wc.attributes || []
+  const found = attrs.find((a) => {
+    const n = `${a.name || ''} ${a.slug || ''}`.toLowerCase()
+    return nameParts.some((part) => n.includes(part.toLowerCase()))
+  })
+  if (!found) return []
+  const opts = found.options
+  if (Array.isArray(opts)) return opts.map(String).filter(Boolean)
+  if (typeof opts === 'string') return opts.split('|').map((s: string) => s.trim()).filter(Boolean)
+  return []
+}
+
+function attrOrMeta(wc: any, meta: (k: string) => any, ...keys: string[]): string {
+  for (const k of keys) {
+    const fromAttr = attrOptions(wc, k)
+    if (fromAttr.length) return fromAttr.join('\n')
+    const m = meta(k) ?? meta(`_${k}`)
+    if (m != null && String(m).trim()) return String(m)
+  }
+  return ''
 }
 
 function mapWooCommerceProduct(wc: any): Product {
   const meta = (key: string) => wc.meta_data?.find((m: any) => m.key === key)?.value
 
+  const sizeOpts = attrOptions(wc, 'conditionnement', 'size', 'taille', 'format', 'poids', 'packaging')
+  const metaSizes = meta('sizes')
+    ? String(meta('sizes')).split('|').map((s: string) => s.trim())
+    : []
+  const sizes =
+    sizeOpts.length > 0
+      ? sizeOpts
+      : metaSizes.length > 0
+        ? metaSizes
+        : [meta('format') || (wc.weight ? `${wc.weight} ${wc.weight_unit || 'kg'}` : 'Standard')].filter(Boolean)
+
+  let composition: { label: string; value: string }[] = []
+  const compMeta = meta('composition')
+  if (compMeta) {
+    try {
+      composition = typeof compMeta === 'string' ? JSON.parse(compMeta) : compMeta
+    } catch {
+      composition = [{ label: 'Composition', value: htmlToText(String(compMeta)) }]
+    }
+  }
+  if (!composition.length) {
+    const compText = attrOrMeta(wc, meta, 'composition', 'ingredients', 'constituants')
+    if (compText) {
+      composition = compText.split(/\n+/).filter(Boolean).map((line: string) => {
+        const parts = line.split(/[:|–—-]/)
+        if (parts.length >= 2) {
+          return { label: parts[0].trim(), value: parts.slice(1).join(':').trim() }
+        }
+        return { label: '', value: line.trim() }
+      })
+    }
+  }
+
+  const posologie =
+    attrOrMeta(wc, meta, 'posologie', 'conseils', 'utilisation', 'mode-emploi', 'dosage') || ''
+
+  const benefitsRaw = meta('benefits')
+  const benefits = benefitsRaw
+    ? String(benefitsRaw).split('|').map((s: string) => s.trim()).filter(Boolean)
+    : []
+
+  const shortHtml = wc.short_description || ''
+  const longHtml = wc.description || ''
+
   return {
     id: String(wc.id),
     slug: wc.slug,
     sku: wc.sku || `CV-${wc.id}`,
-    name: wc.name,
+    name: htmlToText(wc.name) || wc.name,
     category: mapCategory(wc.categories?.[0]?.slug),
-    tagline: wc.short_description?.replace(/<[^>]+>/g, '') || '',
+    categoryLabel: wc.categories?.[0]?.name || undefined,
+    tagline: htmlToText(shortHtml),
     price: Number(wc.price) || 0,
-    compareAtPrice: wc.regular_price !== wc.price ? Number(wc.regular_price) : undefined,
-    rating: Number(wc.average_rating) || 4.5,
+    compareAtPrice:
+      wc.regular_price && String(wc.regular_price) !== String(wc.price)
+        ? Number(wc.regular_price)
+        : undefined,
+    rating: Number(wc.average_rating) || 0,
     reviewCount: wc.rating_count || 0,
-    format: meta('format') || '—',
-    sizes: meta('sizes') ? meta('sizes').split('|') : [meta('format') || '—'],
-    description: wc.description?.replace(/<[^>]+>/g, '') || '',
-    benefits: meta('benefits')?.split('|') || [],
-    composition: meta('composition')
-      ? JSON.parse(meta('composition'))
-      : [{ label: 'Composition', value: 'À renseigner dans WooCommerce' }],
-    posologie: meta('posologie') || 'À renseigner dans WooCommerce',
+    format: sizes[0] || '—',
+    sizes,
+    description: htmlToText(longHtml) || htmlToText(shortHtml),
+    descriptionHtml: longHtml || shortHtml,
+    benefits,
+    composition,
+    posologie: htmlToText(posologie) || posologie,
     image: wc.images?.[0]?.src || '',
+    images: (wc.images || []).map((img: any) => img.src).filter(Boolean),
   }
 }
 
 export async function getProducts(): Promise<Product[]> {
   if (!isConfigured) return PRODUCTS
 
-  const res = await fetch(`${WC_URL}/wp-json/wc/v3/products?per_page=50`, {
+  const res = await fetch(`${WC_URL}/wp-json/wc/v3/products?per_page=100&status=publish`, {
     headers: { ...authHeader() },
   })
   if (!res.ok) {
