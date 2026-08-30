@@ -227,4 +227,45 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26614-large_default/reverdy-foal-prix-degressif.jpg',
   },
+  {
+    id: '6',
+    slug: 'reverdy-post-op',
+    sku: 'RV1040',
+    name: 'Reverdy - Post OP (prix dégressif)',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      "Aliment en granulés pour soutenir le système digestif après une opération ou des troubles digestifs importants",
+    price: 140.53,
+    rating: 0,
+    reviewCount: 0,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+    ],
+    description:
+      "Post OP de Reverdy — aliment en granulés pensé pour accompagner le cheval en période de convalescence digestive, à la suite d'une opération chirurgicale ou de troubles digestifs importants.\n\nSa particularité : la quantité, le rythme et la durée de distribution ne suivent pas un barème fixe, ils se déterminent avec le vétérinaire traitant, en tenant compte de l'état, de l'activité et du reste de l'alimentation du cheval.\n\nToute augmentation se conduit progressivement, par paliers, avec des repas peu volumineux et rapprochés, du fourrage à disposition et une eau propre en permanence. Un suivi quotidien de l'appétit, de la prise de boisson, des crottins et du comportement est recommandé.",
+    benefits: [
+      'Aliment en granulés pour la convalescence digestive',
+      'Quantité et rythme définis avec votre vétérinaire',
+      'Repas fractionnés, peu volumineux et rapprochés',
+      'Fourrage et eau propre disponibles en permanence',
+      'Augmentation progressive, par paliers',
+      'Sac de 20 kg',
+    ],
+    composition: [
+      { label: 'Composition', value: 'Non communiquée par le fabricant' },
+    ],
+    posologie:
+      "À administrer selon les conseils de votre vétérinaire, en fonction de l'état, de l'activité et du mode d'alimentation du cheval. Introduction progressive en repas peu volumineux et rapprochés, avec fourrage et eau propre disponibles en permanence.",
+    image:
+      'https://www.cheval-energy.com/fr/26624-large_default/reverdy-post-op-prix-degressif.jpg',
+  },
 ]
