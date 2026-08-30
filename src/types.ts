@@ -30,6 +30,8 @@ export interface Product {
   sku: string
   name: string
   category: Category
+  /** Libellé catégorie WooCommerce */
+  categoryLabel?: string
   tagline: string
   price: number
   compareAtPrice?: number
@@ -38,6 +40,8 @@ export interface Product {
   format: string
   sizes: string[]
   description: string
+  /** Description HTML WooCommerce */
+  descriptionHtml?: string
   benefits: string[]
   composition: CompositionItem[]
   posologie: string

@@ -155,9 +155,16 @@ export function ProductDetail() {
               </p>
             )}
 
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
-              {product.description}
-            </p>
+            {product.descriptionHtml ? (
+              <div
+                className="prose prose-sm mt-4 max-w-md text-ink-900 prose-p:my-2 prose-ul:my-2"
+                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+              />
+            ) : (
+              <p className="mt-4 max-w-md whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                {product.description}
+              </p>
+            )}
 
             <div className="mt-6">
               <AiVetBanner product={product} />
@@ -227,22 +234,37 @@ export function ProductDetail() {
                 title: 'En savoir plus',
                 content: (
                   <div>
-                    <p className="text-sm leading-relaxed text-ink-900">{product.description}</p>
-                    <ul className="mt-3 space-y-1.5">
-                      {product.benefits.map((b) => (
-                        <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
-                          <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
+                    {product.descriptionHtml ? (
+                      <div
+                        className="prose prose-sm max-w-none text-ink-900"
+                        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                      />
+                    ) : (
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                        {product.description}
+                      </p>
+                    )}
+                    {product.benefits.length > 0 && (
+                      <ul className="mt-3 space-y-1.5">
+                        {product.benefits.map((b) => (
+                          <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
+                            <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 ),
               },
               {
                 id: 'usage',
                 title: "Conseils d'utilisation",
-                content: <p className="font-mono text-sm text-ink-900">{product.posologie}</p>,
+                content: (
+                  <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                    {product.posologie || 'Non renseigné sur la fiche WooCommerce.'}
+                  </p>
+                ),
               },
               {
                 id: 'composition',
