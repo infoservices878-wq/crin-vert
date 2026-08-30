@@ -145,4 +145,45 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26616-large_default/training-reverdy.jpg',
   },
+  {
+    id: '4',
+    slug: 'reverdy-cereal-balancer',
+    sku: 'RV1037',
+    name: 'Reverdy - Cereal Balancer',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment en granulés correcteur de céréales — poulain en croissance et poulinière',
+    price: 88.4,
+    rating: 4.5,
+    reviewCount: 18,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Cereal Balancer de Reverdy — aliment en granulés correcteur de céréales pour corriger les déséquilibres des céréales dans l'alimentation du poulain en croissance ou de la poulinière.\n\nEn correcteur, il accompagne une base d'orge ou d'avoine. En aliment principal, il constitue l'essentiel du concentré. Pour le poulain du sevrage au pré-entraînement, et la poulinière de la gestation aux premiers mois de lactation.\n\nFractionner en trois repas. Réévaluer la ration selon le stade physiologique. Au pré-entraînement ou travail soutenu, relayer vers Reverdy Racing par paliers.",
+    benefits: [
+      'Correcteur de ration céréalière ou aliment principal',
+      'Poulain : du sevrage au pré-entraînement',
+      'Poulinière : gestation et début de lactation',
+      'Distribution en trois repas quotidiens',
+      'Sac de 20 kg',
+    ],
+    composition: [
+      { label: 'Composition', value: 'Non communiquée par le fabricant' },
+    ],
+    posologie:
+      "Adapter la quantité selon l'usage (correcteur ou aliment principal). Fractionner en 3 repas. Ajuster selon activité, mode de vie, alimentation et état du cheval. Travail modéré ou soutenu : privilégier Reverdy Racing.",
+    image:
+      'https://www.cheval-energy.com/fr/26612-large_default/reverdy-cereal-balancer-prix-degressif.jpg',
+  },
 ]
