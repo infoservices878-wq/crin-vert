@@ -198,6 +198,9 @@ export function ProductDetail() {
               },
             ]}
           />
+
+          <ExpertReview product={product} />
+        </div>
             {/*<p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
               {product.description}
             </p>*/}
@@ -261,8 +264,8 @@ export function ProductDetail() {
             </div>
           </div>
         </div>
-          <ExpertReview product={product} />
-        </div>
+
+        
 
         <ProductReviews product={product} />
       </div>
