@@ -186,4 +186,45 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26612-large_default/reverdy-cereal-balancer-prix-degressif.jpg',
   },
+  {
+    id: '5',
+    slug: 'reverdy-foal',
+    sku: 'RV1033',
+    name: 'Reverdy - Foal',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment lacté en granulés pour poulain — des premières semaines à la mise à l\'herbe',
+    price: 88,
+    rating: 4.6,
+    reviewCount: 14,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Foal de Reverdy — aliment lacté en granulés pour la transition vers une alimentation 100 % végétale, formulé pour soutenir la croissance du jeune poulain de quelques semaines à la première mise à l'herbe.\n\nDistribution possible dès 2 semaines de vie, idéalement jusqu'à 8 mois au moins pour accompagner le sevrage. Prévoir un nourrisseur réservé au poulain et fractionner en 3 repas par jour. Ajuster selon mode de vie, état, climat et reste de l'alimentation. Eau propre disponible en permanence.",
+    benefits: [
+      'Aliment en granulés pour poulain avant et pendant le sevrage',
+      'Démarrage possible dès 2 semaines de vie',
+      'Jusqu\'à la mise à l\'herbe, idéalement 8 mois au moins',
+      '3 repas/jour dans un nourrisseur réservé au poulain',
+      'Soutien en acides aminés essentiels pour la croissance',
+    ],
+    composition: [
+      { label: 'Composition', value: 'Non communiquée par le fabricant' },
+    ],
+    posologie:
+      "À partir de 2 semaines de vie selon les doses préconisées, jusqu'à la première mise à l'herbe. Idéalement jusqu'à 8 mois au moins. Distribuer en 3 repas/jour. Adapter mode de vie, état, climat et reste de l'alimentation.",
+    image:
+      'https://www.cheval-energy.com/fr/26614-large_default/reverdy-foal-prix-degressif.jpg',
+  },
 ]
