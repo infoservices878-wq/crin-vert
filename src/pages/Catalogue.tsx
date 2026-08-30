@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, X } from 'lucide-react'
-import { PRODUCTS } from '../data/products'
-import { CATEGORY_LABELS, CATEGORY_ORDER, type Category } from '../types'
+import { getProducts } from '../lib/woocommerce'
+import { CATEGORY_LABELS, CATEGORY_ORDER, type Category, type Product } from '../types'
 import { ProductCard } from '../components/ProductCard'
 import { EmptyState } from '../components/EmptyState'
 import { Breadcrumb } from '../components/Breadcrumb'
@@ -66,22 +66,41 @@ export function Catalogue() {
   const activeCategory = searchParams.get('categorie') as Category | null
   const [sort, setSort] = useState<SortKey>('populaire')
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [allProducts, setAllProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   usePageMeta(
     activeCategory ? CATEGORY_LABELS[activeCategory] : 'Catalogue',
     'Parcourez nos compléments et aliments pour chevaux : CMV, digestion, articulations, sabots, stress…',
   )
 
+  useEffect(() => {
+    let cancelled = false
+    setLoading(true)
+    getProducts()
+      .then((list) => {
+        if (!cancelled) setAllProducts(list)
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const categories = CATEGORY_ORDER
 
   const products = useMemo(() => {
-    let list = activeCategory ? PRODUCTS.filter((p) => p.category === activeCategory) : PRODUCTS
+    let list = activeCategory
+      ? allProducts.filter((p) => p.category === activeCategory)
+      : allProducts
     list = [...list].sort((a, b) => {
       if (sort === 'prix-asc') return a.price - b.price
       if (sort === 'prix-desc') return b.price - a.price
       return b.reviewCount - a.reviewCount
     })
     return list
-  }, [activeCategory, sort])
+  }, [allProducts, activeCategory, sort])
 
   const selectCategory = (cat: Category | null) => {
     if (cat) setSearchParams({ categorie: cat })
@@ -100,7 +119,7 @@ export function Catalogue() {
       <h1 className="mt-3 font-display text-3xl font-bold text-hunter-900">
         {activeCategory ? CATEGORY_LABELS[activeCategory] : 'Tout le catalogue'}
       </h1>
-      <p className="mt-1 text-sm text-ink-600">{products.length} produit(s)</p>
+      <p className="mt-1 text-sm text-ink-600">{loading ? 'Chargement…' : `${products.length} produit(s)`}</p>
 
       {/* Barre mobile : filtres + tri */}
       <div className="mt-6 flex items-center gap-2 md:hidden">

@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Wheat, Leaf, Activity, Wind, Zap, Heart,
   ChevronLeft, ChevronRight, HeartHandshake, Users, Sprout,
 } from 'lucide-react'
-import { PRODUCTS } from '../data/products'
 import { PROTOCOLS } from '../data/protocols'
-import { CATEGORY_LABELS, type Category } from '../types'
+import { CATEGORY_LABELS, type Category, type Product } from '../types'
+import { getProducts } from '../lib/woocommerce'
 import { ProductCard } from '../components/ProductCard'
 import { ProtocolCard } from '../components/ProtocolCard'
 import { CompositionLabel } from '../components/CompositionLabel'
@@ -52,10 +52,20 @@ const TESTIMONIALS = [
 
 export function Home() {
   usePageMeta()
-  const categories = (Object.keys(ICONS) as Category[])
-  const featured = PRODUCTS.slice(0, 6)
+  const categories = Object.keys(ICONS) as Category[]
+  const [featured, setFeatured] = useState<Product[]>([])
   const [slide, setSlide] = useState(0)
   const [review, setReview] = useState(0)
+
+  useEffect(() => {
+    let cancelled = false
+    getProducts().then((list) => {
+      if (!cancelled) setFeatured(list.slice(0, 6))
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const s = HERO_SLIDES[slide]
   const t = TESTIMONIALS[review]
