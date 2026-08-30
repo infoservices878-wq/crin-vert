@@ -34,9 +34,9 @@ export function AiVetBanner({ product }: { product: Product }) {
       {answer && (
         <div className="mt-4 border-t border-oat-50/15 pt-4">
           <p className="text-sm text-oat-100/90">{answer}</p>
-          <p className="mt-2 text-xs text-oat-100/40">
+          {/*<p className="mt-2 text-xs text-oat-100/40">
             Assistant de démonstration — réponses pré-écrites, aucune IA connectée.
-          </p>
+          </p>*/}
         </div>
       )}
     </div>

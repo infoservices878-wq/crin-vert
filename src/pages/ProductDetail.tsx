@@ -158,9 +158,9 @@ export function ProductDetail() {
               </p>
             )}
 
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
+            {/*<p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
               {product.description}
-            </p>
+            </p>*/}
 
             <div className="mt-6">
               <AiVetBanner product={product} />
