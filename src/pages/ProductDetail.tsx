@@ -157,7 +157,47 @@ export function ProductDetail() {
                 <span className="font-semibold text-hunter-900">{size}</span>
               </p>
             )}
-
+<div className="mt-14 grid gap-10 md:grid-cols-2">
+          <Accordion
+            items={[
+              {
+                id: 'plus',
+                title: 'En savoir plus',
+                content: (
+                  <div>
+                    <p className="text-sm leading-relaxed text-ink-900">{product.description}</p>
+                    <ul className="mt-3 space-y-1.5">
+                      {product.benefits.map((b) => (
+                        <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
+                          <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ),
+              },
+              {
+                id: 'usage',
+                title: "Conseils d'utilisation",
+                content: <p className="font-mono text-sm text-ink-900">{product.posologie}</p>,
+              },
+              {
+                id: 'composition',
+                title: product.nutritionAnalysis
+                  ? 'Analyse nutritionnelle'
+                  : 'Composition',
+                content: product.nutritionAnalysis ? (
+                  <NutritionAnalysisPanel
+                    analysis={product.nutritionAnalysis}
+                    posologie={product.posologie}
+                  />
+                ) : (
+                  <CompositionLabel items={product.composition} posologie={product.posologie} />
+                ),
+              },
+            ]}
+          />
             {/*<p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
               {product.description}
             </p>*/}
@@ -221,49 +261,6 @@ export function ProductDetail() {
             </div>
           </div>
         </div>
-
-        <div className="mt-14 grid gap-10 md:grid-cols-2">
-          <Accordion
-            items={[
-              {
-                id: 'plus',
-                title: 'En savoir plus',
-                content: (
-                  <div>
-                    <p className="text-sm leading-relaxed text-ink-900">{product.description}</p>
-                    <ul className="mt-3 space-y-1.5">
-                      {product.benefits.map((b) => (
-                        <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
-                          <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ),
-              },
-              {
-                id: 'usage',
-                title: "Conseils d'utilisation",
-                content: <p className="font-mono text-sm text-ink-900">{product.posologie}</p>,
-              },
-              {
-                id: 'composition',
-                title: product.nutritionAnalysis
-                  ? 'Analyse nutritionnelle'
-                  : 'Composition',
-                content: product.nutritionAnalysis ? (
-                  <NutritionAnalysisPanel
-                    analysis={product.nutritionAnalysis}
-                    posologie={product.posologie}
-                  />
-                ) : (
-                  <CompositionLabel items={product.composition} posologie={product.posologie} />
-                ),
-              },
-            ]}
-          />
-
           <ExpertReview product={product} />
         </div>
 
