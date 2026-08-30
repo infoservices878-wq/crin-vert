@@ -1,7 +1,6 @@
-import { Star } from 'lucide-react'
+import { Stars } from './Stars'
 import type { Product } from '../types'
 
-/** Avis de démonstration — noms et textes cohérents avec le secteur équin */
 const SAMPLE_REVIEWS = [
   {
     name: 'Camille B.',
@@ -27,7 +26,18 @@ const SAMPLE_REVIEWS = [
 ]
 
 export function ProductReviews({ product }: { product: Product }) {
-  const reviews = SAMPLE_REVIEWS.slice(0, Math.min(3, Math.max(1, Math.ceil(product.reviewCount / 50))))
+  if (!product.reviewCount && !product.rating) {
+    return (
+      <section className="mt-14 border-t border-hunter-800/10 pt-10" aria-labelledby="avis-title">
+        <h2 id="avis-title" className="font-display text-2xl font-bold text-hunter-900">
+          Avis clients
+        </h2>
+        <p className="mt-2 text-sm text-ink-600">Pas encore d’avis pour ce produit.</p>
+      </section>
+    )
+  }
+
+  const reviews = SAMPLE_REVIEWS
 
   return (
     <section className="mt-14 border-t border-hunter-800/10 pt-10" aria-labelledby="avis-title">
@@ -36,21 +46,19 @@ export function ProductReviews({ product }: { product: Product }) {
           <h2 id="avis-title" className="font-display text-2xl font-bold text-hunter-900">
             Avis clients
           </h2>
-          <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-600">
-            <Star className="h-4 w-4 fill-straw-500 text-straw-500" />
-            <span className="font-mono font-semibold text-hunter-900">{product.rating}</span>
+          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-ink-600">
+            <Stars value={product.rating} size="md" />
+            <span className="font-mono font-semibold text-hunter-900">
+              {product.rating.toFixed(1)}
+            </span>
             <span>/ 5 — {product.reviewCount} avis</span>
           </p>
         </div>
-        <p className="text-xs text-ink-600">Google</p>
       </div>
 
       <ul className="mt-6 grid gap-4 sm:grid-cols-3">
         {reviews.map((r) => (
-          <li
-            key={r.name}
-            className="border border-hunter-800/10 bg-oat-50 p-4"
-          >
+          <li key={r.name} className="border border-hunter-800/10 bg-oat-50 p-4">
             <div className="flex items-center gap-3">
               <img
                 src={r.avatar}
@@ -62,21 +70,14 @@ export function ProductReviews({ product }: { product: Product }) {
                 decoding="async"
               />
               <div>
-                <p className="font-display text-sm font-bold text-hunter-900">{r.name}</p>
+                <p className="font-display text-sm font-semibold text-hunter-900">{r.name}</p>
                 <p className="text-xs text-ink-600">{r.role}</p>
               </div>
             </div>
-            <div className="mt-2 flex gap-0.5" aria-label={`${r.rating} sur 5`}>
-              {Array.from({ length: 5 }, (_, i) => (
-                <Star
-                  key={i}
-                  className={`h-3.5 w-3.5 ${
-                    i < r.rating ? 'fill-straw-500 text-straw-500' : 'text-hunter-800/20'
-                  }`}
-                />
-              ))}
+            <div className="mt-2">
+              <Stars value={r.rating} size="sm" />
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-ink-900">« {r.text} »</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink-900">{r.text}</p>
           </li>
         ))}
       </ul>

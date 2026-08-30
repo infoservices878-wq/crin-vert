@@ -63,7 +63,7 @@ export interface Protocol {
 
 /** Libellés catalogue — alignés sur les gammes habituelles du secteur équin */
 export const CATEGORY_LABELS: Record<Category, string> = {
-  alimentation: 'Alimentation & CMV',
+  alimentation: 'Aliments & CMV',
   aliments: 'Aliments pour chevaux',
   digestion: 'Confort digestif',
   articulations: 'Articulations & mobilité',

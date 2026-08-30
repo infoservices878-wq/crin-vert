@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Star, ShoppingCart } from 'lucide-react'
+import { ShoppingCart } from 'lucide-react'
+import { Stars } from './Stars'
 import type { Product } from '../types'
 import { ProductIllustration } from './ProductIllustration'
 import { useCart } from '../context/CartContext'
@@ -20,10 +21,10 @@ export function ProductCard({ product }: { product: Product }) {
         </Link>
         <p className="mt-1 line-clamp-2 text-xs text-ink-600 sm:text-sm">{product.tagline}</p>
 
-        <div className="mt-2 flex items-center gap-1 text-xs text-ink-600">
-          <Star className="h-3.5 w-3.5 shrink-0 fill-straw-500 text-straw-500" />
-          <span className="font-mono">{product.rating}</span>
-          <span className="tabular-nums">({product.reviewCount})</span>
+        <div className="mt-2 flex items-center gap-1.5 text-xs text-ink-600">
+          <Stars value={product.rating} size="sm" />
+          <span className="font-mono tabular-nums">{product.rating.toFixed(1)}</span>
+          <span className="tabular-nums">({product.reviewCount} avis)</span>
         </div>
 
         <div className="mt-auto flex flex-col gap-2 pt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-2 sm:pt-4">

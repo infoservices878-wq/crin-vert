@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Star, Plus, Minus, Check, Heart } from 'lucide-react'
+import { Plus, Minus, Check, Heart } from 'lucide-react'
+import { Stars } from '../components/Stars'
 import type { Product } from '../types'
 import { CATEGORY_LABELS } from '../types'
 import { getProductBySlug } from '../lib/woocommerce'
@@ -131,9 +132,11 @@ export function ProductDetail() {
             </h1>
             <p className="mt-1 text-ink-600">{product.tagline}</p>
 
-            <div className="mt-3 flex items-center gap-1.5 text-sm text-ink-600">
-              <Star className="h-4 w-4 fill-straw-500 text-straw-500" />
-              <span className="font-mono">{product.rating}</span>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-ink-600">
+              <Stars value={product.rating} size="md" />
+              <span className="font-mono font-semibold text-hunter-900">
+                {product.rating.toFixed(1)}
+              </span>
               <span>/ 5 — {product.reviewCount} avis</span>
             </div>
 
