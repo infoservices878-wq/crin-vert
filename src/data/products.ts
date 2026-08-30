@@ -11,7 +11,6 @@ export const PRODUCTS: Product[] = [
     sku: 'CE2012',
     name: 'CMV Entretien & Performance',
     category: 'alimentation',
-    categoryLabel: 'Alimentation & CMV',
     tagline:
       "Sans fer ajouté — l'équilibre minéral optimal pour votre cheval",
     price: 19.81,

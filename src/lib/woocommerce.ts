@@ -36,31 +36,6 @@ function mapCategory(wcCategorySlug: string | undefined): Category {
   return (known.find((c) => c === wcCategorySlug) ?? 'alimentation') as Category
 }
 
-function mapWooCommerceProduct(wc: any): Product {
-  const meta = (key: string) => wc.meta_data?.find((m: any) => m.key === key)?.value
-
-  return {
-    id: String(wc.id),
-    slug: wc.slug,
-    sku: wc.sku || `CV-${wc.id}`,
-    name: wc.name,
-    category: mapCategory(wc.categories?.[0]?.slug),
-    tagline: wc.short_description?.replace(/<[^>]+>/g, '') || '',
-    price: Number(wc.price) || 0,
-    compareAtPrice: wc.regular_price !== wc.price ? Number(wc.regular_price) : undefined,
-    rating: Number(wc.average_rating) || 4.5,
-    reviewCount: wc.rating_count || 0,
-    format: meta('format') || '—',
-    sizes: meta('sizes') ? meta('sizes').split('|') : [meta('format') || '—'],
-    description: wc.description?.replace(/<[^>]+>/g, '') || '',
-    benefits: meta('benefits')?.split('|') || [],
-    composition: meta('composition')
-      ? JSON.parse(meta('composition'))
-      : [{ label: 'Composition', value: 'À renseigner dans WooCommerce' }],
-    posologie: meta('posologie') || 'À renseigner dans WooCommerce',
-    image: wc.images?.[0]?.src || '',
-  }
-}
 
 export async function getProducts(): Promise<Product[]> {
   // Catalogue 100 % local — pas d'API produits WooCommerce
