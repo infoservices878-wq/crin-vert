@@ -12,7 +12,6 @@ import { CompositionLabel } from '../components/CompositionLabel'
 import { NutritionAnalysisPanel } from '../components/NutritionAnalysisPanel'
 import { Accordion } from '../components/Accordion'
 import { AiVetBanner } from '../components/AiVetBanner'
-import { ExpertReview } from '../components/ExpertReview'
 import { SizeSelector } from '../components/SizeSelector'
 import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
@@ -157,7 +156,7 @@ export function ProductDetail() {
                 <span className="font-semibold text-hunter-900">{size}</span>
               </p>
             )}
-<div className="mt-14 grid gap-10 md:grid-cols-2">
+          <div className="mt-14 grid gap-10 md:grid-cols-1">
           <Accordion
             items={[
               {
@@ -199,7 +198,7 @@ export function ProductDetail() {
             ]}
           />
 
-          <ExpertReview product={product} />
+          {/*<ExpertReview product={product} />*/}
         </div>
             {/*<p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
               {product.description}
