@@ -77,7 +77,7 @@ function attrOptions(wc: any, ...nameParts: string[]): string[] {
   })
   if (!found) return []
   const opts = found.options
-  if (Array.isArray(opts)) return opts.map(String).filter(Boolean)
+  if (Array.isArray(opts)) return opts.map((o) => htmlToText(String(o)) || String(o)).filter(Boolean)
   if (typeof opts === 'string') return opts.split('|').map((s: string) => s.trim()).filter(Boolean)
   return []
 }

@@ -16,8 +16,8 @@ export function CompositionLabel({
         Composition
       </p>
       <ul className="mt-2 divide-y divide-ink-900/15">
-        {items.map((item) => (
-          <li key={item.label} className="flex items-baseline justify-between py-2 text-sm">
+        {items.map((item, idx) => (
+          <li key={`${item.label}-${idx}`} className="flex items-baseline justify-between py-2 text-sm">
             <span className="text-ink-900">{item.label}</span>
             <span className="font-mono text-hunter-800 font-medium">{item.value}</span>
           </li>

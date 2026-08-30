@@ -36,7 +36,7 @@ export function ProductDetail() {
   usePageMeta(
     product?.name,
     product
-      ? `${product.name} — ${product.tagline}. ${product.description.slice(0, 120)}…`
+      ? `${product.name} — ${product.tagline || ''}. ${(product.description || '').slice(0, 120)}`
       : undefined,
   )
 
@@ -92,7 +92,10 @@ export function ProductDetail() {
         <Breadcrumb
           items={[
             { label: 'Accueil', to: '/' },
-            { label: CATEGORY_LABELS[product.category], to: `/catalogue?categorie=${product.category}` },
+            {
+              label: product.categoryLabel || CATEGORY_LABELS[product.category] || product.category,
+              to: `/catalogue?categorie=${product.category}`,
+            },
             { label: product.name },
           ]}
         />
@@ -148,23 +151,70 @@ export function ProductDetail() {
               )}
             </div>
 
-            {size && (
-              <p className="mt-2 text-sm text-ink-600">
-                Conditionnement :{' '}
-                <span className="font-semibold text-hunter-900">{size}</span>
-              </p>
-            )}
-
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
-              {product.description}
-            </p>
-
-            <div className="mt-6">
-              <AiVetBanner product={product} />
-            </div>
-
             <div className="mt-6 space-y-5">
               <SizeSelector sizes={product.sizes} selected={size} onSelect={setSize} />
+
+              <Accordion
+                items={[
+                  {
+                    id: 'plus',
+                    title: 'En savoir plus',
+                    content: (
+                      <div>
+                        {product.descriptionHtml ? (
+                          <div
+                            className="prose prose-sm max-w-none text-ink-900"
+                            dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                          />
+                        ) : (
+                          <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                            {product.description}
+                          </p>
+                        )}
+                        {product.benefits.length > 0 && (
+                          <ul className="mt-3 space-y-1.5">
+                            {product.benefits.map((b) => (
+                              <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
+                                <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ),
+                  },
+                  {
+                    id: 'usage',
+                    title: "Conseils d'utilisation",
+                    content: (
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                        {product.posologie || 'Non renseigné sur la fiche WooCommerce.'}
+                      </p>
+                    ),
+                  },
+                  {
+                    id: 'composition',
+                    title: product.nutritionAnalysis
+                      ? 'Analyse nutritionnelle'
+                      : 'Composition',
+                    content: product.nutritionAnalysis ? (
+                      <NutritionAnalysisPanel
+                        analysis={product.nutritionAnalysis}
+                        posologie={product.posologie}
+                      />
+                    ) : product.composition.length > 0 ? (
+                      <CompositionLabel items={product.composition} posologie={product.posologie} />
+                    ) : (
+                      <p className="text-sm text-ink-600">Non renseigné sur la fiche WooCommerce.</p>
+                    ),
+                  },
+                ]}
+              />
+
+              <div className="mt-2">
+                <AiVetBanner product={product} />
+              </div>
 
               {/* Quantité + CTA desktop (masqué le bouton principal sur mobile via sticky) */}
               <div className="flex flex-wrap items-stretch gap-3">
@@ -219,63 +269,7 @@ export function ProductDetail() {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-2">
-          <Accordion
-            items={[
-              {
-                id: 'plus',
-                title: 'En savoir plus',
-                content: (
-                  <div>
-                    {product.descriptionHtml ? (
-                      <div
-                        className="prose prose-sm max-w-none text-ink-900"
-                        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                      />
-                    ) : (
-                      <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
-                        {product.description}
-                      </p>
-                    )}
-                    {product.benefits.length > 0 && (
-                      <ul className="mt-3 space-y-1.5">
-                        {product.benefits.map((b) => (
-                          <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
-                            <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
-                            {b}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ),
-              },
-              {
-                id: 'usage',
-                title: "Conseils d'utilisation",
-                content: (
-                  <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
-                    {product.posologie || 'Non renseigné sur la fiche WooCommerce.'}
-                  </p>
-                ),
-              },
-              {
-                id: 'composition',
-                title: product.nutritionAnalysis
-                  ? 'Analyse nutritionnelle'
-                  : 'Composition',
-                content: product.nutritionAnalysis ? (
-                  <NutritionAnalysisPanel
-                    analysis={product.nutritionAnalysis}
-                    posologie={product.posologie}
-                  />
-                ) : (
-                  <CompositionLabel items={product.composition} posologie={product.posologie} />
-                ),
-              },
-            ]}
-          />
-
+        <div className="mt-14">
           <ExpertReview product={product} />
         </div>
 
