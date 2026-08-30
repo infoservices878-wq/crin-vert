@@ -1,4 +1,4 @@
-import type { Product, Category } from '../types'
+import type { Product } from '../types'
 import { PRODUCTS } from '../data/products'
 
 // --- Connexion à un backend WooCommerce (optionnel) -----------------------
@@ -18,24 +18,6 @@ const isConfigured = Boolean(WC_URL && WC_KEY && WC_SECRET)
 function authHeader(): HeadersInit {
   return { Authorization: `Basic ${btoa(`${WC_KEY}:${WC_SECRET}`)}` }
 }
-
-function mapCategory(wcCategorySlug: string | undefined): Category {
-  const known: Category[] = [
-    'alimentation',
-    'digestion',
-    'articulations',
-    'respiration',
-    'recuperation',
-    'senior',
-    'sabots',
-    'robe-peau',
-    'stress',
-    'electrolytes',
-    'aliments',
-  ]
-  return (known.find((c) => c === wcCategorySlug) ?? 'alimentation') as Category
-}
-
 
 export async function getProducts(): Promise<Product[]> {
   // Catalogue 100 % local — pas d'API produits WooCommerce
