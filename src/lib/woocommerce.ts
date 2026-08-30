@@ -63,17 +63,8 @@ function mapWooCommerceProduct(wc: any): Product {
 }
 
 export async function getProducts(): Promise<Product[]> {
-  if (!isConfigured) return PRODUCTS
-
-  const res = await fetch(`${WC_URL}/wp-json/wc/v3/products?per_page=50`, {
-    headers: { ...authHeader() },
-  })
-  if (!res.ok) {
-    console.warn('WooCommerce API indisponible, utilisation des données de démo.')
-    return PRODUCTS
-  }
-  const data = await res.json()
-  return data.map(mapWooCommerceProduct)
+  // Catalogue 100 % local — pas d'API produits WooCommerce
+  return PRODUCTS
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
