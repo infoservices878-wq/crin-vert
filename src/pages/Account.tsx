@@ -84,7 +84,7 @@ export function Account() {
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-xs text-ink-600">Historique de démonstration.</p>
+        <p className="mt-2 text-xs text-ink-600">Historique de compte.</p>
       </div>
 
       <div className="mt-6 flex flex-wrap gap-3">

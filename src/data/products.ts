@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
         'Sans fer ajouté. Granulation à froid. Ne pas cumuler avec un aliment complet déjà minéralisé à dose pleine.',
     },
     image:
-      'https://www.cheval-energy.com/fr/28240-large_default/cheval-energy-cmv-entretien-performance.jpg',
+      'https://drive.google.com/file/d/19kA9CjXf-ROKODmpNSsABjRJ7Pvo9Izn/view?usp=drive_link',
   },
   {
     id: '2',
@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
       '25 sacs de 20 kg',
       '35 sacs de 20 kg',
       '1 palette – 50 sacs de 20 kg',
-      '2 palettes – 100 sacs de 20 kg',
+      '1 palette – 100 sacs de 20 kg',
     ],
     description:
       "Racing Balancer de Reverdy — aliment en granulés avec flocons de maïs, correcteur de céréales pour corriger les déséquilibres des céréales utilisées dans l'alimentation du cheval de course ou de sport soumis à des efforts réguliers.\n\nDistribué en complément d'une base de céréales, il joue le rôle de correcteur de ration. Distribué seul, il devient l'aliment principal, avec des quantités journalières plus élevées.\n\nLa quantité journalière se distribue en trois repas répartis sur la journée. La ration se pèse plutôt qu'elle ne se mesure au volume. Tout changement s'installe par paliers sur une à deux semaines.\n\nPour le cheval de course ou de sport à l'effort régulier. Chez le cheval de course, privilégier l'avoine plutôt que l'orge.",
@@ -128,7 +128,7 @@ export const PRODUCTS: Product[] = [
       '25 sacs de 20 kg',
       '35 sacs de 20 kg',
       '1 palette – 50 sacs de 20 kg',
-      '2 palettes – 100 sacs de 20 kg',
+      '1 palette – 100 sacs de 20 kg',
     ],
     description:
       "Training de Reverdy (anciennement Trotting) — aliment sous forme de granulés avec flocons de maïs pour l'alimentation du cheval de courses, apport énergétique élevé et bonne digestibilité.\n\nAliment complet de la période d'entraînement, entre l'aliment d'entretien et les formules réservées aux charges les plus lourdes. Servir à heures fixes, fractionner en plusieurs repas de volume modéré, maintenir une eau propre accessible en permanence. Le fourrage reste la base de la ration.\n\nPour cheval de courses à l'entraînement ou cheval adulte en travail régulier et soutenu. Transition d'un aliment à l'autre sur une à deux semaines.",
@@ -170,7 +170,7 @@ export const PRODUCTS: Product[] = [
       '25 sacs de 20 kg',
       '35 sacs de 20 kg',
       '1 palette – 50 sacs de 20 kg',
-      '2 palettes – 100 sacs de 20 kg',
+      '1 palette – 100 sacs de 20 kg',
     ],
     description:
       "Cereal Balancer de Reverdy — aliment en granulés correcteur de céréales pour corriger les déséquilibres des céréales dans l'alimentation du poulain en croissance ou de la poulinière.\n\nEn correcteur, il accompagne une base d'orge ou d'avoine. En aliment principal, il constitue l'essentiel du concentré. Pour le poulain du sevrage au pré-entraînement, et la poulinière de la gestation aux premiers mois de lactation.\n\nFractionner en trois repas. Réévaluer la ration selon le stade physiologique. Au pré-entraînement ou travail soutenu, relayer vers Reverdy Racing par paliers.",
@@ -212,7 +212,7 @@ export const PRODUCTS: Product[] = [
       '25 sacs de 20 kg',
       '35 sacs de 20 kg',
       '1 palette – 50 sacs de 20 kg',
-      '2 palettes – 100 sacs de 20 kg',
+      '1 palette – 100 sacs de 20 kg',
     ],
     description:
       "Foal de Reverdy — aliment lacté en granulés pour la transition vers une alimentation 100 % végétale, formulé pour soutenir la croissance du jeune poulain de quelques semaines à la première mise à l'herbe.\n\nDistribution possible dès 2 semaines de vie, idéalement jusqu'à 8 mois au moins pour accompagner le sevrage. Prévoir un nourrisseur réservé au poulain et fractionner en 3 repas par jour. Ajuster selon mode de vie, état, climat et reste de l'alimentation. Eau propre disponible en permanence.",
@@ -296,7 +296,7 @@ export const PRODUCTS: Product[] = [
       '25 sacs de 20 kg',
       '35 sacs de 20 kg',
       '1 palette – 50 sacs de 20 kg',
-      '2 palettes – 100 sacs de 20 kg',
+      '1 palette – 100 sacs de 20 kg',
     ],
     description:
       "Cereal Free de Reverdy — aliment en granulés correcteur de foin sans céréales, pour compléter les apports du cheval ou poney nourri au fourrage.\n\nSe distribue en petit volume (1 L max par repas). Complément d'une ration de foin et d'herbe, jamais son remplacement. Pour cheval ou poney au repos ou à activité faible à modérée.\n\nMouiller à l'eau tiède et attendre le délitement complet chez les chevaux sujets aux bouchons œsophagiens, âgés ou qui avalent sans mâcher. Respecter les quantités pour ne pas cumuler les apports avec d'autres compléments.",

@@ -23,6 +23,47 @@ import { MadeInFranceBadge } from '../components/MadeInFranceBadge'
 import { ProductReviews } from '../components/ProductReviews'
 import { usePageMeta } from '../hooks/usePageMeta'
 
+/**
+ * Extrait le nombre de sacs de la chaîne de taille.
+ * Ex: "6 sacs de 20 kg" → 6
+ * Ex: "1 palette – 50 sacs de 20 kg" → 50
+ */
+function extractSizeMultiplier(sizeString: string): number {
+  // Si c'est une palette, extraire le nombre de sacs après "sacs"
+  if (sizeString.includes('palette')) {
+    const match = sizeString.match(/(\d+)\s*sacs/)
+    if (match) {
+      return parseInt(match[1], 10)
+    }
+  }
+  
+  // Sinon, extraire le premier nombre
+  const match = sizeString.match(/^(\d+)/)
+  return match ? parseInt(match[1], 10) : 1
+}
+
+/**
+ * Calcule le prix ajusté en fonction de la taille sélectionnée.
+ * Compare la taille sélectionnée avec la taille de base du format.
+ * Applique une réduction de 35% pour les palettes.
+ */
+function calculateAdjustedPrice(
+  basePrice: number,
+  format: string,
+  selectedSize: string
+): number {
+  const baseMultiplier = extractSizeMultiplier(format)
+  const selectedMultiplier = extractSizeMultiplier(selectedSize)
+  let price = (basePrice * selectedMultiplier) / baseMultiplier
+  
+  // Appliquer la réduction de 35% si c'est une palette
+  if (selectedSize.includes('palette')) {
+    price = price * 0.65 // -35% = ×0.65
+  }
+  
+  return price
+}
+
 export function ProductDetail() {
   const { slug } = useParams<{ slug: string }>()
   const [product, setProduct] = useState<Product | null | undefined>(undefined)
@@ -141,11 +182,11 @@ export function ProductDetail() {
 
             <div className="mt-4 flex items-baseline gap-2 font-mono">
               <span className="text-2xl font-semibold text-hunter-900">
-                {product.price.toFixed(2)} €
+                {calculateAdjustedPrice(product.price, product.format, size).toFixed(2)} €
               </span>
               {product.compareAtPrice && (
                 <span className="text-base text-ink-600 line-through">
-                  {product.compareAtPrice.toFixed(2)} €
+                  {calculateAdjustedPrice(product.compareAtPrice, product.format, size).toFixed(2)} €
                 </span>
               )}
             </div>
@@ -258,7 +299,7 @@ export function ProductDetail() {
                 <MadeInFranceBadge />
               </div>
 
-              <ShippingReturnsBlock price={product.price} />
+              <ShippingReturnsBlock price={calculateAdjustedPrice(product.price, product.format, size)} />
             </div>
           </div>
         </div>
