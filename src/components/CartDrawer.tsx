@@ -51,13 +51,13 @@ export function CartDrawer() {
         ) : (
           <div className="flex h-[calc(100%-4.5rem)] flex-col">
             <ul className="flex-1 divide-y divide-hunter-800/10 overflow-y-auto px-5">
-              {items.map(({ product, qty, size }) => (
+              {items.map(({ product, qty, size, pricePerUnit }) => (
                 <li key={`${product.id}-${size}`} className="flex items-center justify-between gap-3 py-4">
                   <div>
                     <p className="font-display font-semibold text-hunter-900">{product.name}</p>
                     <p className="text-xs text-ink-600">{size}</p>
                     <p className="font-mono text-xs text-ink-600">
-                      Qté {qty} · {product.price.toFixed(2)} €
+                      Qté {qty} · {(pricePerUnit * qty).toFixed(2)} €
                     </p>
                   </div>
                   <button

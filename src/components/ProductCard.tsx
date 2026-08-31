@@ -4,6 +4,7 @@ import { Stars } from './Stars'
 import type { Product } from '../types'
 import { ProductIllustration } from './ProductIllustration'
 import { useCart } from '../context/CartContext'
+import { calculateAdjustedPrice } from '../lib/pricing'
 
 export function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
@@ -40,7 +41,11 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
           <button
             type="button"
-            onClick={() => addItem(product)}
+            onClick={() => {
+              const defaultSize = product.sizes[0] || product.format
+              const adjustedPrice = calculateAdjustedPrice(product.price, product.format, defaultSize)
+              addItem(product, defaultSize, adjustedPrice)
+            }}
             className="focus-ring flex w-full shrink-0 items-center justify-center gap-1.5 rounded-md bg-leather-600 px-2.5 py-2 font-display text-xs font-semibold text-oat-50 transition-colors hover:bg-leather-500 sm:w-auto sm:gap-2 sm:px-3 sm:text-sm"
             aria-label={`Ajouter ${product.name} au panier`}
           >

@@ -49,8 +49,8 @@ export function Cart() {
         <div className="mt-8 grid gap-10 md:grid-cols-[1fr_360px]">
           <div>
             <div className="border border-hunter-800/10 bg-oat-50 px-5">
-              {items.map(({ product, qty, size }) => (
-                <CartLineItem key={`${product.id}-${size}`} product={product} qty={qty} size={size} />
+              {items.map(({ product, qty, size, pricePerUnit }) => (
+                <CartLineItem key={`${product.id}-${size}`} product={product} qty={qty} size={size} pricePerUnit={pricePerUnit} />
               ))}
             </div>
 

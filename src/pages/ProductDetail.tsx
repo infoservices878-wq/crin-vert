@@ -22,47 +22,7 @@ import { ShippingReturnsBlock } from '../components/ShippingReturnsBlock'
 import { MadeInFranceBadge } from '../components/MadeInFranceBadge'
 import { ProductReviews } from '../components/ProductReviews'
 import { usePageMeta } from '../hooks/usePageMeta'
-
-/**
- * Extrait le nombre de sacs de la chaîne de taille.
- * Ex: "6 sacs de 20 kg" → 6
- * Ex: "1 palette – 50 sacs de 20 kg" → 50
- */
-function extractSizeMultiplier(sizeString: string): number {
-  // Si c'est une palette, extraire le nombre de sacs après "sacs"
-  if (sizeString.includes('palette')) {
-    const match = sizeString.match(/(\d+)\s*sacs/)
-    if (match) {
-      return parseInt(match[1], 10)
-    }
-  }
-  
-  // Sinon, extraire le premier nombre
-  const match = sizeString.match(/^(\d+)/)
-  return match ? parseInt(match[1], 10) : 1
-}
-
-/**
- * Calcule le prix ajusté en fonction de la taille sélectionnée.
- * Compare la taille sélectionnée avec la taille de base du format.
- * Applique une réduction de 35% pour les palettes.
- */
-function calculateAdjustedPrice(
-  basePrice: number,
-  format: string,
-  selectedSize: string
-): number {
-  const baseMultiplier = extractSizeMultiplier(format)
-  const selectedMultiplier = extractSizeMultiplier(selectedSize)
-  let price = (basePrice * selectedMultiplier) / baseMultiplier
-  
-  // Appliquer la réduction de 35% si c'est une palette
-  if (selectedSize.includes('palette')) {
-    price = price * 0.65 // -35% = ×0.65
-  }
-  
-  return price
-}
+import { calculateAdjustedPrice } from '../lib/pricing'
 
 export function ProductDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -113,8 +73,9 @@ export function ProductDetail() {
   }
 
   const handleAdd = () => {
+    const adjustedPrice = calculateAdjustedPrice(product.price, product.format, size)
     for (let i = 0; i < qty; i++) {
-      addItem(product, size)
+      addItem(product, size, adjustedPrice)
     }
     setAdded(true)
     toast(
@@ -182,18 +143,67 @@ export function ProductDetail() {
 
             <div className="mt-4 flex items-baseline gap-2 font-mono">
               <span className="text-2xl font-semibold text-hunter-900">
-                {calculateAdjustedPrice(product.price, product.format, size).toFixed(2)} €
+                {(calculateAdjustedPrice(product.price, product.format, size) * qty).toFixed(2)} €
               </span>
               {product.compareAtPrice && (
                 <span className="text-base text-ink-600 line-through">
-                  {calculateAdjustedPrice(product.compareAtPrice, product.format, size).toFixed(2)} €
+                  {(calculateAdjustedPrice(product.compareAtPrice, product.format, size) * qty).toFixed(2)} €
                 </span>
               )}
             </div>
 
             <div className="mt-5 space-y-3">
               <SizeSelector sizes={product.sizes} selected={size} onSelect={setSize} />
+            </div>
 
+            {/* Quantité + CTA + Disponibilité */}
+            <div className="mt-5 space-y-5">
+              <div className="flex flex-wrap items-stretch gap-3">
+                <div className="flex items-center border border-hunter-800/20 bg-oat-50">
+                  <button
+                    type="button"
+                    onClick={() => setQty((q) => Math.max(1, q - 1))}
+                    className="focus-ring px-3 py-3 text-hunter-900 hover:bg-oat-200"
+                    aria-label="Diminuer la quantité"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <span className="min-w-[2.5rem] text-center font-mono text-base font-semibold text-hunter-900">
+                    {qty}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setQty((q) => q + 1)}
+                    className="focus-ring px-3 py-3 text-hunter-900 hover:bg-oat-200"
+                    aria-label="Augmenter la quantité"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleAdd}
+                  className="focus-ring btn-primary hidden min-w-[12rem] flex-1 md:inline-flex"
+                >
+                  {added ? (
+                    <>
+                      <Check className="h-4 w-4" strokeWidth={2.5} /> Ajouté au panier
+                    </>
+                  ) : (
+                    <>Ajouter au panier</>
+                  )}
+                </button>
+              </div>
+
+              <p className="flex items-center gap-1.5 text-sm text-leather-600">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-leather-600" />
+                Disponible
+              </p>
+            </div>
+
+            {/* Accordéons */}
+            <div className="mt-5 space-y-3">
               <Accordion
                 items={[
                   {
@@ -247,59 +257,13 @@ export function ProductDetail() {
             </div>
 
             <div className="mt-5">
-              <AiVetBanner product={product} />
+              <MadeInFranceBadge />
             </div>
 
-            <div className="mt-5 space-y-5">
-              {/* Quantité + CTA desktop */}
-              <div className="flex flex-wrap items-stretch gap-3">
-                <div className="flex items-center border border-hunter-800/20 bg-oat-50">
-                  <button
-                    type="button"
-                    onClick={() => setQty((q) => Math.max(1, q - 1))}
-                    className="focus-ring px-3 py-3 text-hunter-900 hover:bg-oat-200"
-                    aria-label="Diminuer la quantité"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </button>
-                  <span className="min-w-[2.5rem] text-center font-mono text-base font-semibold text-hunter-900">
-                    {qty}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setQty((q) => q + 1)}
-                    className="focus-ring px-3 py-3 text-hunter-900 hover:bg-oat-200"
-                    aria-label="Augmenter la quantité"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </button>
-                </div>
+            <ShippingReturnsBlock price={calculateAdjustedPrice(product.price, product.format, size) * qty} />
 
-                <button
-                  type="button"
-                  onClick={handleAdd}
-                  className="focus-ring btn-primary hidden min-w-[12rem] flex-1 md:inline-flex"
-                >
-                  {added ? (
-                    <>
-                      <Check className="h-4 w-4" strokeWidth={2.5} /> Ajouté au panier
-                    </>
-                  ) : (
-                    <>Ajouter au panier</>
-                  )}
-                </button>
-              </div>
-
-              <p className="flex items-center gap-1.5 text-sm text-leather-600">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-leather-600" />
-                Disponible
-              </p>
-
-              <div className="mt-4">
-                <MadeInFranceBadge />
-              </div>
-
-              <ShippingReturnsBlock price={calculateAdjustedPrice(product.price, product.format, size)} />
+            <div className="mt-5">
+              <AiVetBanner product={product} />
             </div>
           </div>
         </div>

@@ -9,10 +9,12 @@ export function CartLineItem({
   product,
   qty,
   size,
+  pricePerUnit,
 }: {
   product: Product
   qty: number
   size: string
+  pricePerUnit: number
 }) {
   const { updateQty, removeItem } = useCart()
 
@@ -36,7 +38,7 @@ export function CartLineItem({
         </p>
 
         <p className="mt-2 font-mono text-lg font-semibold text-leather-600">
-          {(product.price * qty).toFixed(2)} €
+          {(pricePerUnit * qty).toFixed(2)} €
         </p>
 
         <div className="mt-auto flex items-center justify-between pt-3">

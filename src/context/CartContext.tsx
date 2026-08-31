@@ -6,6 +6,8 @@ interface CartItem {
   qty: number
   /** Conditionnement choisi (ex. "Seau 3 kg") */
   size: string
+  /** Prix unitaire ajusté selon le conditionnement */
+  pricePerUnit: number
 }
 
 interface CartContextValue {
@@ -13,7 +15,7 @@ interface CartContextValue {
   isOpen: boolean
   count: number
   total: number
-  addItem: (product: Product, size?: string) => void
+  addItem: (product: Product, size?: string, pricePerUnit?: number) => void
   removeItem: (productId: string, size: string) => void
   updateQty: (productId: string, size: string, qty: number) => void
   clear: () => void
@@ -27,8 +29,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
-  const addItem = (product: Product, size?: string) => {
+  const addItem = (product: Product, size?: string, pricePerUnit?: number) => {
     const chosen = size || product.sizes[0] || product.format
+    const price = pricePerUnit ?? product.price
+    
     setItems((prev) => {
       const existing = prev.find(
         (i) => i.product.id === product.id && i.size === chosen,
@@ -40,7 +44,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             : i,
         )
       }
-      return [...prev, { product, qty: 1, size: chosen }]
+      return [...prev, { product, qty: 1, size: chosen, pricePerUnit: price }]
     })
     // Ne pas ouvrir le tiroir : l'ajout se fait en silence
   }
@@ -67,7 +71,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const count = useMemo(() => items.reduce((sum, i) => sum + i.qty, 0), [items])
   const total = useMemo(
-    () => items.reduce((sum, i) => sum + i.qty * i.product.price, 0),
+    () => items.reduce((sum, i) => sum + i.qty * i.pricePerUnit, 0),
     [items],
   )
 

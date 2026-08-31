@@ -4,6 +4,7 @@ import { ProductIllustration } from './ProductIllustration'
 import { PRODUCTS } from '../data/products'
 import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
+import { calculateAdjustedPrice } from '../lib/pricing'
 
 export function ProtocolCard({ protocol }: { protocol: Protocol }) {
     const { addItem } = useCart()
@@ -29,7 +30,11 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
         return
       }
 
-      products.forEach((p) => addItem(p))
+      products.forEach((p) => {
+        const defaultSize = p.sizes[0] || p.format
+        const adjustedPrice = calculateAdjustedPrice(p.price, p.format, defaultSize)
+        addItem(p, defaultSize, adjustedPrice)
+      })
 
       toast(
         products.length === 1
