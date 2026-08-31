@@ -268,4 +268,45 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26624-large_default/reverdy-post-op-prix-degressif.jpg',
   },
+  {
+    id: '7',
+    slug: 'reverdy-cereal-free',
+    sku: 'RV1036',
+    name: 'Reverdy - Cereal Free',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment en granulés sans céréales — correcteur de foin pour cheval ou poney',
+    price: 94,
+    rating: 4.5,
+    reviewCount: 12,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Cereal Free de Reverdy — aliment en granulés correcteur de foin sans céréales, pour compléter les apports du cheval ou poney nourri au fourrage.\n\nSe distribue en petit volume (1 L max par repas). Complément d'une ration de foin et d'herbe, jamais son remplacement. Pour cheval ou poney au repos ou à activité faible à modérée.\n\nMouiller à l'eau tiède et attendre le délitement complet chez les chevaux sujets aux bouchons œsophagiens, âgés ou qui avalent sans mâcher. Respecter les quantités pour ne pas cumuler les apports avec d'autres compléments.",
+    benefits: [
+      'Sans céréales',
+      'Complément de ration fourragère (pas un remplacement)',
+      'Max. 1 L par repas',
+      'Repos ou activité faible à modérée',
+      'Mouillage recommandé si risque de bouchon œsophagien',
+    ],
+    composition: [
+      { label: 'Composition', value: 'Non communiquée par le fabricant' },
+    ],
+    posologie:
+      "Respecter les rations recommandées (ne pas surdoser oligo-éléments et vitamines). Max. 1 L par repas. Adapter au mode de vie, à l'alimentation et à l'état. Mouiller à l'eau tiède jusqu'au délitement complet si risque de bouchon œsophagien.",
+    image:
+      'https://www.cheval-energy.com/fr/26622-large_default/reverdy-cereal-free-prix-degressif.jpg',
+  },
 ]
