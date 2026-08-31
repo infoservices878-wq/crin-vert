@@ -72,7 +72,8 @@ export const PRODUCTS: Product[] = [
     categoryLabel: 'Aliments & CMV',
     tagline:
       'Aliment en granulés correcteur de céréales — cheval de course et de sport',
-    price: 80,
+    price: 72.0,
+    compareAtPrice: 80.0,
     rating: 4.6,
     reviewCount: 23,
     format: '2 sacs de 20 kg',
@@ -113,7 +114,8 @@ export const PRODUCTS: Product[] = [
     categoryLabel: 'Aliments & CMV',
     tagline:
       'Aliment complet en granulés pour cheval de courses à l\'entraînement (ex-Trotting)',
-    price: 74,
+    price: 66.6,
+    compareAtPrice: 74.0,
     rating: 4.7,
     reviewCount: 31,
     format: '2 sacs de 20 kg',
@@ -154,7 +156,8 @@ export const PRODUCTS: Product[] = [
     categoryLabel: 'Aliments & CMV',
     tagline:
       'Aliment en granulés correcteur de céréales — poulain en croissance et poulinière',
-    price: 88.4,
+    price: 79.56,
+    compareAtPrice: 88.4,
     rating: 4.5,
     reviewCount: 18,
     format: '2 sacs de 20 kg',
@@ -195,7 +198,8 @@ export const PRODUCTS: Product[] = [
     categoryLabel: 'Aliments & CMV',
     tagline:
       'Aliment lacté en granulés pour poulain — des premières semaines à la mise à l\'herbe',
-    price: 88,
+    price: 79.2,
+    compareAtPrice: 88.0,
     rating: 4.6,
     reviewCount: 14,
     format: '2 sacs de 20 kg',
@@ -236,7 +240,8 @@ export const PRODUCTS: Product[] = [
     categoryLabel: 'Aliments & CMV',
     tagline:
       "Aliment en granulés pour soutenir le système digestif après une opération ou des troubles digestifs importants",
-    price: 140.53,
+    price: 126.48,
+    compareAtPrice: 140.53,
     rating: 0,
     reviewCount: 0,
     format: '2 sacs de 20 kg',
@@ -277,7 +282,8 @@ export const PRODUCTS: Product[] = [
     categoryLabel: 'Aliments & CMV',
     tagline:
       'Aliment en granulés sans céréales — correcteur de foin pour cheval ou poney',
-    price: 94,
+    price: 84.6,
+    compareAtPrice: 94.0,
     rating: 4.5,
     reviewCount: 12,
     format: '2 sacs de 20 kg',

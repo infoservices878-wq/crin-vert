@@ -24,12 +24,10 @@ const ICONS: Record<Category, typeof Wheat> = {
   'robe-peau': Sparkles,
   stress: Moon,
   electrolytes: Droplets,
-  aliments: Wheat,
 }
 
 const BLURBS: Record<Category, string> = {
   alimentation: 'CMV et minéraux du quotidien',
-  aliments: 'Granulés, floconnés, mash, fibres',
   digestion: 'Confort gastrique et flore',
   articulations: 'Mobilité et souplesse',
   respiration: 'Voies respiratoires dégagées',

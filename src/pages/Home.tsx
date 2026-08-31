@@ -19,7 +19,6 @@ import { MadeInFranceBadge } from '../components/MadeInFranceBadge'
 
 const ICONS: Partial<Record<Category, typeof Wheat>> = {
   alimentation: Wheat,
-  aliments: Wheat,
   digestion: Leaf,
   articulations: Activity,
   respiration: Wind,

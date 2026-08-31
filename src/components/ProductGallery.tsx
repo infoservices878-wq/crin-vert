@@ -25,10 +25,6 @@ const CATEGORY_EXTRAS: Record<string, string[]> = {
     'https://images.pexels.com/photos/633767/pexels-photo-633767.jpeg?auto=compress&cs=tinysrgb&w=900',
     'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=900&q=75',
   ],
-  aliments: [
-    'https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=900',
-    'https://images.unsplash.com/photo-1574323346680-bf9bfa4ad39f?auto=format&fit=crop&w=900&q=75',
-  ],
   senior: [
     'https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=900&q=75',
     'https://images.pexels.com/photos/1996333/pexels-photo-1996333.jpeg?auto=compress&cs=tinysrgb&w=900',

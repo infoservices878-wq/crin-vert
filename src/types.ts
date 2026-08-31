@@ -1,6 +1,5 @@
 export type Category =
   | 'alimentation'
-  | 'aliments'
   | 'digestion'
   | 'articulations'
   | 'respiration'
@@ -64,7 +63,6 @@ export interface Protocol {
 /** Libellés catalogue — alignés sur les gammes habituelles du secteur équin */
 export const CATEGORY_LABELS: Record<Category, string> = {
   alimentation: 'Aliments & CMV',
-  aliments: 'Aliments pour chevaux',
   digestion: 'Confort digestif',
   articulations: 'Articulations & mobilité',
   respiration: 'Respiration',
@@ -78,7 +76,6 @@ export const CATEGORY_LABELS: Record<Category, string> = {
 
 /** Ordre d’affichage des filtres catalogue */
 export const CATEGORY_ORDER: Category[] = [
-  'aliments',
   'alimentation',
   'digestion',
   'articulations',

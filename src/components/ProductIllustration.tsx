@@ -29,7 +29,6 @@ const CATEGORY_STYLE: Record<
   'robe-peau': { icon: Sparkles, badge: '#c45c8a', accent: '#7a2f52', label: 'Robe & crin' },
   stress: { icon: Moon, badge: '#6b7fd7', accent: '#3d4a8a', label: 'Stress' },
   electrolytes: { icon: Droplets, badge: '#2fb6c4', accent: '#0e5c66', label: 'Électrolytes' },
-  aliments: { icon: Wheat, badge: '#c4a35a', accent: '#6b5420', label: 'Aliments' },
 }
 
 /** Images de secours par catégorie (photos libres) */
@@ -54,8 +53,6 @@ const CATEGORY_FALLBACK: Record<Category, string> = {
     'https://images.unsplash.com/photo-1445116572660-236099ec97a0',
   electrolytes:
     'https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg',
-  aliments:
-    'https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg',
 }
 
 type Props =

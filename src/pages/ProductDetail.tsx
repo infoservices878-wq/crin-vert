@@ -36,7 +36,7 @@ export function ProductDetail() {
   usePageMeta(
     product?.name,
     product
-      ? `${product.name} — ${product.tagline}. ${product.description.slice(0, 120)}…`
+      ? `${product.name} — ${product.tagline}. ${(product.description || "").slice(0, 120)}…`
       : undefined,
   )
 
@@ -150,68 +150,67 @@ export function ProductDetail() {
               )}
             </div>
 
-            {size && (
-              <p className="mt-2 text-sm text-ink-600">
-                Conditionnement :{' '}
-                <span className="font-semibold text-hunter-900">{size}</span>
-              </p>
-            )}
-          <div className="mt-14 grid gap-10 md:grid-cols-1">
-          <Accordion
-            items={[
-              {
-                id: 'plus',
-                title: 'En savoir plus',
-                content: (
-                  <div>
-                    <p className="text-sm leading-relaxed text-ink-900">{product.description}</p>
-                    <ul className="mt-3 space-y-1.5">
-                      {product.benefits.map((b) => (
-                        <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
-                          <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ),
-              },
-              {
-                id: 'usage',
-                title: "Conseils d'utilisation",
-                content: <p className="font-mono text-sm text-ink-900">{product.posologie}</p>,
-              },
-              {
-                id: 'composition',
-                title: product.nutritionAnalysis
-                  ? 'Analyse nutritionnelle'
-                  : 'Composition',
-                content: product.nutritionAnalysis ? (
-                  <NutritionAnalysisPanel
-                    analysis={product.nutritionAnalysis}
-                    posologie={product.posologie}
-                  />
-                ) : (
-                  <CompositionLabel items={product.composition} posologie={product.posologie} />
-                ),
-              },
-            ]}
-          />
+            <div className="mt-5 space-y-3">
+              <SizeSelector sizes={product.sizes} selected={size} onSelect={setSize} />
 
-          {/*<ExpertReview product={product} />*/}
-        </div>
-            {/*<p className="mt-4 max-w-md text-sm leading-relaxed text-ink-900">
-              {product.description}
-            </p>*/}
+              <Accordion
+                items={[
+                  {
+                    id: 'plus',
+                    title: 'En savoir plus',
+                    content: (
+                      <div>
+                        <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                          {product.description}
+                        </p>
+                        {product.benefits.length > 0 && (
+                          <ul className="mt-3 space-y-1.5">
+                            {product.benefits.map((b) => (
+                              <li key={b} className="flex items-center gap-2 text-sm text-ink-900">
+                                <Check className="h-4 w-4 shrink-0 text-hunter-800" strokeWidth={2.5} />
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    ),
+                  },
+                  {
+                    id: 'usage',
+                    title: "Conseils d'utilisation",
+                    content: (
+                      <p className="whitespace-pre-line text-sm leading-relaxed text-ink-900">
+                        {product.posologie || 'Non renseigné.'}
+                      </p>
+                    ),
+                  },
+                  {
+                    id: 'composition',
+                    title: product.nutritionAnalysis
+                      ? 'Analyse nutritionnelle'
+                      : 'Composition',
+                    content: product.nutritionAnalysis ? (
+                      <NutritionAnalysisPanel
+                        analysis={product.nutritionAnalysis}
+                        posologie={product.posologie}
+                      />
+                    ) : product.composition.length > 0 ? (
+                      <CompositionLabel items={product.composition} posologie={product.posologie} />
+                    ) : (
+                      <p className="text-sm text-ink-600">Non renseigné.</p>
+                    ),
+                  },
+                ]}
+              />
+            </div>
 
-            <div className="mt-6">
+            <div className="mt-5">
               <AiVetBanner product={product} />
             </div>
 
-            <div className="mt-6 space-y-5">
-              <SizeSelector sizes={product.sizes} selected={size} onSelect={setSize} />
-
-              {/* Quantité + CTA desktop (masqué le bouton principal sur mobile via sticky) */}
+            <div className="mt-5 space-y-5">
+              {/* Quantité + CTA desktop */}
               <div className="flex flex-wrap items-stretch gap-3">
                 <div className="flex items-center border border-hunter-800/20 bg-oat-50">
                   <button
