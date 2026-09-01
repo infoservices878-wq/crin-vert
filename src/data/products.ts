@@ -431,4 +431,56 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26620-large_default/reverdy-adult-prix-degressif.jpg',
   },
+  {
+    id: '10',
+    slug: 'optiform-du-marechal',
+    sku: 'OM1030',
+    name: 'Gamme du Maréchal - Optiform',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment minéral en mini-granulés — jeunes chevaux en croissance',
+    price: 43.1,
+    rating: 4.6,
+    reviewCount: 19,
+    format: '2,7 kg',
+    sizes: ['2,7 kg'],
+    description:
+      "L'Optiform du Maréchal est un aliment minéral pour chevaux sous forme de mini-granulés. Complément idéal pour les jeunes chevaux en croissance. Format seau avec doseur.\n\nRééquilibre le rapport phosphocalcique (Ca 15 %, P 6 %, rapport 2,5) et apporte vitamines A, D3, E ainsi que zinc, cuivre, manganèse, méthionine et lysine. Fenugrec pour l'appétence.\n\nPour poulains, jeunes en croissance, poulinières, chevaux au foin et céréales simples. Ne pas cumuler avec un autre CMV sans recalculer les apports.",
+    benefits: [
+      'Calcium 15 % / phosphore 6 % (rapport 2,5)',
+      'Vitamines A, D3, E concentrées',
+      'Zinc, cuivre, manganèse pour squelette et corne',
+      'Méthionine et lysine',
+      'Mini-granulés appétents (fenugrec)',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Phosphate bicalcique, remoulage de blé, carbonate de calcium, fenugrec, oxyde de magnésie, dextrine, sucre' },
+      { label: 'Calcium', value: '15 %' },
+      { label: 'Phosphore', value: '6 %' },
+      { label: 'Magnésium', value: '2 %' },
+      { label: 'Vitamine A', value: '500 000 UI/kg' },
+      { label: 'Vitamine D3', value: '60 000 UI/kg' },
+      { label: 'Vitamine E', value: '1 250 mg/kg' },
+      { label: 'Zinc', value: '2 100 mg/kg' },
+      { label: 'Cuivre', value: '1 000 mg/kg' },
+      { label: 'Manganèse', value: '1 500 mg/kg' },
+    ],
+    posologie:
+      "Cheval au repos : 50 g/jour.\nCheval au travail : 100 g/jour.\nPoulinière : 100 g/jour.\nPoulain : 50 g/jour.\nBien refermer après usage. Correcteur à distribuer en continu.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Calcium', value: '15 %' },
+        { label: 'Phosphore', value: '6 %' },
+        { label: 'Magnésium', value: '2 %' },
+      ],
+      minerals: [
+        { label: 'Zinc', value: '2 100 mg/kg' },
+        { label: 'Cuivre', value: '1 000 mg/kg' },
+        { label: 'Manganèse', value: '1 500 mg/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26448-large_default/optiform-du-marechal.jpg',
+  },
 ]
