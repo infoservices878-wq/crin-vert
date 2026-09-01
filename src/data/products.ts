@@ -315,4 +315,61 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26622-large_default/reverdy-cereal-free-prix-degressif.jpg',
   },
+  {
+    id: '8',
+    slug: 'cheval-energy-fiber-energy',
+    sku: 'CE2079',
+    name: 'Cheval Energy - Aliment Fiber Energy',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      "Aliment ultra fibreux, amidon très bas — besoins énergétiques modérés, sensibilité à l'amidon",
+    price: 33.13,
+    rating: 4.7,
+    reviewCount: 22,
+    format: 'Sac TEST - 1 sac de 20 kg',
+    sizes: [
+      'Sac TEST - 1 sac de 20 kg',
+      '1 petite palette - 10 sacs de 20 kg',
+      '1/2 palette - 25 sacs de 20 kg',
+      '1 palette - 50 sacs de 20 kg',
+      '2 palettes - 100 sacs de 20 kg',
+    ],
+    description:
+      "Aliment Fiber Energy de Cheval Energy — idéal pour les chevaux aux besoins énergétiques modérés, exposés aux risques d'ulcères ou présentant une sensibilité à l'amidon. Tarif dégressif. Livraison incluse.\n\nAliment ultra fibreux alliant bien-être et performance avec un taux d'amidon très bas. Sources de fibres : sainfoin Equifolia®, luzerne, pulpe de betterave, cosse d'avoine. Énergie aussi via graines de lin extrudées, son et germe de riz, huile de colza. Granulation à froid. Oligo-éléments chélatés.\n\nCe n'est pas un complément : c'est un aliment qui remplace tout ou partie de la ration de granulés, pas le fourrage.",
+    benefits: [
+      'Amidon très bas (~2,5 %)',
+      'Énergie issue des fibres (sainfoin, luzerne, pulpe de betterave)',
+      'Adapté ulcères, fourbure, sensibilité aux céréales',
+      'Granulation à froid',
+      'Livraison incluse — délai 7 à 10 jours ouvrés',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Granulé de luzerne, cosse d\'avoine, pulpe de betterave, sainfoin Equifolia®, luzerne fibre, huile de colza, graines de lin extrudées, tourteaux, son de riz, blé extrudé, pois floconné…' },
+      { label: 'UFC', value: '79,45' },
+      { label: 'Protéines', value: '12,4 %' },
+      { label: 'Matières grasses', value: '8,4 %' },
+      { label: 'Cellulose', value: '22,0 %' },
+      { label: 'Amidon', value: '2,5 %' },
+      { label: 'MADC', value: '77 g/kg' },
+    ],
+    posologie:
+      "0,25 à 1 kg pour 100 kg de poids vif / jour, en fractionnant les repas.\nEntretien : 0,3 kg / 100 kg PV.\nTravail léger : 0,5 kg / 100 kg PV.\nTravail intensif : 1 kg / 100 kg PV.\nMinimum 5 kg de foin de bonne qualité / jour. Eau propre à volonté. Conserver au sec et au frais.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines', value: '12,4 %' },
+        { label: 'Matières grasses', value: '8,4 %' },
+        { label: 'Cellulose', value: '22,0 %' },
+        { label: 'Amidon', value: '2,5 %' },
+        { label: 'UFC', value: '79,45' },
+      ],
+      notes: 'Aliment, pas un CMV. Le fourrage reste la base de la ration.',
+    },
+    image:
+      'https://www.cheval-energy.com/fr/23612-large_default/cheval-energy-aliment-fiber-energy.jpg',
+    images: [
+      'https://www.cheval-energy.com/fr/23612-large_default/cheval-energy-aliment-fiber-energy.jpg',
+      'https://www.cheval-energy.com/fr/23499-large_default/cheval-energy-aliment-fiber-energy.jpg',
+    ],
+  },
 ]
