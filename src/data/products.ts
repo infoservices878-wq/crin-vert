@@ -598,4 +598,61 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26621-large_default/reverdy-adult-specific-energy-prix-degressif.jpg',
   },
+  {
+    id: '13',
+    slug: 'reverdy-mash',
+    sku: 'RV1028',
+    name: 'Reverdy - Mash',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Mash floconné appétent — récupération après effort (sport, endurance)',
+    price: 69.05,
+    compareAtPrice: 76.72,
+    rating: 4.7,
+    reviewCount: 24,
+    format: '2 sacs de 14 kg',
+    sizes: [
+      '2 sacs de 14 kg',
+      '4 sacs de 14 kg',
+      '6 sacs de 14 kg',
+      '8 sacs de 14 kg',
+      '10 sacs de 14 kg',
+      '35 sacs de 14 kg',
+      '50 sacs de 14 kg',
+      '1 palette – 60 sacs de 14 kg',
+      '2 palettes – 120 sacs de 14 kg',
+    ],
+    description:
+      "Mash de Reverdy — aliment à base de flocons mélangés très appétents pour aider à la récupération énergétique après un effort intense (sport, endurance). Sac de 14 kg. Port inclus.\n\nPréparation : 2 volumes de mash + 1 volume d'eau chaude, 10 min à couvert, servir tiède. Après effort, transport ou poulinage ; en endurance possible à chaque vet gate. En cas de fortes pertes de sueur, associer éventuellement des électrolytes.",
+    benefits: [
+      'Repas humide tiède après effort',
+      'Flocons très appétents',
+      'Préparation simple (2:1 eau chaude, 10 min)',
+      'Sport, endurance, transport, poulinage',
+      'Sac 14 kg — port inclus',
+    ],
+    composition: [
+      { label: 'Matières premières', value: "Flocons d'orge, flocons d'avoine, flocons de maïs sans OGM, carottes déshydratées, flocons de pois" },
+      { label: 'Protéines brutes', value: '10 %' },
+      { label: 'Matières grasses', value: '3 %' },
+      { label: 'Cellulose brute', value: '7 %' },
+      { label: 'Amidon', value: '47 %' },
+      { label: 'UFC', value: '0,97/kg' },
+      { label: 'MADC', value: '69 g/kg' },
+    ],
+    posologie:
+      "Après l'effort (travail, course, compétition, poulinage) ou à chaque vet gate en endurance. Mélanger 2 volumes de mash + 1 volume d'eau chaude, laisser 10 min à couvert, servir tiède. Préparer juste avant distribution.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '10 %' },
+        { label: 'Matières grasses', value: '3 %' },
+        { label: 'Cellulose brute', value: '7 %' },
+        { label: 'Amidon', value: '47 %' },
+        { label: 'UFC', value: '0,97/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/6492-large_default/mash-reverdy.jpg',
+  },
 ]
