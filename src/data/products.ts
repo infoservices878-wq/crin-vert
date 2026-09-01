@@ -541,4 +541,61 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26625-large_default/adult-energy-reverdy.jpg',
   },
+  {
+    id: '12',
+    slug: 'reverdy-adult-specific-energy',
+    sku: 'RV1035',
+    name: 'Reverdy - Adult Specific Energy',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Granulés course/sport — coups de sang et ulcères, protection digestive et musculaire',
+    price: 79.56,
+    compareAtPrice: 88.4,
+    rating: 4.7,
+    reviewCount: 16,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Adult Specific Energy de Reverdy — granulés pour chevaux adultes de courses ou de sport sujets aux coups de sang et ulcères gastriques ; protège le système digestif et musculaire. Port inclus.\n\n3 repas/jour, max. 4 L par repas. Amidon plus modéré (15,5 %), fibres (luzerne, paille, pulpe de betterave), graines de lin, argiles (bentonite, clinoptilolite). Ajuster selon activité et fourrage. Transition 1–2 semaines.",
+    benefits: [
+      'Formulé pour chevaux sujets aux coups de sang / ulcères',
+      'Amidon 15,5 % — énergie plus progressive',
+      '3 repas/jour, max. 4 L par repas',
+      'Argiles (bentonite, clinoptilolite)',
+      'Port inclus — sac 20 kg',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Luzerne déshydratée, orge, graines de lin extrudées TRADI-LIN®, paille, pulpe de betterave, soja extrudé sans OGM, bentonite, clinoptilolite, NaCl, phosphate magnésien, tourteau de soja, fenugrec, phosphate bicalcique, oxyde de magnésium, oligo-éléments et vitamines' },
+      { label: 'Protéines brutes', value: '13,5 %' },
+      { label: 'Matières grasses', value: '8 %' },
+      { label: 'Cellulose brute', value: '14,5 %' },
+      { label: 'Amidon', value: '15,5 %' },
+      { label: 'UFC', value: '0,82/kg' },
+      { label: 'MADC', value: '91 g/kg' },
+    ],
+    posologie:
+      "3 repas répartis dans la journée. Adapter activité, fourrage, mode de vie et état. Max. 4 litres par repas. Réduire le concentré les jours de repos. Transition par paliers 1–2 semaines.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '13,5 %' },
+        { label: 'Matières grasses', value: '8 %' },
+        { label: 'Cellulose brute', value: '14,5 %' },
+        { label: 'Amidon', value: '15,5 %' },
+        { label: 'UFC', value: '0,82/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26621-large_default/reverdy-adult-specific-energy-prix-degressif.jpg',
+  },
 ]
