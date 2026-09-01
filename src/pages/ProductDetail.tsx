@@ -8,7 +8,6 @@ import { getProductBySlug } from '../lib/woocommerce'
 import { ProductGallery } from '../components/ProductGallery'
 import { Breadcrumb } from '../components/Breadcrumb'
 import { StickyMobileCta } from '../components/StickyMobileCta'
-import { CompositionLabel } from '../components/CompositionLabel'
 import { NutritionAnalysisPanel } from '../components/NutritionAnalysisPanel'
 import { Accordion } from '../components/Accordion'
 import { AiVetBanner } from '../components/AiVetBanner'
@@ -247,7 +246,22 @@ export function ProductDetail() {
                         posologie={product.posologie}
                       />
                     ) : product.composition.length > 0 ? (
-                      <CompositionLabel items={product.composition} posologie={product.posologie} />
+                      <div className="space-y-2">
+                        {product.composition.map((item) => (
+                          <p
+                            key={item.label}
+                            className="whitespace-pre-line text-sm leading-relaxed text-ink-900"
+                          >
+                            {item.label === 'Composition' ? (
+                              item.value
+                            ) : (
+                              <>
+                                <span className="font-semibold">{item.label}</span> : {item.value}
+                              </>
+                            )}
+                          </p>
+                        ))}
+                      </div>
                     ) : (
                       <p className="text-sm text-ink-600">Non renseigné.</p>
                     ),
