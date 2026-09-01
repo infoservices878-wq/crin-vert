@@ -372,4 +372,63 @@ export const PRODUCTS: Product[] = [
       'https://www.cheval-energy.com/fr/23499-large_default/cheval-energy-aliment-fiber-energy.jpg',
     ],
   },
+  {
+    id: '9',
+    slug: 'reverdy-adult',
+    sku: 'RV1022',
+    name: 'Reverdy - Adult',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment en granulés à base d\'orge — hygiène digestive, sport ou loisir',
+    price: 63.36,
+    compareAtPrice: 70.4,
+    rating: 4.6,
+    reviewCount: 28,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Adult de Reverdy — aliment pour chevaux sous forme de granulés à base d'orge, pour favoriser une bonne hygiène digestive chez les chevaux de sport ou de loisirs.\n\nComplète le fourrage (qui reste la base). Distribuer en 3 repas, max. 4 L par repas. Transition progressive sur 1 à 2 semaines. Pour cheval adulte de loisir, sport à l'entretien ou activité réduite.",
+    benefits: [
+      'Aliment complet en granulés pour cheval adulte',
+      '3 repas/jour, max. 4 L par repas',
+      'Complément du fourrage',
+      'Transition progressive 1–2 semaines',
+      'Sac de 20 kg',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Orge, luzerne déshydratée, paille, graines de lin extrudées TRADI-LIN®, tourteau de soja sans OGM, phosphate bicalcique, NaCl, oligo-éléments et vitamines' },
+      { label: 'Protéines brutes', value: '11,5 %' },
+      { label: 'Matières grasses', value: '3,5 %' },
+      { label: 'Cellulose brute', value: '14 %' },
+      { label: 'Amidon', value: '28,5 %' },
+      { label: 'Calcium', value: '1 %' },
+      { label: 'Phosphore', value: '0,5 %' },
+      { label: 'UFC', value: '0,81/kg' },
+      { label: 'MADC', value: '75,5 g/kg' },
+    ],
+    posologie:
+      "3 repas par jour. Doses selon activité, mode de vie et état. Max. 4 litres par repas et par cheval. Transition sur 1 à 2 semaines en cas de changement d'aliment.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '11,5 %' },
+        { label: 'Matières grasses', value: '3,5 %' },
+        { label: 'Cellulose brute', value: '14 %' },
+        { label: 'Amidon', value: '28,5 %' },
+        { label: 'UFC', value: '0,81/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26620-large_default/reverdy-adult-prix-degressif.jpg',
+  },
 ]
