@@ -655,4 +655,63 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/6492-large_default/mash-reverdy.jpg',
   },
+  {
+    id: '14',
+    slug: 'reverdy-breeding',
+    sku: 'RV1027',
+    name: 'Reverdy - Breeding',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment élevage (ex-Yearling) — jeunes en croissance et poulinières',
+    price: 68.4,
+    compareAtPrice: 76,
+    rating: 4.6,
+    reviewCount: 17,
+    format: '2 sacs de 20 kg',
+    sizes: [
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Breeding de Reverdy (anciennement Yearling) — aliment en granulés pour jeunes chevaux en croissance et poulinières, formulé pour la croissance et le développement ostéo-articulaire. Sac de 20 kg.\n\n3 repas/jour. Max. 2 L par repas (poulain/jeune), 4 L (poulinière). Du sevrage au pré-entraînement ; gestation et lactation. Possible relais Adult les 8 premiers mois de gestation si fourrage riche en protéines.",
+    benefits: [
+      'Aliment complet élevage (ex-Yearling)',
+      'Jeunes en croissance et poulinières',
+      '3 repas/jour — 2 L max (jeune) / 4 L (poulinière)',
+      'Soutien croissance et ostéo-articulaire',
+      'Sac de 20 kg',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Orge, avoine, luzerne déshydratée, tourteau de soja sans OGM, graines de lin extrudées TRADI-LIN®, phosphate bicalcique, NaCl, lithothamne, oxyde de magnésium, oligo-éléments et vitamines' },
+      { label: 'Protéines brutes', value: '16 %' },
+      { label: 'Matières grasses', value: '4 %' },
+      { label: 'Cellulose brute', value: '11 %' },
+      { label: 'Amidon', value: '26 %' },
+      { label: 'Calcium', value: '1,2 %' },
+      { label: 'Phosphore', value: '0,6 %' },
+      { label: 'UFC', value: '0,87/kg' },
+      { label: 'MADC', value: '121 g/kg' },
+    ],
+    posologie:
+      "3 repas par jour. Adapter activité, mode de vie, fourrage et état.\nPoulains et jeunes : max. 2 L de granulés par repas.\nPoulinières : max. 4 L par repas.\n8 premiers mois de gestation : possible remplacement par Reverdy Adult si fourrage riche en protéines.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '16 %' },
+        { label: 'Matières grasses', value: '4 %' },
+        { label: 'Cellulose brute', value: '11 %' },
+        { label: 'Amidon', value: '26 %' },
+        { label: 'UFC', value: '0,87/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26623-large_default/breeding-reverdy.jpg',
+  },
 ]
