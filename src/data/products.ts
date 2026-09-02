@@ -714,4 +714,64 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26623-large_default/breeding-reverdy.jpg',
   },
+  {
+    id: '15',
+    slug: 'reverdy-yearling-plus',
+    sku: 'RV1032',
+    name: 'Reverdy - Yearling Plus',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment jeunes au travail — articulations et croissance de la corne',
+    price: 40.5,
+    compareAtPrice: 45,
+    rating: 4.6,
+    reviewCount: 13,
+    format: '1 sac de 20 kg',
+    sizes: [
+      '1 sac de 20 kg',
+      '2 sacs de 20 kg',
+      '4 sacs de 20 kg',
+      '6 sacs de 20 kg',
+      '8 sacs de 20 kg',
+      '10 sacs de 20 kg',
+      '25 sacs de 20 kg',
+      '35 sacs de 20 kg',
+      '1 palette – 50 sacs de 20 kg',
+      '2 palettes – 100 sacs de 20 kg',
+    ],
+    description:
+      "Yearling Plus de Reverdy — aliment pour jeunes chevaux au travail, formulé pour soutenir le système articulaire et la croissance de la corne des sabots. Sac de 20 kg. Port inclus.\n\nPour yearling en croissance, débourrage ou pré-entraînement. 3 repas/jour, max. 2 L par repas. Respecter les quantités repères ; en deçà, préférer Breeding + Flexy. Contient des chondroprotecteurs (glucosamine, chondroïtine).",
+    benefits: [
+      'Yearling au travail / pré-entraînement',
+      'Soutien articulaire (chondroprotecteurs)',
+      'Biotine renforcée pour la corne',
+      '3 repas/jour — max. 2 L par repas',
+      'Port inclus — sac 20 kg',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Orge, luzerne déshydratée, avoine, tourteau de soja sans OGM, graines de lin extrudées TRADI-LIN®, phosphate bicalcique, NaCl, lithothamne, chondroprotecteurs, oxyde de magnésium, oligo-éléments et vitamines' },
+      { label: 'Protéines brutes', value: '16 %' },
+      { label: 'Matières grasses', value: '4 %' },
+      { label: 'Cellulose brute', value: '10,5 %' },
+      { label: 'Amidon', value: '26,5 %' },
+      { label: 'UFC', value: '0,86/kg' },
+      { label: 'MADC', value: '121 g/kg' },
+      { label: 'Glucosamine', value: '2 000 mg/kg' },
+      { label: 'Chondroïtine', value: '400 mg/kg' },
+    ],
+    posologie:
+      "3 repas répartis dans la journée. Adapter régime, état, mode de vie et activité. Max. 2 litres par repas. Si rations sous les recommandations Reverdy : préférer Breeding + Flexy pour l'apport en chondroprotecteurs.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '16 %' },
+        { label: 'Matières grasses', value: '4 %' },
+        { label: 'Cellulose brute', value: '10,5 %' },
+        { label: 'Amidon', value: '26,5 %' },
+        { label: 'UFC', value: '0,86/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26619-large_default/reverdy-yearling-plus-prix-degressif.jpg',
+  },
 ]
