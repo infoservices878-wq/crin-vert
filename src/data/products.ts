@@ -1057,4 +1057,39 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26701-large_default/reverdy-mineral-oligovit-easy-dose.jpg',
   },
+  {
+    id: '22',
+    slug: 'pavo-e-lyte',
+    sku: 'PV1002',
+    name: "Pavo - E'lyte",
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      "Électrolytes après effort intense — reconstitue sodium, chlorure et magnésium",
+    price: 40.75,
+    rating: 4.6,
+    reviewCount: 18,
+    format: '3 kg',
+    sizes: ['3 kg'],
+    description:
+      "E'lyte de Pavo — aide à reconstituer le stock d'électrolytes du cheval après un effort intense.\n\nChlorure de sodium, citrate de sodium, fumarate de magnésium, maërl, dextrose, luzerne, vitamine C. Granulés à mélanger à la ration avant, pendant ou après le travail. Eau fraîche toujours disponible. Réservé aux jours de forte sudation.",
+    benefits: [
+      'Sodium et chlorure — pertes principales par la sueur',
+      'Magnésium (fumarate) et maërl',
+      'Dextrose — absorption couplée au sodium',
+      'Avant, pendant ou après le travail',
+      'Granulés faciles à mélanger',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Luzerne, chlorure de sodium, citrate de sodium, farine de seigle, fumarate de magnésium, dextrose, maërl, huile de soja non OGM, vitamine C' },
+    ],
+    posologie:
+      "Entraînement modéré — cheval ~600 kg : 100 g/jour ; poney ~300 kg : 50 g/jour.\nEntraînement intense / transpiration abondante — cheval : 200 g/jour ; poney : 100 g/jour.\nToujours proposer de l'eau fraîche et propre en quantité suffisante.",
+    image:
+      'https://www.cheval-energy.com/fr/23867-large_default/pavo-e-lyte.jpg',
+    images: [
+      'https://www.cheval-energy.com/fr/23867-large_default/pavo-e-lyte.jpg',
+      'https://www.cheval-energy.com/fr/23866-large_default/pavo-e-lyte.jpg',
+    ],
+  },
 ]
