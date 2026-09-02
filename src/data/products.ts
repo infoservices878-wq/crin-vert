@@ -821,4 +821,51 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/28903-large_default/first-ekine-cmv-exellium.jpg',
   },
+  {
+    id: '17',
+    slug: 'michel-vaillant-biotine-cmv-omega-3',
+    sku: 'MV3005',
+    name: 'Michel Vaillant - Biotine Cheval CMV Oméga 3',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'CMV granulés riche en oméga 3 et biotine — corne, articulations, poil',
+    price: 54.98,
+    rating: 4.6,
+    reviewCount: 15,
+    format: '3,8 kg',
+    sizes: ['3,8 kg'],
+    description:
+      "Biotine Cheval CMV Oméga 3 de Michel Vaillant — complément riche en oméga 3 et vitamines. Favorise une pousse saine de la corne et aide à protéger les articulations. Format granulés.\n\nBase sainfoin, luzerne, graine de lin, tournesol, colza, son de blé. Biotine 150 mg/kg. Zinc et cuivre en partie chélatés. Sans OGM, céréales circuit court Rhône-Alpes/Auvergne. Idéal sénior, corne fragile, juments allaitantes, période de mue.",
+    benefits: [
+      'Biotine 150 mg/kg — pousse de la corne',
+      'Oméga 3 (lin, colza)',
+      'Base fourragère (sainfoin, luzerne)',
+      'Zinc et cuivre partiellement chélatés',
+      'Sans OGM — circuit court',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Sainfoin déshydraté, graine de lin, son de blé, tournesol, colza, luzerne déshydratée' },
+      { label: 'Protéines brutes', value: '20 %' },
+      { label: 'Matières grasses', value: '8,5 %' },
+      { label: 'Cellulose brute', value: '15,5 %' },
+      { label: 'Calcium', value: '2,2 %' },
+      { label: 'Phosphore', value: '0,65 %' },
+      { label: 'Biotine', value: '150 mg/kg' },
+      { label: 'Vitamine E', value: '525 mg/kg' },
+    ],
+    posologie:
+      "Cure min. 1 mois pour un cheval de 500 kg : 125 g/jour (1 verre de 20 cl) ≈ 24,7 mg de biotine pure/jour.\nSabots très abîmés : cure de 2 mois ; doubler la dose si déficience sévère.\nUtilisable toute l'année ; idéal en période de mue. Introduction progressive 5–7 jours.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '20 %' },
+        { label: 'Matières grasses', value: '8,5 %' },
+        { label: 'Cellulose brute', value: '15,5 %' },
+        { label: 'Calcium', value: '2,2 %' },
+        { label: 'Biotine', value: '150 mg/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/24652-large_default/michel-vaillant-biotine-cheval-cmv-omega-3.jpg',
+  },
 ]
