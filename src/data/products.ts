@@ -1300,4 +1300,45 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/23198-large_default/superlyte-seringue-orale-trm.jpg',
   },
+  {
+    id: '28',
+    slug: 'reverdy-electrolytes-gel',
+    sku: 'RV1013X1',
+    name: 'Reverdy - Electrolytes Gel',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Gel concentré en seringue orale — lot de 3 × 60 ml',
+    price: 23.03,
+    compareAtPrice: 25.59,
+    rating: 4.7,
+    reviewCount: 15,
+    format: '3 × 60 ml',
+    sizes: ['3 × 60 ml'],
+    description:
+      "Reverdy Electrolytes Gel — électrolytes faciles à administrer, formule concentrée. Seringue orale 60 ml, lot de 3.\n\nPar kilo : chlorure de sodium, chlorure de potassium, citrate de sodium, chlorure de magnésium. Base fructose, glycine, arôme pomme verte. Administration à l'arrière de la langue. Eau fraîche en permanence. Déconseillé le jour d'une course d'endurance (préférer forme diluée).",
+    benefits: [
+      'Seringue orale — prise complète et contrôlée',
+      'Formule concentrée (sodium 9 %)',
+      'Glycine pour absorption du sodium',
+      'Arôme pomme verte',
+      'Non dopant',
+    ],
+    composition: [
+      { label: 'Chlorure de sodium', value: '194 200 mg/kg' },
+      { label: 'Chlorure de potassium', value: '86 350 mg/kg' },
+      { label: 'Citrate de sodium', value: '52 800 mg/kg' },
+      { label: 'Chlorure de magnésium', value: '13 650 mg/kg' },
+      { label: 'Sodium', value: '9 %' },
+      { label: 'Excipients', value: 'Eau déminéralisée, fructose, glycine, gomme xanthane, arôme pomme verte' },
+    ],
+    posologie:
+      "Administrer à l'arrière de la langue. Cheval 500 kg :\nEffort modéré / transport long : ½ à 1 seringue après l'événement.\nEffort intense : 1 seringue le soir ; renouveler le lendemain matin si forte sudation.\nEffort prolongé (endurance) : 1 seringue matin et soir jusqu'à 10 jours après.\nPoney : diviser par 2. Eau fraîche en permanence.",
+    image:
+      'https://www.cheval-energy.com/fr/26717-large_default/reverdy-electrolytes-gel.jpg',
+    images: [
+      'https://www.cheval-energy.com/fr/26717-large_default/reverdy-electrolytes-gel.jpg',
+      'https://www.cheval-energy.com/fr/26718-large_default/reverdy-electrolytes-gel.jpg',
+    ],
+  },
 ]
