@@ -1264,4 +1264,40 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/28741-large_default/reverdy-mash-uni-dose-avec-electrolytes.jpg',
   },
+  {
+    id: '27',
+    slug: 'trm-superlyte-seringue',
+    sku: 'SE1042',
+    name: 'TRM - Superlyte Seringue Orale',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Électrolytes en seringue orale — coffret de 3 doseurs de 70 g',
+    price: 26.12,
+    rating: 4.6,
+    reviewCount: 13,
+    format: '3 × 70 g',
+    sizes: ['3 × 70 g'],
+    description:
+      "Superlyte de TRM — électrolytes faciles à administrer, formule appétente. Coffret de 3 doseurs de 70 g.\n\nPour 70 g : sodium 3 440 mg, chlorure 3 430 mg, potassium 1 720 mg, calcium 539 mg, magnésium 270 mg, glucose 20 000 mg. Administration directe à l'arrière de la langue. Idéal si le cheval refuse sa ration après l'effort. Eau libre en permanence.",
+    benefits: [
+      'Seringue orale prête à l'emploi',
+      'Sans dilution ni pesée',
+      'Profil calqué sur les pertes de sueur',
+      'Glucose pour l'absorption du sodium',
+      'Pratique en concours et transport',
+    ],
+    composition: [
+      { label: 'Pour 70 g — Glucose', value: '20 000 mg' },
+      { label: 'Sodium', value: '3 440 mg' },
+      { label: 'Chlorure', value: '3 430 mg' },
+      { label: 'Potassium', value: '1 720 mg' },
+      { label: 'Calcium', value: '539 mg' },
+      { label: 'Magnésium', value: '270 mg' },
+    ],
+    posologie:
+      "Administrer directement dans la bouche, à l'arrière de la langue.\nEntraînement : 1 doseur oral après le travail.\nTemps chaud ou transport : 1 doseur oral par jour.\nAccès libre à l'eau en permanence.",
+    image:
+      'https://www.cheval-energy.com/fr/23198-large_default/superlyte-seringue-orale-trm.jpg',
+  },
 ]
