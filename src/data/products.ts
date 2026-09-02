@@ -1341,4 +1341,35 @@ export const PRODUCTS: Product[] = [
       'https://www.cheval-energy.com/fr/26718-large_default/reverdy-electrolytes-gel.jpg',
     ],
   },
+  {
+    id: '29',
+    slug: 'natural-innov-electrolytes-eau-de-mer',
+    sku: 'IC2018',
+    name: 'Natural Innov - Electrolytes Eau de mer',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Eau de mer micro-filtrée à froid — sels minéraux naturels sans additif',
+    price: 28.44,
+    rating: 4.5,
+    reviewCount: 10,
+    format: '1 L',
+    sizes: ['1 L'],
+    description:
+      "Electrolytes Eau de Mer de Natural'Innov — solution liquide à base d'eau de mer pure micro-filtrée à froid, sans additif ni conservateur. Apporte sodium, potassium, calcium et magnésium naturellement présents dans l'eau de mer. Flacon 1 L avec gobelet doseur.\n\nAprès effort ou forte sudation. Cure courte 1–10 jours. Conserver au réfrigérateur après ouverture (4–5 semaines).",
+    benefits: [
+      'Eau de mer pure micro-filtrée à froid',
+      'Sans additif ni conservateur',
+      'Sodium, potassium, calcium, magnésium ioniques',
+      'Gobelet doseur fourni',
+      'Jusqu\'à 20 jours de cure (1 L)',
+    ],
+    composition: [
+      { label: 'Composition', value: 'Eau de mer pure, micro-filtrée à froid, sans additif ni conservateur — sels minéraux sous forme ionique' },
+    ],
+    posologie:
+      "50 ml/jour pour un cheval adulte de 550 kg, dans la ration ou l'eau de boisson (gobelet doseur). Doubler si besoins importants.\nCure 1 à 10 jours, de préférence après effort ou sudation importante.\nVérifier que le cheval boit. Eau propre et pierre à sel à disposition. Avis véto si insuffisance rénale, hypertension ou maladie cardiovasculaire.\nAprès ouverture : réfrigérateur 4–5 semaines.",
+    image:
+      'https://www.cheval-energy.com/fr/29022-large_default/natural-innov-electrolytes-eau-de-mer.jpg',
+  },
 ]
