@@ -1138,4 +1138,47 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26765-large_default/twydil-electrolytes.jpg',
   },
+  {
+    id: '24',
+    slug: 'trm-electrolyte-gold',
+    sku: 'SE1041X1',
+    name: 'TRM - Electrolyte Gold',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Électrolytes + vitamines E et C — 30 sachets de 50 g',
+    price: 77.94,
+    rating: 4.7,
+    reviewCount: 16,
+    format: '30 sachets × 50 g',
+    sizes: ['30 sachets × 50 g'],
+    description:
+      "Electrolyte Gold de TRM — électrolytes pour chevaux supplémentés de vitamines E et C. Poudre en coffret de 30 sachets de 50 g.\n\nProfil calqué sur la sueur : chlorure de sodium, chlorure de potassium, citrate de sodium, carbonate de calcium, sulfate de magnésium. Glucose et glycine pour l'absorption du sodium. Vitamine C 15 000 mg/kg et vitamine E 20 000 UI/kg.",
+    benefits: [
+      'Sachets individuels 50 g — pas de pesée',
+      'Sodium, potassium, chlorures, Ca, Mg',
+      'Glucose + glycine (absorption)',
+      'Vitamines E et C antioxydantes',
+      'Sport, transport, forte chaleur',
+    ],
+    composition: [
+      { label: 'Chlorure de sodium', value: '204 000 mg/kg' },
+      { label: 'Chlorure de potassium', value: '176 600 mg/kg' },
+      { label: 'Citrate de sodium', value: '33 000 mg/kg' },
+      { label: 'Carbonate de calcium', value: '148 000 mg/kg' },
+      { label: 'Sulfate de magnésium', value: '12 000 mg/kg' },
+      { label: 'Glucose', value: '266 400 mg/kg' },
+      { label: 'Glycine', value: '125 000 mg/kg' },
+      { label: 'Vitamine C', value: '15 000 mg/kg' },
+      { label: 'Vitamine E', value: '20 000 UI/kg' },
+    ],
+    posologie:
+      "Mélanger à la ration ou diluer dans l'eau de boisson.\nEntraînement intense / compétition : 1 sachet/jour.\nClimat chaud ou transport : 1 sachet/jour.\nEntraînement léger : 1 sachet tous les 2 jours.\nAccès libre à l'eau en permanence.",
+    image:
+      'https://www.cheval-energy.com/fr/25561-large_default/electrolyte-gold-trm.jpg',
+    images: [
+      'https://www.cheval-energy.com/fr/25561-large_default/electrolyte-gold-trm.jpg',
+      'https://www.cheval-energy.com/fr/25562-large_default/electrolyte-gold-trm.jpg',
+    ],
+  },
 ]
