@@ -1011,4 +1011,50 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/25572-large_default/dcp-d3-trm.jpg',
   },
+  {
+    id: '21',
+    slug: 'reverdy-mineral-oligovit-easy-dose',
+    sku: 'RV1043',
+    name: 'Reverdy - CMV Mineral Oligovit Easy Dose',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'CMV doses prêtes arôme pomme verte — oligo-éléments et vitamines',
+    price: 18.63,
+    compareAtPrice: 20.7,
+    rating: 4.5,
+    reviewCount: 12,
+    format: '1,2 kg',
+    sizes: ['1,2 kg', '4 kg', 'Recharge – 4 kg', '10 kg'],
+    description:
+      "CMV Mineral Oligovit Easy Dose de Reverdy — doses déjà prêtes pour faciliter l'administration. Arôme pomme verte.\n\nPour 30 g : zinc 195 mg, cuivre 75 mg, manganèse 105 mg, iode 1,1 mg, sélénium organique 0,9 mg, vitamine A 22 500 UI, D3 2 250 UI, E 450 mg + vitamines B et K3. Support orge. Sans SNAP (courses, FEI, FFE, SHF).",
+    benefits: [
+      'Doses prêtes — administration facile',
+      'Sélénium organique',
+      'Arôme pomme verte',
+      'Sans substances prohibées (SNAP)',
+      'Entretien, travail, croissance, poulinières',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Orge, oxyde de magnésium, phosphate de calcium et de sodium, carbonate de calcium, fructose, arôme pomme verte' },
+      { label: 'Calcium', value: '2,5 %' },
+      { label: 'Phosphore', value: '1 %' },
+      { label: 'Magnésium', value: '3,5 %' },
+      { label: 'Pour 30 g — Zinc', value: '195 mg' },
+      { label: 'Pour 30 g — Cuivre', value: '75 mg' },
+      { label: 'Pour 30 g — Sélénium organique', value: '0,9 mg' },
+      { label: 'Pour 30 g — Vitamine E', value: '450 mg' },
+    ],
+    posologie:
+      "Distribuer la friandise/unité à la main. 30 g ≈ 3 unités.\nCheval 500 kg entretien : 30–60 g/jour ; travail : 30–90 g/jour ; jeunes : 30–60 g ; poulinières/étalons : 30–90 g.\nFoin/herbe seul, activité légère : 10 g (1 unité) pour 100 kg PV/jour.\nPot 1,2 kg ≈ 13 à 40 jours. Conserver bien refermé, au sec.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Calcium', value: '2,5 %' },
+        { label: 'Phosphore', value: '1 %' },
+        { label: 'Magnésium', value: '3,5 %' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26701-large_default/reverdy-mineral-oligovit-easy-dose.jpg',
+  },
 ]
