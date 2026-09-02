@@ -774,4 +774,51 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26619-large_default/reverdy-yearling-plus-prix-degressif.jpg',
   },
+  {
+    id: '16',
+    slug: 'first-ekine-cmv-exellium',
+    sku: 'FE1005',
+    name: 'First Ekine - CMV Exellium',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'CMV enrichi en lithothamne — minéraux, vitamines et oligo-éléments pour tous les chevaux',
+    price: 42.65,
+    rating: 4.5,
+    reviewCount: 11,
+    format: '1,5 kg',
+    sizes: ['1,5 kg'],
+    description:
+      "CMV Exellium First Ekine — complément minéraux, vitamines et oligo-éléments enrichi en lithothamne. Rééquilibre la ration quotidienne, comble les carences et soutient le métabolisme, l'immunité et la qualité des pieds. Convient à tout type de cheval (sport, loisir, jeune, adulte). Fabriqué en Bretagne.\n\nBiotine, zinc et cuivre pour la corne ; vitamines E, C et A antioxydantes. Ne pas cumuler avec un autre CMV sans vérifier sélénium et vitamine A.",
+    benefits: [
+      'Enrichi en lithothamne (calcium biodisponible)',
+      'Rééquilibrage minéral et vitaminé quotidien',
+      'Biotine, zinc, cuivre — qualité de la corne',
+      'Sport, loisir, croissance, sénior',
+      'Fabriqué en Bretagne — doseur fourni',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Phosphate bicalcique, lithothamne, remoulage, oxyde de magnésium, carbonate de calcium, dextrine, sucre' },
+      { label: 'Vitamine A', value: '1 000 000 UI/kg' },
+      { label: 'Vitamine D3', value: '100 000 UI/kg' },
+      { label: 'Vitamine E', value: '40 000 mg/kg' },
+      { label: 'Biotine', value: '20 mg/kg' },
+      { label: 'Zinc', value: '6 000 mg/kg' },
+      { label: 'Cuivre', value: '2 000 mg/kg' },
+      { label: 'Sélénium', value: '36 mg/kg' },
+    ],
+    posologie:
+      "Mélanger à la ration ou au mash, avec le doseur.\nCheval adulte (600 kg) entretien : 50 g/jour pendant 30 jours.\nPoulain en croissance : 25 g/jour pendant 60 jours.\nSeau 1,5 kg ≈ 30 jours (adulte). Cures renouvelables 3–4×/an ou en continu. Conserver au frais et au sec.",
+    nutritionAnalysis: {
+      minerals: [
+        { label: 'Zinc', value: '6 000 mg/kg' },
+        { label: 'Cuivre', value: '2 000 mg/kg' },
+        { label: 'Sélénium', value: '36 mg/kg' },
+        { label: 'Biotine', value: '20 mg/kg' },
+      ],
+      notes: 'Contient du sucre comme excipient — avis véto si SME, Cushing ou fourbure.',
+    },
+    image:
+      'https://www.cheval-energy.com/fr/28903-large_default/first-ekine-cmv-exellium.jpg',
+  },
 ]
