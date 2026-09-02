@@ -969,4 +969,46 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26080-large_default/bonutron-senior-17-plus-audevard.jpg',
   },
+  {
+    id: '20',
+    slug: 'trm-dcp-d3',
+    sku: 'SE1115',
+    name: 'TRM - DCP + D3 Croissance',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Correcteur calcium / phosphore + vitamine D3 — ration traditionnelle, croissance, lactation',
+    price: 59.38,
+    rating: 4.5,
+    reviewCount: 9,
+    format: '4 kg',
+    sizes: ['4 kg'],
+    description:
+      "DCP + D3 de TRM — pour équilibrer l'apport en calcium et phosphore de la ration traditionnelle (céréales + fourrage), du jeune en croissance et de la poulinière en lactation. Poudre en seau de 4 kg.\n\nPhosphate dicalcique 85 %, carbonate de calcium 15 % → Ca 29,2 %, P 16,6 %. Vitamine D3 3 000 UI par mesure de 50 g. Inutile si aliment complet déjà équilibré.",
+    benefits: [
+      'Calcium 29,2 % / phosphore 16,6 %',
+      'Vitamine D3 pour la fixation osseuse',
+      'Ration traditionnelle céréales + fourrage',
+      'Jeunes en croissance et poulinières en lactation',
+      'Seau 4 kg ≈ 80 jours',
+    ],
+    composition: [
+      { label: 'Phosphate dicalcique', value: '85 %' },
+      { label: 'Carbonate de calcium', value: '15 %' },
+      { label: 'Calcium', value: '29,2 %' },
+      { label: 'Phosphore', value: '16,6 %' },
+      { label: 'Vitamine D3', value: '3 000 UI / 50 g' },
+    ],
+    posologie:
+      "Poudre à mélanger à la ration. Mesure fournie 50 g.\nCheval adulte : 50 g (1 mesure) par jour.\n4 kg ≈ 80 jours. Refermer après usage. Conserver au frais et au sec. Demander conseil au vétérinaire pour jeunes et poulinières.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Calcium', value: '29,2 %' },
+        { label: 'Phosphore', value: '16,6 %' },
+      ],
+      notes: 'Ne pas cumuler avec un CMV déjà riche en Ca/P/D3 sans calcul de ration.',
+    },
+    image:
+      'https://www.cheval-energy.com/fr/25572-large_default/dcp-d3-trm.jpg',
+  },
 ]
