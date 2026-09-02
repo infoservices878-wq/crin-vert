@@ -868,4 +868,54 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/24652-large_default/michel-vaillant-biotine-cheval-cmv-omega-3.jpg',
   },
+  {
+    id: '18',
+    slug: 'audevard-bonutron-sport-pro',
+    sku: 'AU1062',
+    name: 'Audevard - Bonutron Sport Pro',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'CMV sport riche en antioxydants — calcium, lysine, vitamine E, L-carnitine',
+    price: 116.05,
+    rating: 4.7,
+    reviewCount: 20,
+    format: '3 kg',
+    sizes: ['3 kg', '9 kg', '18 kg'],
+    description:
+      "Bonutron Sport Pro d'Audevard — CMV riche en antioxydants pour la complémentation du cheval de sport, quelle que soit son alimentation.\n\nCa 12 %, P 3,6 %, Mg 6 %. Lysine 40 000 mg/kg, vitamine E 70 000 UI/kg, sélénium 71 mg/kg, L-carnitine 10 000 mg/kg. Capteur de mycotoxines (bentonite + parois de levures). Arôme pomme. Contrôlé programme anti-dopage Audevard.",
+    benefits: [
+      'Ca/P adapté aux rations céréalières',
+      'Magnésium 6 % — fonctionnement neuromusculaire',
+      'Lysine, méthionine, L-carnitine',
+      'Antioxydants (E, C, sélénium, pépins de raisin)',
+      'Programme anti-dopage Audevard',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Phosphate bicalcique, remoulage de blé, carbonate de calcium, Mycosorb A+, mélasse, oxyde de magnésium, extrait de pépins de raisin' },
+      { label: 'Calcium', value: '12 %' },
+      { label: 'Phosphore', value: '3,6 %' },
+      { label: 'Magnésium', value: '6 %' },
+      { label: 'Vitamine E', value: '70 000 UI/kg' },
+      { label: 'Lysine', value: '40 000 mg/kg' },
+      { label: 'Sélénium', value: '71 mg/kg' },
+      { label: 'L-carnitine', value: '10 000 mg/kg' },
+    ],
+    posologie:
+      "Granulés à mélanger à la ration (dose 25 g). Sac 3 kg ≈ 60 jours à 2 doses/jour.\nCheval fourrage + céréales : 75 g (3 doses)/jour ; fourrage + aliment industriel : 50 g (2 doses)/jour.\nPoney fourrage + céréales : 50 g ; fourrage + aliment industriel : 25 g.\nRefermer après usage. Conserver au sec.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Calcium', value: '12 %' },
+        { label: 'Phosphore', value: '3,6 %' },
+        { label: 'Magnésium', value: '6 %' },
+      ],
+      minerals: [
+        { label: 'Zinc', value: '6 600 mg/kg' },
+        { label: 'Cuivre', value: '1 600 mg/kg' },
+        { label: 'Sélénium', value: '71 mg/kg' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26015-large_default/bonutron-sport-pro-audevard.jpg',
+  },
 ]
