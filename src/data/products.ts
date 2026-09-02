@@ -1181,4 +1181,51 @@ export const PRODUCTS: Product[] = [
       'https://www.cheval-energy.com/fr/25562-large_default/electrolyte-gold-trm.jpg',
     ],
   },
+  {
+    id: '25',
+    slug: 'equistro-electrolyt-7',
+    sku: 'VQ1021',
+    name: 'Equistro - Electrolyt 7',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Électrolytes très appétents — compensation des pertes par la sueur',
+    price: 38.11,
+    rating: 4.6,
+    reviewCount: 14,
+    format: '1,2 kg',
+    sizes: ['1,2 kg', '3 kg'],
+    description:
+      "Equistro Electrolyt 7 — électrolytes pour chevaux très appétants. Poudre à mélanger à la ration ou à l'eau de boisson.\n\nProfil proche de la sueur : chlorures 10,5 %, sodium 6 %, potassium 3 %, calcium 2,8 %, magnésium 0,25 %. Diacétate de sodium, vitamines E et C, zinc. Base poudre de lait et sucre. Max. 3 jours consécutifs — eau libre en permanence.",
+    benefits: [
+      'Très appétent (poudre de lait, sucre)',
+      'Chlorures, sodium, potassium, Ca, Mg',
+      'Vitamines E et C + zinc',
+      'Ration ou eau de boisson',
+      'Mesure 40 g fournie',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Poudre de lait, sucre, chlorure de sodium' },
+      { label: 'Chlorures', value: '10,5 %' },
+      { label: 'Sodium', value: '6 %' },
+      { label: 'Potassium', value: '3 %' },
+      { label: 'Calcium', value: '2,8 %' },
+      { label: 'Magnésium', value: '0,25 %' },
+      { label: 'Vitamine E', value: '5 900 UI/kg' },
+      { label: 'Vitamine C', value: '5 900 mg/kg' },
+    ],
+    posologie:
+      "Mélanger à la ration ou à l'eau. Mesure 40 g. 1,2 kg ≈ jusqu'à 25 jours.\nCheval standard — sudation moyenne : 40 g/jour ; forte : 80 g ; très importante (endurance) : 120 g/jour.\nPoulains et poneys : adapter au poids.\nMax. 3 jours consécutifs. Accès libre à l'eau. Avis vétérinaire avant prolongation.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Chlorures', value: '10,5 %' },
+        { label: 'Sodium', value: '6 %' },
+        { label: 'Potassium', value: '3 %' },
+        { label: 'Calcium', value: '2,8 %' },
+        { label: 'Magnésium', value: '0,25 %' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/25659-large_default/equistro-electrolyt-7.jpg',
+  },
 ]
