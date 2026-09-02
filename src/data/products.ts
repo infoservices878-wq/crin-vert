@@ -1092,4 +1092,50 @@ export const PRODUCTS: Product[] = [
       'https://www.cheval-energy.com/fr/23866-large_default/pavo-e-lyte.jpg',
     ],
   },
+  {
+    id: '23',
+    slug: 'twydil-electrolytes',
+    sku: 'TW1007',
+    name: 'Twydil - Electrolytes',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Électrolytes poudre ou seringue — entraînement et compétition',
+    price: 51,
+    rating: 4.7,
+    reviewCount: 22,
+    format: '10 unités × 50 g',
+    sizes: ['50 g', '10 unités', '5 kg'],
+    description:
+      "Twydil Electrolytes — pour chevaux à l'entraînement ou en compétition. Poudre ou pâte orale.\n\nPoudre : chlorure de sodium, chlorure de potassium, lactate de calcium, palatinose, oxyde de magnésium (chlorures 32 %, sodium 17 %, potassium 6,7 %). Pâte orale : même socle + vitamine C 20 000 mg/kg. Certifié LCH. Eau toujours accessible.",
+    benefits: [
+      'Poudre ou pâte orale (seringue)',
+      'Chlorures, sodium, potassium, calcium, magnésium',
+      'Pâte enrichie en vitamine C',
+      'Certifié LCH (anti-dopage)',
+      'Pratique en déplacement (seringue)',
+    ],
+    composition: [
+      { label: 'Poudre — matières premières', value: 'Chlorure de sodium, chlorure de potassium, lactate de calcium, palatinose, oxyde de magnésium' },
+      { label: 'Chlorures', value: '32 %' },
+      { label: 'Sodium', value: '17 %' },
+      { label: 'Potassium', value: '6,7 %' },
+      { label: 'Calcium', value: '2 %' },
+      { label: 'Magnésium', value: '0,6 %' },
+      { label: 'Pâte — vitamine C', value: '20 000 mg/kg' },
+    ],
+    posologie:
+      "Poudre : 40 g (1 doseur)/jour dans la ration ou dilué dans 3 L d'eau. Seau 5 kg ≈ 4 mois.\nPâte orale : 1 seringue/jour à l'arrière de la langue.\nForte chaleur : jusqu'à 80 g ou 2 seringues/jour, progressivement. Encourager à boire. Avis vétérinaire recommandé.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Chlorures', value: '32 %' },
+        { label: 'Sodium', value: '17 %' },
+        { label: 'Potassium', value: '6,7 %' },
+        { label: 'Calcium', value: '2 %' },
+        { label: 'Magnésium', value: '0,6 %' },
+      ],
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26765-large_default/twydil-electrolytes.jpg',
+  },
 ]
