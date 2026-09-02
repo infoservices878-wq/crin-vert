@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
         'Sans fer ajouté. Granulation à froid. Ne pas cumuler avec un aliment complet déjà minéralisé à dose pleine.',
     },
     image:
-      'https://drive.google.com/file/d/19kA9CjXf-ROKODmpNSsABjRJ7Pvo9Izn/view?usp=drive_link',
+      'https://drive.google.com/drive/folders/1OveY_XUYm9C6p91f_crStkJRzrs5_QPC',
   },
   {
     id: '2',
