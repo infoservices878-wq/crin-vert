@@ -1228,4 +1228,40 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/25659-large_default/equistro-electrolyt-7.jpg',
   },
+  {
+    id: '26',
+    slug: 'reverdy-mash-uni-dose-electrolytes',
+    sku: 'RV1057',
+    name: 'Reverdy - Mash Uni-dose avec électrolytes',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Mash unidose 750 g — récupération post-effort et compensation électrolytique',
+    price: 6.74,
+    compareAtPrice: 7.49,
+    rating: 4.6,
+    reviewCount: 11,
+    format: '750 g',
+    sizes: ['750 g'],
+    description:
+      "Mash Electrolytes Reverdy 750 g — aliment complémentaire en unidose pour la récupération post-effort. Flocons cuits à la vapeur, carottes déshydratées et fraction minérale (sodium, potassium, magnésium, bicarbonate) pour compenser les pertes liées à la transpiration.\n\nUsage ponctuel, en remplacement partiel du repas de concentrés après effort. Eau propre toujours accessible.",
+    benefits: [
+      'Unidose 750 g — 1 ration cheval 500 kg',
+      'Flocons + carottes déshydratées',
+      'Na, K, Mg, bicarbonate',
+      'Endurance, sport, transport, chaleur',
+      'Préparation simple (eau chaude 10 min)',
+    ],
+    composition: [
+      { label: 'Matières premières', value: "Flocons d'orge, d'avoine, de maïs sans OGM, carottes déshydratées, chlorure de sodium, flocons de pois, chlorure de potassium, sulfate de magnésium, bicarbonate de sodium" },
+      { label: 'Protéines brutes', value: '10 %' },
+      { label: 'Matières grasses', value: '3 %' },
+      { label: 'Cellulose brute', value: '6 %' },
+      { label: 'Cendres brutes', value: '7,5 %' },
+    ],
+    posologie:
+      "Cheval adulte 500 kg : 1 L d'eau très chaude sur 750 g de mash, couvrir 10 min, laisserdir avant distribution. Poney : diviser par 2.\nEau froide possible : attendre 45 min.\nUsage ponctuel post-effort. Accès permanent à l'eau de boisson.",
+    image:
+      'https://www.cheval-energy.com/fr/28741-large_default/reverdy-mash-uni-dose-avec-electrolytes.jpg',
+  },
 ]
