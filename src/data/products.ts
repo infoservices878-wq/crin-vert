@@ -809,15 +809,6 @@ export const PRODUCTS: Product[] = [
     ],
     posologie:
       "Mélanger à la ration ou au mash, avec le doseur.\nCheval adulte (600 kg) entretien : 50 g/jour pendant 30 jours.\nPoulain en croissance : 25 g/jour pendant 60 jours.\nSeau 1,5 kg ≈ 30 jours (adulte). Cures renouvelables 3–4×/an ou en continu. Conserver au frais et au sec.",
-    nutritionAnalysis: {
-      minerals: [
-        { label: 'Zinc', value: '6 000 mg/kg' },
-        { label: 'Cuivre', value: '2 000 mg/kg' },
-        { label: 'Sélénium', value: '36 mg/kg' },
-        { label: 'Biotine', value: '20 mg/kg' },
-      ],
-      notes: 'Contient du sucre comme excipient — avis véto si SME, Cushing ou fourbure.',
-    },
     image:
       'https://www.cheval-energy.com/fr/28903-large_default/first-ekine-cmv-exellium.jpg',
   },
@@ -1281,10 +1272,10 @@ export const PRODUCTS: Product[] = [
     description:
       "Superlyte de TRM — électrolytes faciles à administrer, formule appétente. Coffret de 3 doseurs de 70 g.\n\nPour 70 g : sodium 3 440 mg, chlorure 3 430 mg, potassium 1 720 mg, calcium 539 mg, magnésium 270 mg, glucose 20 000 mg. Administration directe à l'arrière de la langue. Idéal si le cheval refuse sa ration après l'effort. Eau libre en permanence.",
     benefits: [
-      'Seringue orale prête à l'emploi',
+      "Seringue orale prête à l'emploi",
       'Sans dilution ni pesée',
       'Profil calqué sur les pertes de sueur',
-      'Glucose pour l'absorption du sodium',
+      "Glucose pour l'absorption du sodium",
       'Pratique en concours et transport',
     ],
     composition: [
@@ -1371,5 +1362,40 @@ export const PRODUCTS: Product[] = [
       "50 ml/jour pour un cheval adulte de 550 kg, dans la ration ou l'eau de boisson (gobelet doseur). Doubler si besoins importants.\nCure 1 à 10 jours, de préférence après effort ou sudation importante.\nVérifier que le cheval boit. Eau propre et pierre à sel à disposition. Avis véto si insuffisance rénale, hypertension ou maladie cardiovasculaire.\nAprès ouverture : réfrigérateur 4–5 semaines.",
     image:
       'https://www.cheval-energy.com/fr/29022-large_default/natural-innov-electrolytes-eau-de-mer.jpg',
+  },
+  {
+    id: '30',
+    slug: 'nutragile-electrolytes-cheval',
+    sku: 'NU1018',
+    name: 'Nutragile - Electrolytes Cheval',
+    category: 'electrolytes',
+    categoryLabel: 'Électrolytes & hydratation',
+    tagline:
+      'Solution liquide en électrolytes pour réhydrater le cheval après un effort important ou une forte sudation',
+    price: 11.2,
+    rating: 4.6,
+    reviewCount: 9,
+    format: '500 ml',
+    sizes: ['500 ml', '1 L', '5 L'],
+    description:
+      "Electrolytes de Nutragile — complément liquide 100% naturel pensé pour compenser les pertes minérales d'un cheval qui a beaucoup transpiré. La sueur du cheval est riche en sodium, en chlorure et en potassium ; lors d'un travail en ambiance chaude et humide, ces pertes peuvent être plus de trois fois supérieures à celles d'un travail au frais.\n\nLa formule associe sel raffiné, chlorure de potassium et sulfate de magnésium (cofacteur de nombreuses réactions enzymatiques et des fonctions neuromusculaires), complétés par du dextrose. Sa forme liquide se verse directement sur la ration ou se dilue, pour un dosage ajusté au gabarit et à la sudation observée.\n\nIndiqué pour le cheval de concours, d'endurance ou de randonnée qui transpire abondamment, après un long transport ou pendant un épisode de fortes chaleurs. Un cheval au repos, correctement nourri et disposant d'une pierre à sel, n'en a généralement pas besoin. Un apport d'électrolytes n'a de sens qu'avec de l'eau propre à volonté.",
+    benefits: [
+      'Formule liquide 100% naturelle',
+      'Sel raffiné, chlorure de potassium, sulfate de magnésium, dextrose',
+      "Sodium et chlorure, les ions majoritaires perdus dans la sueur",
+      'Dosage ajustable au gabarit et à la sudation',
+      "À utiliser après un effort important, un transport ou une forte chaleur",
+    ],
+    composition: [
+      {
+        label: 'Composition',
+        value:
+          'Dextrose monohydraté, sel raffiné standard, chlorure de potassium, sulfate de magnésium anhydre',
+      },
+    ],
+    posologie:
+      "Cheval et poney : 10 à 30 ml pour 100 kg de poids vif, selon l'effort et la sudation. Respecter les doses recommandées. Bien refermer après usage, conserver dans un endroit frais et sec, hors de portée des enfants.",
+    image:
+      'https://www.cheval-energy.com/fr/27536-large_default/nutragile-electrolytes-cheval.jpg',
   },
 ]
