@@ -918,4 +918,55 @@ export const PRODUCTS: Product[] = [
     image:
       'https://www.cheval-energy.com/fr/26015-large_default/bonutron-sport-pro-audevard.jpg',
   },
+  {
+    id: '19',
+    slug: 'audevard-bonutron-senior-17',
+    sku: 'AU1061',
+    name: 'Audevard - Bonutron Senior 17+',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'CMV cheval âgé 17+ — digestion, locomotion, acides aminés et levures',
+    price: 131.68,
+    rating: 4.6,
+    reviewCount: 14,
+    format: '2,4 kg',
+    sizes: ['2,4 kg'],
+    description:
+      "Bonutron Senior 17+ d'Audevard — aliment complémentaire pour couvrir les besoins du vieux cheval (vieillissement digestif et locomoteur).\n\nLysine, thréonine, méthionine. Vitamine E, sélénium, zinc et cuivre (partiellement chélatés). Levures vivantes Saccharomyces cerevisiae. Bentonite anti-mycotoxines. Huile de lin, chrysantellum, reine des prés, saule. Granulés arôme pomme. Programme anti-dopage Audevard — attention salicylés en compétition.",
+    benefits: [
+      'Formulé pour chevaux 17 ans et plus',
+      'Acides aminés limitants (lysine, thréonine, méthionine)',
+      'Levures vivantes — digestibilité',
+      'Bentonite — mycotoxines des fourrages',
+      'Programme anti-dopage Audevard',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Remoulage de blé, lactosérum, carbonate de calcium, Mycosorb A+, mélasse, oxyde de magnésium, farine de soja, chrysantellum, reine des prés, saule, huile de lin, rafle de maïs' },
+      { label: 'Protéines brutes', value: '14 %' },
+      { label: 'Calcium', value: '4 %' },
+      { label: 'Magnésium', value: '1,85 %' },
+      { label: 'Vitamine E', value: '14 000 UI/kg' },
+      { label: 'Lysine', value: '17 000 mg/kg' },
+      { label: 'L-thréonine', value: '24 000 mg/kg' },
+      { label: 'Sélénium', value: '30 mg/kg' },
+    ],
+    posologie:
+      "Granulés à mélanger à la ration (dose 25 g).\nJusqu'à 600 kg : 50 g (2 doses)/jour.\n600 kg ou plus : 75 g (3 doses)/jour.\nContient reine des prés et saule (salicylés) — délai d'attente compétition à valider avec le vétérinaire. Refermer après usage. Conserver au sec.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '14 %' },
+        { label: 'Calcium', value: '4 %' },
+        { label: 'Magnésium', value: '1,85 %' },
+      ],
+      minerals: [
+        { label: 'Zinc', value: '6 000 mg/kg' },
+        { label: 'Cuivre', value: '1 600 mg/kg' },
+        { label: 'Sélénium', value: '30 mg/kg' },
+      ],
+      notes: 'Reine des prés / saule : substance contrôlée FEI (acide salicylique).',
+    },
+    image:
+      'https://www.cheval-energy.com/fr/26080-large_default/bonutron-senior-17-plus-audevard.jpg',
+  },
 ]
