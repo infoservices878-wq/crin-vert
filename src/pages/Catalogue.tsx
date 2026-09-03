@@ -10,6 +10,8 @@ import { usePageMeta } from '../hooks/usePageMeta'
 
 type SortKey = 'populaire' | 'prix-asc' | 'prix-desc'
 
+const PAGE_SIZE = 12
+
 function CategoryList({
   categories,
   activeCategory,
@@ -66,6 +68,7 @@ export function Catalogue() {
   const activeCategory = searchParams.get('categorie') as Category | null
   const [sort, setSort] = useState<SortKey>('populaire')
   const [filtersOpen, setFiltersOpen] = useState(false)
+  const [page, setPage] = useState(1)
   usePageMeta(
     activeCategory ? CATEGORY_LABELS[activeCategory] : 'Catalogue',
     'Parcourez nos compléments et aliments pour chevaux : CMV, digestion, articulations, sabots, stress…',
@@ -84,6 +87,7 @@ export function Catalogue() {
   }, [activeCategory, sort])
 
   const selectCategory = (cat: Category | null) => {
+    setPage(1)
     if (cat) setSearchParams({ categorie: cat })
     else setSearchParams({})
   }
@@ -119,7 +123,7 @@ export function Catalogue() {
         </button>
         <select
           value={sort}
-          onChange={(e) => setSort(e.target.value as SortKey)}
+          onChange={(e) => { setSort(e.target.value as SortKey); setPage(1) }}
           className="focus-ring border border-hunter-800/20 bg-oat-50 px-2 py-2.5 font-body text-sm text-hunter-900"
           aria-label="Trier par"
         >
@@ -183,7 +187,7 @@ export function Catalogue() {
               Trier par
               <select
                 value={sort}
-                onChange={(e) => setSort(e.target.value as SortKey)}
+                onChange={(e) => { setSort(e.target.value as SortKey); setPage(1) }}
                 className="focus-ring border border-hunter-800/20 bg-oat-50 px-2 py-1 font-body text-sm text-hunter-900"
               >
                 <option value="populaire">Popularité</option>
@@ -202,11 +206,42 @@ export function Catalogue() {
               onAction={() => selectCategory(null)}
             />
           ) : (
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              {products.map((p) => (
-                <ProductCard key={p.id} product={p} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                {products
+                  .slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+                  .map((p) => (
+                    <ProductCard key={p.id} product={p} />
+                  ))}
+              </div>
+              {products.length > PAGE_SIZE && (
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    disabled={page <= 1}
+                    onClick={() => setPage((n) => Math.max(1, n - 1))}
+                    className="focus-ring rounded-full border border-hunter-800/20 px-4 py-2 text-sm font-medium text-hunter-900 disabled:opacity-40"
+                  >
+                    Précédent
+                  </button>
+                  <span className="px-2 text-sm text-ink-600">
+                    Page {page} / {Math.max(1, Math.ceil(products.length / PAGE_SIZE))}
+                  </span>
+                  <button
+                    type="button"
+                    disabled={page >= Math.ceil(products.length / PAGE_SIZE)}
+                    onClick={() =>
+                      setPage((n) =>
+                        Math.min(Math.ceil(products.length / PAGE_SIZE), n + 1),
+                      )
+                    }
+                    className="focus-ring rounded-full border border-hunter-800/20 px-4 py-2 text-sm font-medium text-hunter-900 disabled:opacity-40"
+                  >
+                    Suivant
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
