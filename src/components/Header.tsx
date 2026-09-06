@@ -32,7 +32,7 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b border-hunter-800/10 bg-oat-50/95 backdrop-blur">
+      <header className="sticky top-0 z-30 border-b border-hunter-800/15 bg-oat-50/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6 lg:gap-6">
           <Link
             to="/"
@@ -42,7 +42,7 @@ export function Header() {
             <HorseshoeMark />
             <span className="flex flex-col">
               <span className="font-display text-lg font-bold leading-none tracking-tight sm:text-xl">
-                Nutrition&nbsp;Équine
+                Nutrition Équine
               </span>
               <span
                 className="mt-1.5 flex h-[3px] w-full min-w-[4.5rem] overflow-hidden rounded-full"
@@ -67,7 +67,7 @@ export function Header() {
                 className="focus-ring flex items-center gap-1 px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
                 aria-expanded={menuOpen}
               >
-                Tous les produits
+                Boutique
                 <ChevronDown className="h-4 w-4" strokeWidth={2} />
               </Link>
               {menuOpen && (
@@ -80,13 +80,25 @@ export function Header() {
               to="/a-propos"
               className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
             >
-              À propos
+              Notre approche
             </Link>
             <Link
               to="/contact"
               className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
             >
               Contact
+            </Link>
+            <Link
+              to="/bilan-equin"
+              className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
+            >
+              Bilan équin
+            </Link>
+            <Link
+              to="/conseils"
+              className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
+            >
+              Conseils
             </Link>
           </nav>
 
@@ -271,14 +283,14 @@ export function Header() {
                 )}
 
                 <p className="mb-1 mt-2 font-display text-[11px] font-semibold uppercase tracking-[0.15em] text-oat-100/45">
-                  Infos
+                  Découvrir
                 </p>
                 <Link
                   to="/a-propos"
                   onClick={() => setMobileOpen(false)}
                   className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
                 >
-                  À propos
+                  Notre approche
                 </Link>
                 <Link
                   to="/contact"
@@ -286,6 +298,27 @@ export function Header() {
                   className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
                 >
                   Contact
+                </Link>
+                <Link
+                  to="/bilan-equin"
+                  onClick={() => setMobileOpen(false)}
+                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
+                >
+                  Bilan équin
+                </Link>
+                <Link
+                  to="/conseils"
+                  onClick={() => setMobileOpen(false)}
+                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
+                >
+                  Conseils
+                </Link>
+                <Link
+                  to="/faq"
+                  onClick={() => setMobileOpen(false)}
+                  className="focus-ring rounded-sm px-1 py-2.5 font-display text-sm font-semibold uppercase tracking-wide text-oat-50"
+                >
+                  FAQ
                 </Link>
               </nav>
 

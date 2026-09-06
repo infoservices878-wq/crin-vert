@@ -1,22 +1,18 @@
 import type { Product } from '../types'
 import { PRODUCTS } from '../data/products'
+import { apiConfigured } from './api'
 
 // --- Connexion à un backend WooCommerce (optionnel) -----------------------
 // Renseigne ces variables dans .env (voir .env.example).
 // Sans elles : mode démo (localStorage pour les comptes).
 
-const WC_URL = import.meta.env.VITE_WC_URL as string | undefined
-const WC_KEY = import.meta.env.VITE_WC_CONSUMER_KEY as string | undefined
-const WC_SECRET = import.meta.env.VITE_WC_CONSUMER_SECRET as string | undefined
-/** Optionnel — endpoint JWT (plugin JWT Authentication for WP-API) */
-const JWT_ENDPOINT =
-  (import.meta.env.VITE_WC_JWT_ENDPOINT as string | undefined) ||
-  (WC_URL ? `${WC_URL}/wp-json/jwt-auth/v1/token` : undefined)
+const WC_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
+const JWT_ENDPOINT = WC_URL ? `${WC_URL}/v1/auth/login` : undefined
 
-const isConfigured = Boolean(WC_URL && WC_KEY && WC_SECRET)
+const isConfigured = apiConfigured
 
 function authHeader(): HeadersInit {
-  return { Authorization: `Basic ${btoa(`${WC_KEY}:${WC_SECRET}`)}` }
+  return {}
 }
 
 export async function getProducts(): Promise<Product[]> {
@@ -165,7 +161,7 @@ export async function registerCustomer(
     )
   }
 
-  const res = await fetch(`${WC_URL}/wp-json/wc/v3/customers`, {
+  const res = await fetch(`${WC_URL}/v1/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -188,8 +184,8 @@ export async function registerCustomer(
   const session: CustomerSession = {
     id: data.id,
     email: data.email,
-    firstName: data.first_name || payload.firstName,
-    lastName: data.last_name || payload.lastName,
+    firstName: data.firstName || data.first_name || payload.firstName,
+    lastName: data.lastName || data.last_name || payload.lastName,
     accountType: payload.accountType,
     demo: false,
   }
@@ -220,11 +216,11 @@ export async function loginCustomer(
       )
     }
     const session: CustomerSession = {
-      id: data.user_id ?? data.data?.user?.id ?? email,
-      email: data.user_email || email,
-      firstName: data.user_display_name?.split(' ')[0] || '',
-      lastName: data.user_display_name?.split(' ').slice(1).join(' ') || '',
-      accountType: 'particulier',
+      id: data.id ?? data.user_id ?? data.data?.user?.id ?? email,
+      email: data.email || data.user_email || email,
+      firstName: data.firstName || data.user_display_name?.split(' ')[0] || '',
+      lastName: data.lastName || data.user_display_name?.split(' ').slice(1).join(' ') || '',
+      accountType: data.accountType || 'particulier',
       token: data.token,
       demo: false,
     }

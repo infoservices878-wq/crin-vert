@@ -185,17 +185,12 @@ export function Login() {
             </div>
 
             <div className="text-center">
-              <button
-                type="button"
-                onClick={() =>
-                  setFormError(
-                    'La récupération de mot de passe sera disponible une fois le site branché sur WordPress.',
-                  )
-                }
+              <Link
+                to="/reinitialisation"
                 className="focus-ring text-sm text-hunter-900 underline hover:text-leather-600"
               >
                 Mot de passe oublié ?
-              </button>
+              </Link>
             </div>
 
             <button

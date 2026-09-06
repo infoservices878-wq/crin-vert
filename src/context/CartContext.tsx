@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Product } from '../types'
 
 interface CartItem {
@@ -23,11 +23,23 @@ interface CartContextValue {
 }
 
 const CartContext = createContext<CartContextValue | null>(null)
+const CART_STORAGE_KEY = 'nutrition-equine-cart-v1'
 
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>([])
+  const [items, setItems] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem(CART_STORAGE_KEY)
+      return saved ? JSON.parse(saved) as CartItem[] : []
+    } catch {
+      return []
+    }
+  })
   const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    try { localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items)) } catch { /* storage unavailable */ }
+  }, [items])
 
   const addItem = (product: Product, size?: string, pricePerUnit?: number) => {
     const chosen = size || product.sizes[0] || product.format

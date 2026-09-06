@@ -1,4 +1,4 @@
-import { MessageCircle, Timer, Star, CreditCard } from 'lucide-react'
+import { MessageCircle, Timer, ClipboardCheck, CreditCard } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const ITEMS = [
@@ -15,9 +15,10 @@ const ITEMS = [
     to: '/livraison',
   },
   {
-    icon: Star,
-    title: 'Fidélité',
-    text: 'Des points fidélité à transformer en récompenses.',
+    icon: ClipboardCheck,
+    title: 'Choix éclairé',
+    text: 'Composition, utilisation et informations nutritionnelles consultables avant l’achat.',
+    to: '/conseils',
   },
   {
     icon: CreditCard,

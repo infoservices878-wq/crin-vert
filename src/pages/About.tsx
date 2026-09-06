@@ -5,23 +5,23 @@ import { usePageMeta } from '../hooks/usePageMeta'
 const PILLARS = [
   {
     icon: Leaf,
-    title: 'Nature & science',
-    text: 'Des formules basées sur des actifs naturels, dosés avec rigueur pour répondre aux besoins réels du cheval de sport, de loisir ou sénior.',
+    title: 'Clarté avant tout',
+    text: 'Nous rendons les informations utiles accessibles : objectif, composition, analyse, format, dose et précautions d’emploi.',
   },
   {
     icon: FlaskConical,
-    title: 'Fabriqué en France',
-    text: 'Conception et production sur le territoire français, avec une traçabilité des matières premières et des contrôles qualité à chaque lot.',
+    title: 'Exigence de sélection',
+    text: 'Nous privilégions des formules compréhensibles, pensées pour s’intégrer à une ration déjà construite autour du fourrage.',
   },
   {
     icon: ShieldCheck,
-    title: 'Non dopant & FEI',
-    text: 'Nos produits sont formulés pour respecter les règlements anti-dopage aux posologies recommandées. Lisez toujours l’étiquette avant une compétition.',
+    title: 'Usage raisonné',
+    text: 'Chaque produit doit être choisi selon le cheval, son activité et son contexte. En compétition ou sous traitement, demandez conseil à votre vétérinaire.',
   },
   {
     icon: HeartHandshake,
-    title: 'À l’écoute des soigneurs',
-    text: 'Cavaliers, vétérinaires et ostéopathes nourrissent nos protocoles. Votre retour terrain guide l’évolution de la gamme.',
+    title: 'Le terrain d’abord',
+    text: 'Les questions des propriétaires et des professionnels nous aident à rendre notre accompagnement plus concret, sans surpromesse.',
   },
 ]
 
@@ -47,11 +47,11 @@ export function About() {
             À propos
           </p>
           <h1 className="mt-3 max-w-2xl font-display text-4xl font-extrabold leading-tight sm:text-5xl">
-            Nutrition Équine, l'équilibre naturel au service du cheval
+            Une nutrition plus lisible, pensée pour le quotidien du cheval
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-oat-100/85">
-            Nous concevons des compléments alimentaires clairs, efficaces et respectueux de
-            l’animal — pour accompagner l’entretien, la performance et le bien-être au quotidien.
+            Une sélection d’aliments complémentaires présentés avec clarté pour vous aider à
+            faire des choix cohérents avec la ration, le rythme de vie et les besoins de votre cheval.
           </p>
         </div>
       </section>

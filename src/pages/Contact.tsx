@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin, Lock, Truck, Zap, Check } from 'lucide-react'
 import { ContactInfoCard } from '../components/ContactInfoCard'
 import {
@@ -7,6 +8,7 @@ import {
   inputErrorClass,
   type FieldErrors,
 } from '../lib/validation'
+import { sendContactMessage } from '../lib/api'
 
 const base =
   'focus-ring mt-1.5 w-full border bg-oat-50 px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-600/60 border-hunter-800/15'
@@ -19,6 +21,8 @@ export function Contact() {
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState<FieldErrors>({})
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState('')
 
   const clear = (key: string) =>
     setErrors((prev) => {
@@ -28,7 +32,7 @@ export function Contact() {
       return n
     })
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const result = parseForm(contactSchema, { name, email, phone, subject, message })
     if (!result.success) {
@@ -37,7 +41,16 @@ export function Contact() {
       return
     }
     setErrors({})
-    setSent(true)
+    setSending(true)
+    setSendError('')
+    try {
+      await sendContactMessage({ name, email, phone, subject, message })
+      setSent(true)
+    } catch (reason) {
+      setSendError(reason instanceof Error ? reason.message : 'Impossible d’envoyer le message.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -49,14 +62,19 @@ export function Contact() {
         Nous contacter
       </h1>
       <p className="mt-4 text-center text-ink-600">
-        Une question sur nos produits, un conseil personnalisé pour votre cheval ? Notre équipe est
-        à votre écoute.
+        Une question sur une formule, une commande ou le bilan ? Décrivez le contexte de votre cheval : nous vous répondrons avec des informations utiles, sans remplacer l’avis de votre vétérinaire.
       </p>
 
       <div className="mt-10 space-y-4">
-        <ContactInfoCard icon={Mail} title="Email" detail="contact@nutritionequine.com" />
+        <ContactInfoCard icon={Mail} title="Email" detail="contact@nutrition-equine.com" />
         <ContactInfoCard icon={Phone} title="Téléphone" detail="+33 1 23 45 67 89" />
         <ContactInfoCard icon={MapPin} title="Adresse" detail="LA FOLIE, 28130 MAINTENON" />
+      </div>
+
+      <div className="mt-8 border border-leather-600/20 bg-leather-600/5 p-5">
+        <p className="font-display text-lg font-semibold text-hunter-900">Pour une réponse vraiment utile</p>
+        <p className="mt-2 text-sm leading-relaxed text-ink-600">Indiquez si possible l’âge de votre cheval, son activité, sa ration actuelle et la question précise que vous vous posez. Pour un bilan complet, utilisez directement notre formulaire dédié.</p>
+        <Link to="/bilan-equin" className="focus-ring mt-4 inline-flex font-display text-sm font-semibold text-leather-700 underline">Faire le bilan nutritionnel offert</Link>
       </div>
 
       <form
@@ -170,7 +188,7 @@ export function Contact() {
           type="submit"
           className="focus-ring btn-primary btn-block uppercase tracking-wide"
         >
-          {sent ? (
+          {sending ? 'Envoi en cours…' : sent ? (
             <>
               <Check className="h-4 w-4" strokeWidth={2.5} /> Message envoyé
             </>
@@ -180,7 +198,7 @@ export function Contact() {
         </button>
         {sent && (
           <p className="text-center text-xs text-ink-600">
-            Formulaire de démonstration — aucun message n’est réellement envoyé.
+            Merci, votre message a bien été transmis à notre équipe.
           </p>
         )}
         {!sent && Object.keys(errors).length > 0 && (
@@ -188,6 +206,7 @@ export function Contact() {
             Merci de corriger les champs indiqués.
           </p>
         )}
+        {sendError && <p className="text-center text-xs text-flag-red" role="alert">{sendError}</p>}
       </form>
 
       <div className="mt-10 space-y-4">

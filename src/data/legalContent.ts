@@ -246,4 +246,38 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       },
     ],
   },
+
+  'politique-de-confidentialite': {
+    slug: 'politique-de-confidentialite',
+    title: 'Politique de confidentialité',
+    updated: 'Dernière mise à jour : janvier 2026',
+    intro:
+      'Nutrition Équine protège les informations confiées lors de la navigation, d’une demande de conseil, de la création d’un compte ou d’une commande.',
+    sections: [
+      {
+        heading: 'Données collectées',
+        paragraphs: [
+          'Selon votre parcours, nous pouvons traiter votre nom, vos coordonnées, votre adresse de livraison, les informations nécessaires à votre commande et les éléments que vous choisissez de partager dans un bilan équin.',
+        ],
+      },
+      {
+        heading: 'Finalités et durée',
+        paragraphs: [
+          'Ces données servent à répondre à vos demandes, préparer et suivre vos commandes, assurer le service après-vente et, si vous y avez consenti, vous envoyer des informations de la boutique. Elles sont conservées pendant la durée nécessaire à ces finalités et aux obligations légales.',
+        ],
+      },
+      {
+        heading: 'Vos droits',
+        paragraphs: [
+          'Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données. Vous pouvez aussi vous opposer à la prospection. Écrivez à contact@nutrition-equine.com en précisant l’objet de votre demande.',
+        ],
+      },
+      {
+        heading: 'Cookies et sécurité',
+        paragraphs: [
+          'Le panier, les préférences et la session peuvent nécessiter des cookies ou du stockage local. Les paiements sont traités par un prestataire sécurisé; Nutrition Équine ne conserve pas vos données bancaires complètes.',
+        ],
+      },
+    ],
+  },
 }

@@ -11,10 +11,12 @@ export function StepPayment({
   total,
   onBack,
   onConfirm,
+  error,
 }: {
   total: number
   onBack: () => void
-  onConfirm: () => void
+  onConfirm: () => Promise<void>
+  error?: string
 }) {
   const [method, setMethod] = useState('cb')
   const [loading, setLoading] = useState(false)
@@ -22,10 +24,7 @@ export function StepPayment({
   const handlePay = () => {
     setLoading(true)
     // Simulation délai paiement
-    window.setTimeout(() => {
-      setLoading(false)
-      onConfirm()
-    }, 600)
+    onConfirm().finally(() => setLoading(false))
   }
 
   return (
@@ -54,7 +53,8 @@ export function StepPayment({
       </div>
 
       {method === 'cb' && (
-        <div className="mt-5 space-y-4">
+        <>
+        <div className="mt-5 space-y-4 pointer-events-none opacity-40" aria-hidden="true">
           <input
             type="text"
             placeholder="Numéro de carte"
@@ -76,6 +76,8 @@ export function StepPayment({
             />
           </div>
         </div>
+        <p className="mt-3 text-sm text-ink-600">Les informations de carte sont saisies uniquement sur la page sécurisée de notre prestataire.</p>
+        </>
       )}
 
       {method === 'virement' && (
@@ -86,7 +88,7 @@ export function StepPayment({
 
       <div className="mt-6 flex items-center gap-2 text-xs text-ink-600">
         <Lock className="h-3.5 w-3.5" />
-        Paiement sécurisé — démonstration uniquement
+        Paiement sécurisé — vous serez redirigé vers notre prestataire de paiement.
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
@@ -106,6 +108,7 @@ export function StepPayment({
           {loading ? 'Traitement…' : `Payer ${total.toFixed(2)} €`}
         </button>
       </div>
+      {error && <p className="mt-4 text-sm text-flag-red" role="alert">{error}</p>}
     </div>
   )
 }

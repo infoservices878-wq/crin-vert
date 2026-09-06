@@ -16,6 +16,7 @@ import { StatCircle } from '../components/StatCircle'
 import { FaqSection } from '../components/FaqSection'
 import { usePageMeta } from '../hooks/usePageMeta'
 import { MadeInFranceBadge } from '../components/MadeInFranceBadge'
+import { ClipboardCheck, Truck, BookOpen } from 'lucide-react'
 
 const ICONS: Partial<Record<Category, typeof Wheat>> = {
   alimentation: Wheat,
@@ -28,25 +29,32 @@ const ICONS: Partial<Record<Category, typeof Wheat>> = {
 
 const HERO_SLIDES = [
   {
-    eyebrow: 'CMV Entretien',
-    title: 'La base minérale du quotidien',
-    text: "Un complément formulé avec des vétérinaires équins pour couvrir les besoins essentiels de votre cheval, jour après jour.",
-    cta: 'Découvrir CMV Entretien',
+    eyebrow: 'NUTRITION ÉQUINE · DEPUIS LA FRANCE',
+    title: 'Mieux nourrir commence par mieux comprendre.',
+    text: "Des formules sélectionnées avec soin et des informations enfin lisibles pour construire une ration cohérente, sans ajouter de complexité.",
+    cta: 'Explorer la sélection',
     link: '/produit/cmv-entretien',
   },
   {
-    eyebrow: 'Ulcéro+',
-    title: 'Le confort digestif retrouvé',
-    text: 'Fibres de luzerne et argile verte pour soutenir la muqueuse gastrique dans les moments sensibles.',
+    eyebrow: 'BILAN NUTRITIONNEL OFFERT',
+    title: 'Une recommandation qui part de votre cheval.',
+    text: 'Âge, activité, fourrage et habitudes: nous vous aidons à poser les bonnes questions avant de choisir un complément.',
+    cta: 'Commencer mon bilan',
+    link: '/bilan-equin',
+  },
+  {
+    eyebrow: 'ULCÉRO+',
+    title: 'Le confort digestif, avec méthode.',
+    text: 'Une formule ciblée pour les périodes sensibles, accompagnée d’un mode d’emploi précis et de repères d’utilisation concrets.',
     cta: 'Découvrir Ulcéro+',
     link: '/produit/ulcero-plus',
   },
 ]
 
 const TESTIMONIALS = [
-  { author: 'Camille B.', context: 'cavalière de CSO', text: "Résultat visible en une dizaine de jours, mon cheval est bien plus détendu à l'effort." },
-  { author: 'Marc T.', context: 'propriétaire de 3 chevaux', text: "Facile à donner, bien mélangé aux granulés, aucun refus même avec ma jument difficile." },
-  { author: 'Élise R.', context: "monitrice d'équitation", text: 'Je le recommande à tous mes élèves pour leurs poneys, bon rapport qualité-prix.' },
+  { author: 'Composition', context: 'clairement détaillée', text: 'Chaque fiche indique les ingrédients, l’analyse nutritionnelle, le format et les conseils d’utilisation utiles à votre décision.' },
+  { author: 'Bilan offert', context: 'orienté terrain', text: 'Nous commençons par l’âge, l’activité et la ration de votre cheval plutôt que par une recommandation automatique.' },
+  { author: 'Usage responsable', context: 'sans promesse excessive', text: 'Un aliment complémentaire accompagne une ration adaptée ; il ne remplace ni le fourrage, ni un diagnostic vétérinaire.' },
 ]
 
 export function Home() {
@@ -63,15 +71,15 @@ export function Home() {
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden bg-hunter-900">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-10 pt-8 sm:px-6 md:grid-cols-2 md:pb-16 md:pt-12">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-12 pt-10 sm:px-6 md:grid-cols-[1.05fr_.95fr] md:pb-20 md:pt-16">
           <div className="text-oat-50">
             <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-leather-500">
               {s.eyebrow}
             </p>
-            <h1 className="mt-3 font-display text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl">
+            <h1 className="mt-3 max-w-xl font-display text-5xl font-semibold leading-[0.98] sm:text-6xl">
               {s.title}
             </h1>
-            <p className="mt-5 max-w-md text-oat-100/80">{s.text}</p>
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-oat-100/80">{s.text}</p>
             <div className="mt-4">
               <MadeInFranceBadge />
             </div>
@@ -84,7 +92,7 @@ export function Home() {
                 to="/catalogue"
                 className="focus-ring text-sm font-semibold text-oat-100/70 underline decoration-oat-100/30 underline-offset-4 hover:text-oat-50"
               >
-                Voir le catalogue
+                Voir toute la sélection
               </Link>
               <div className="flex items-center gap-1.5">
                 <button
@@ -119,7 +127,7 @@ export function Home() {
             <div className="absolute -top-5 left-1/2 z-10 -translate-x-1/2">
               <RatingBadge />
             </div>
-            <div className="rotate-1 overflow-hidden rounded-sm bg-oat-100 p-2 shadow-xl transition-transform hover:rotate-0">
+            <div className="rotate-1 overflow-hidden rounded-sm bg-oat-100 p-2 shadow-2xl transition-transform hover:rotate-0">
               <img
                 src="https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=640"
                 srcSet="https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=400 400w, https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=640 640w, https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=900 900w"
@@ -133,8 +141,8 @@ export function Home() {
                 fetchPriority="high"
               />
               <div className="bg-oat-50 px-4 py-3">
-                <p className="font-display text-lg font-bold text-hunter-900">{s.eyebrow}</p>
-                <p className="text-sm text-ink-600">100% naturel · Fabriqué en France</p>
+                <p className="font-display text-xl font-semibold text-hunter-900">Pour une ration plus juste</p>
+                <p className="text-sm text-ink-600">Composition lisible · conseils concrets · sélection française</p>
               </div>
             </div>
             <div className="absolute -bottom-6 -left-6 hidden rotate-[-3deg] sm:block">
@@ -151,7 +159,8 @@ export function Home() {
 
       {/* Category strip */}
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <h2 className="font-display text-2xl font-bold text-hunter-900">Par besoin</h2>
+        <p className="font-body text-xs font-bold uppercase tracking-[0.18em] text-leather-700">Commencer par le bon besoin</p>
+        <h2 className="mt-2 font-display text-3xl font-semibold text-hunter-900">Une sélection qui s’adapte au quotidien</h2>
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
           {categories.map((cat) => {
             const Icon = ICONS[cat] ?? Wheat
@@ -168,6 +177,15 @@ export function Home() {
               </Link>
             )
           })}
+        </div>
+      </section>
+
+      <section className="border-y border-hunter-800/10 bg-oat-50">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+          <div className="max-w-2xl"><p className="font-body text-xs font-bold uppercase tracking-[0.18em] text-leather-700">Une expérience plus simple</p><h2 className="mt-2 font-display text-3xl font-semibold text-hunter-900">Du besoin de votre cheval à la bonne décision.</h2><p className="mt-3 text-sm leading-relaxed text-ink-600">Chaque étape est pensée pour vous laisser comparer, comprendre et demander conseil sans vous perdre dans une promesse universelle.</p></div>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[{ icon: ClipboardCheck, number: '01', title: 'Identifier le besoin', text: 'Commencez par la ration, l’âge, l’activité et le contexte de votre cheval.', to: '/bilan-equin' }, { icon: BookOpen, number: '02', title: 'Comparer avec méthode', text: 'Consultez la composition, le format, la dose et les précautions sur chaque fiche.', to: '/catalogue' }, { icon: Truck, number: '03', title: 'Recevoir sereinement', text: 'Suivez votre commande et retrouvez toutes les informations de livraison.', to: '/livraison' }].map(({ icon: Icon, number, title, text, to }) => <Link key={number} to={to} className="focus-ring border border-hunter-800/10 p-5 transition-colors hover:border-leather-600"><div className="flex items-center justify-between"><Icon className="h-6 w-6 text-leather-600" /><span className="font-display text-2xl text-leather-600">{number}</span></div><h3 className="mt-6 font-display text-xl font-semibold text-hunter-900">{title}</h3><p className="mt-2 text-sm leading-relaxed text-ink-600">{text}</p><span className="mt-5 inline-flex text-sm font-semibold text-hunter-900">Découvrir <span className="ml-2" aria-hidden="true">→</span></span></Link>)}
+          </div>
         </div>
       </section>
 
@@ -264,8 +282,8 @@ export function Home() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            <StatCircle value="96%" label="Recommandent Nutrition Équine à un autre cavalier" />
-            <StatCircle value="89%" label="Constatent une amélioration en moins de 15 jours" />
+            <StatCircle value="01" label="Un besoin à la fois : une gamme organisée pour éviter l’empilement inutile." />
+            <StatCircle value="100%" label="Des informations de composition, format et utilisation accessibles avant l’achat." />
           </div>
         </div>
       </section>
@@ -273,16 +291,16 @@ export function Home() {
       {/* Avis */}
       <section className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
         <p className="font-display text-xs font-bold uppercase tracking-[0.2em] text-ink-600">
-          Avis vérifiés
+          Notre engagement
         </p>
         <h2 className="mt-2 font-display text-3xl font-extrabold text-hunter-900">
-          Les cavaliers qui nous font confiance
+          Une recommandation qui part du cheval
         </h2>
 
         <div className="mt-8 border border-hunter-800/10 bg-oat-50 p-6 text-left sm:p-8">
           <div className="flex items-center justify-between">
             <RatingBadge />
-            <span className="text-xs text-ink-600">143 avis</span>
+            <span className="text-xs text-ink-600">Une décision éclairée</span>
           </div>
           <p className="mt-6 font-display text-lg font-semibold text-hunter-900">"{t.text}"</p>
           <p className="mt-3 text-sm text-ink-600">

@@ -10,9 +10,12 @@ export type OrderConfirmationState = {
 
 export function OrderConfirmation() {
   const location = useLocation()
-  const state = location.state as OrderConfirmationState | null
+  const state = (location.state || { total: 0, itemCount: 0 }) as OrderConfirmationState
+  const params = new URLSearchParams(location.search)
+  const orderId = state?.orderId || params.get('order') || params.get('order_number')
+  const email = state?.email || params.get('email') || undefined
 
-  if (!state?.orderId) {
+  if (!orderId) {
     return <Navigate to="/" replace />
   }
 
@@ -25,18 +28,18 @@ export function OrderConfirmation() {
         Merci pour votre commande
       </h1>
       <p className="mt-2 text-ink-600">
-        Votre commande a bien été enregistrée (démonstration — aucun paiement réel).
+        Votre commande a bien été enregistrée. Un e-mail de confirmation vous sera envoyé après validation du paiement.
       </p>
 
       <div className="mt-8 border border-hunter-800/10 bg-oat-50 px-6 py-5 text-left">
         <p className="text-xs font-semibold uppercase tracking-wide text-ink-600">
           Numéro de commande
         </p>
-        <p className="mt-1 font-mono text-xl font-bold text-hunter-900">{state.orderId}</p>
+        <p className="mt-1 font-mono text-xl font-bold text-hunter-900">{orderId}</p>
         <dl className="mt-4 space-y-2 text-sm">
           <div className="flex justify-between">
             <dt className="text-ink-600">Articles</dt>
-            <dd className="font-medium text-hunter-900">{state.itemCount}</dd>
+            <dd className="font-medium text-hunter-900">{state?.itemCount ?? '—'}</dd>
           </div>
           <div className="flex justify-between">
             <dt className="text-ink-600">Total</dt>
@@ -44,10 +47,10 @@ export function OrderConfirmation() {
               {state.total.toFixed(2)} €
             </dd>
           </div>
-          {state.email && (
+          {email && (
             <div className="flex justify-between gap-4">
               <dt className="text-ink-600">Confirmation</dt>
-              <dd className="truncate text-right font-medium text-hunter-900">{state.email}</dd>
+              <dd className="truncate text-right font-medium text-hunter-900">{email}</dd>
             </div>
           )}
         </dl>
@@ -56,7 +59,7 @@ export function OrderConfirmation() {
       <ul className="mt-8 space-y-3 text-left text-sm text-ink-600">
         <li className="flex gap-3">
           <Mail className="mt-0.5 h-4 w-4 shrink-0 text-hunter-800" />
-          Un e-mail de confirmation serait envoyé en production.
+          Vous recevrez un e-mail de confirmation et de suivi.
         </li>
         <li className="flex gap-3">
           <Package className="mt-0.5 h-4 w-4 shrink-0 text-hunter-800" />

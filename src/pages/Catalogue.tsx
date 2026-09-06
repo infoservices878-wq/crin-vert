@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { SlidersHorizontal, X } from 'lucide-react'
 import { PRODUCTS } from '../data/products'
 import { CATEGORY_LABELS, CATEGORY_ORDER, type Category } from '../types'
@@ -63,7 +63,8 @@ function CategoryList({
 
 export function Catalogue() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const activeCategory = searchParams.get('categorie') as Category | null
+  const { categoryId } = useParams<{ categoryId?: string }>()
+  const activeCategory = (searchParams.get('categorie') || categoryId) as Category | null
   const [sort, setSort] = useState<SortKey>('populaire')
   const [filtersOpen, setFiltersOpen] = useState(false)
   usePageMeta(
@@ -100,7 +101,14 @@ export function Catalogue() {
       <h1 className="mt-3 font-display text-3xl font-bold text-hunter-900">
         {activeCategory ? CATEGORY_LABELS[activeCategory] : 'Tout le catalogue'}
       </h1>
-      <p className="mt-1 text-sm text-ink-600">{products.length} produit(s)</p>
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-600">Sélectionnez d’abord le besoin à accompagner, puis consultez la composition, le format et les conseils d’utilisation. Un complément ne remplace pas une ration de fourrage équilibrée.</p>
+      <div className="mt-4 flex flex-wrap items-center gap-3 text-sm"><span className="font-mono text-ink-600">{products.length} référence{products.length > 1 ? 's' : ''}</span><Link className="focus-ring font-semibold text-leather-700 underline underline-offset-4" to="/conseils">Comment choisir ?</Link></div>
+
+      <div className="mt-8 grid gap-3 border-y border-hunter-800/10 py-5 text-sm sm:grid-cols-3">
+        <div><p className="font-display font-semibold text-hunter-900">Des fiches lisibles</p><p className="mt-1 text-ink-600">Composition, dose et format avant l’achat.</p></div>
+        <div><p className="font-display font-semibold text-hunter-900">Une sélection structurée</p><p className="mt-1 text-ink-600">Par besoin, âge, activité et contexte.</p></div>
+        <div><p className="font-display font-semibold text-hunter-900">Un conseil humain</p><p className="mt-1 text-ink-600"><Link to="/bilan-equin" className="focus-ring underline">Faire le bilan offert</Link></p></div>
+      </div>
 
       {/* Barre mobile : filtres + tri */}
       <div className="mt-6 flex items-center gap-2 md:hidden">

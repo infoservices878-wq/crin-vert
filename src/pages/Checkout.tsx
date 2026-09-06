@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { StepperHeader } from '../components/checkout/StepperHeader'
 import { OrderSummarySidebar } from '../components/checkout/OrderSummarySidebar'
@@ -7,6 +7,7 @@ import { StepInfo } from '../components/checkout/StepInfo'
 import { StepAddress } from '../components/checkout/StepAddress'
 import { StepDelivery } from '../components/checkout/StepDelivery'
 import { StepPayment } from '../components/checkout/StepPayment'
+import { createCheckout } from '../lib/api'
 
 const FREE_SHIPPING_THRESHOLD = 79
 
@@ -41,11 +42,11 @@ const initialData: CheckoutData = {
 
 export function Checkout() {
   const { items, total, clear } = useCart()
-  const navigate = useNavigate()
   const [step, setStep] = useState(1)
   const [data, setData] = useState<CheckoutData>(initialData)
   const [carrier, setCarrier] = useState('')
   const [shippingCost, setShippingCost] = useState<number | null>(null)
+  const [paymentError, setPaymentError] = useState('')
 
   const freeShippingUnlocked = total >= FREE_SHIPPING_THRESHOLD
 
@@ -87,16 +88,23 @@ export function Checkout() {
               <StepPayment
                 total={total + (shippingCost ?? 0)}
                 onBack={() => setStep(3)}
-                onConfirm={() => {
-                  const orderId = `CV-${Date.now().toString().slice(-6)}`
-                  const itemCount = items.reduce((n, i) => n + i.qty, 0)
-                  const orderTotal = total + (shippingCost ?? 0)
-                  const email = data.email
-                  clear()
-                  navigate('/commande-confirmee', {
-                    state: { orderId, email, total: orderTotal, itemCount },
-                    replace: true,
-                  })
+                error={paymentError}
+                onConfirm={async () => {
+                  setPaymentError('')
+                  try {
+                    const checkout = await createCheckout({
+                      customer: { firstName: data.firstName, lastName: data.lastName, email: data.email, newsletter: data.newsletter },
+                      shippingAddress: data.address,
+                      shippingMethod: carrier,
+                      items: items.map((item) => ({ productId: item.product.id, sku: item.product.sku, variation: item.size, quantity: item.qty })),
+                      successUrl: `${window.location.origin}/commande-confirmee`,
+                      cancelUrl: `${window.location.origin}/commande`,
+                    })
+                    clear()
+                    window.location.assign(checkout.checkoutUrl)
+                  } catch (reason) {
+                    setPaymentError(reason instanceof Error ? reason.message : 'Le paiement n’a pas pu être initialisé.')
+                  }
                 }}
               />
             )}

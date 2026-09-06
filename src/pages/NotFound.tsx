@@ -10,8 +10,8 @@ export function NotFound() {
         Page introuvable
       </h1>
       <p className="mt-4 text-ink-600">
-        Cette page n’existe pas ou a été déplacée. Revenez au catalogue ou à l’accueil pour
-        continuer votre navigation.
+        Cette page n’existe pas ou a été déplacée. Retrouvez une formule par besoin, lisez nos
+        conseils ou demandez directement un bilan pour votre cheval.
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link to="/" className="focus-ring btn-primary">
@@ -19,6 +19,9 @@ export function NotFound() {
         </Link>
         <Link to="/catalogue" className="focus-ring btn-secondary">
           Catalogue
+        </Link>
+        <Link to="/bilan-equin" className="focus-ring btn-secondary">
+          Bilan offert
         </Link>
       </div>
     </div>

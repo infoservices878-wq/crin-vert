@@ -1,54 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Baloo 2", "Source Sans 3", ui-rounded, system-ui, sans-serif;
-  --font-body: "Source Sans 3", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", monospace;
+  --font-display: "Newsreader", Georgia, serif;
+  --font-body: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Code", monospace;
 
-  /*
-   * Psychologie des couleurs — Nutrition Équine
-   * ------------------------------------
-   * HUNTER (marine) : confiance, expertise, premium. Ancre e-commerce
-   *   (achat = décision « sérieuse »). Réduit l’anxiété sur un produit santé animale.
-   * OAT (crème) : chaleur, naturel, propreté. Évoque le fourrage / la lumière
-   *   d’écurie sans agressivité. Favorise le temps de lecture.
-   * LEATHER (vert) : nature, vitalité, « Vert » de la marque. Validation,
-   *   stock dispo, succès — pas le CTA d’achat principal (évite confusion
-   *   « bio marketing » saturé).
-   * STRAW (or) : récompense, qualité, avis. Attire l’œil sans crier « promo ».
-   * FLAG : ancrage France (confiance réglementaire / fabrication locale).
-   * INK : lisibilité, sérieux éditorial.
-   */
+  --color-hunter-950: #102a33;
+  --color-hunter-900: #173d46;
+  --color-hunter-800: #285864;
+  --color-hunter-700: #477480;
+  --color-hunter-600: #71939a;
 
-  /* Marine — confiance & autorité (CTA principal, header, titres) */
-  --color-hunter-950: #0a1728;
-  --color-hunter-900: #10233d;
-  --color-hunter-800: #163254;
-  --color-hunter-700: #1e4270;
-  --color-hunter-600: #2c5690;
-
-  /* Crème — fond « naturel », repos visuel */
   --color-oat-50: #fffdf8;
-  --color-oat-100: #f7f3e9;
-  --color-oat-200: #f1ebda;
-  --color-oat-300: #e6ddc2;
+  --color-oat-100: #f5f1e8;
+  --color-oat-200: #e9e1d2;
+  --color-oat-300: #d8c9b4;
 
-  /* Vert prairie — nature, validation, marque */
-  --color-leather-700: #145c34;
-  --color-leather-600: #1c8a4c;
-  --color-leather-500: #24a45c;
+  --color-leather-700: #9a4635;
+  --color-leather-600: #b85b43;
+  --color-leather-500: #d47a5c;
 
-  /* Or paille — social proof, distinction */
-  --color-straw-500: #f2a733;
-  --color-straw-400: #f5bc5c;
+  --color-straw-500: #c78e3b;
+  --color-straw-400: #e1b866;
 
   /* France */
   --color-flag-blue: #1e4270;
   --color-flag-red: #c8102e;
 
   /* Texte */
-  --color-ink-900: #1c2333;
-  --color-ink-600: #58607a;
+  --color-ink-900: #1d2a2e;
+  --color-ink-600: #526267;
 }
 
 html {
@@ -64,11 +46,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background-image: linear-gradient(135deg, rgb(255 253 248 / 0.65), transparent 35%), linear-gradient(315deg, rgb(233 225 210 / 0.35), transparent 45%);
 }
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 .font-body {
   font-family: var(--font-body);
@@ -91,8 +74,8 @@ body {
   outline: none;
 }
 .focus-ring:focus-visible {
-  outline: 2px solid var(--color-leather-600);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-straw-500);
+  outline-offset: 3px;
 }
 
 /* Animations toasts : Framer Motion (src/context/ToastContext.tsx) */
@@ -110,10 +93,12 @@ body {
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.875rem 1.5rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.15s ease;
+  border-radius: 0.25rem;
+  letter-spacing: 0;
+  box-shadow: 0 8px 18px rgb(23 61 70 / 0.14);
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
-.btn-primary:hover { background-color: var(--color-hunter-800); }
+.btn-primary:hover { background-color: var(--color-hunter-800); transform: translateY(-1px); box-shadow: 0 12px 24px rgb(23 61 70 / 0.18); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .btn-primary-inverse {
@@ -127,7 +112,7 @@ body {
   font-weight: 700;
   font-size: 0.875rem;
   padding: 0.875rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   transition: background-color 0.15s ease;
 }
 .btn-primary-inverse:hover { background-color: var(--color-oat-200); }
@@ -144,7 +129,7 @@ body {
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.8125rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 .btn-secondary:hover {

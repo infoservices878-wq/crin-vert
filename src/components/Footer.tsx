@@ -15,9 +15,10 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <span className="font-display text-lg font-bold text-oat-50">Nutrition Équine</span>
+            <span className="font-display text-xl font-semibold text-oat-50">Nutrition Équine</span>
             <p className="mt-3 max-w-xs text-sm text-oat-100/70">
-              Compléments alimentaires naturels formulés en France, pensés pour accompagner le
-              cheval à chaque étape de sa vie.
+              Une sélection exigeante de nutrition équine, conçue pour accompagner chaque cheval
+              avec méthode, transparence et bon sens.
             </p>
           </div>
           <div>
@@ -37,12 +38,18 @@ export function Footer() {
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-wide text-oat-50">
               Le nécessaire
+                          Service & confiance
             </p>
             <ul className="mt-3 space-y-2 text-sm text-oat-100/80">
               <li>Fabriqué en France</li>
               <li>Formules non-dopantes, conformes FEI</li>
-              <li>Expédition sous 48h</li>
-              <li>contact@nutritionequine.com</li>
+              <li>Expédition sous 48 h ouvrées</li>
+              <li><Link to="/bilan-equin" className="focus-ring hover:text-oat-50">Bilan nutritionnel offert</Link></li>
+              <li><Link to="/conseils" className="focus-ring hover:text-oat-50">Le carnet conseil</Link></li>
+              <li><Link to="/faq" className="focus-ring hover:text-oat-50">Questions fréquentes</Link></li>
+              <li><Link to="/livraison" className="focus-ring hover:text-oat-50">Livraison & retours</Link></li>
+              <li><Link to="/suivi-commande" className="focus-ring hover:text-oat-50">Suivre ma commande</Link></li>
+              <li>contact@nutrition-equine.com</li>
             </ul>
           </div>
           <div>
@@ -78,6 +85,11 @@ export function Footer() {
               <li>
                 <Link to="/paiement" className="focus-ring hover:text-oat-50">
                   Paiement
+                </Link>
+              </li>
+              <li>
+                <Link to="/politique-de-confidentialite" className="focus-ring hover:text-oat-50">
+                  Confidentialité
                 </Link>
               </li>
             </ul>
