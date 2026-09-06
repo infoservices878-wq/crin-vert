@@ -7,21 +7,21 @@ const SAMPLE_REVIEWS = [
     role: 'Cavalière CSO',
     rating: 5,
     text: 'Résultat visible en une dizaine de jours, mon cheval est bien plus détendu à l’effort. Je rachète.',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=60',
+    avatar: '/images/site/review-woman.jpg',
   },
   {
     name: 'Marc T.',
     role: 'Propriétaire de 3 chevaux',
     rating: 5,
     text: 'Facile à donner, bien mélangé aux granulés, aucun refus même avec ma jument difficile.',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=60',
+    avatar: '/images/site/review-man.jpg',
   },
   {
     name: 'Élise R.',
     role: 'Monitrice d’équitation',
     rating: 4,
     text: 'Bon rapport qualité-prix. Je le recommande à mes élèves pour leurs poneys de club.',
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=60',
+    avatar: '/images/site/review-person.jpg',
   },
 ]
 

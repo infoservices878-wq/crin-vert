@@ -129,9 +129,7 @@ export function Home() {
             </div>
             <div className="rotate-1 overflow-hidden rounded-sm bg-oat-100 p-2 shadow-2xl transition-transform hover:rotate-0">
               <img
-                src="https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=640"
-                srcSet="https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=400 400w, https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=640 640w, https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg?auto=compress&cs=tinysrgb&w=900 900w"
-                sizes="(max-width: 768px) 90vw, 420px"
+                src="/images/site/hero-horse.jpg"
                 width={640}
                 height={800}
                 alt="Cheval mangeant dans un seau — nutrition naturelle Nutrition Équine"

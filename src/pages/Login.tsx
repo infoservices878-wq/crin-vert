@@ -88,8 +88,7 @@ export function Login() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1400&q=70')",
+          backgroundImage: "url('/images/site/horse-calm.jpg')",
         }}
         aria-hidden="true"
       />

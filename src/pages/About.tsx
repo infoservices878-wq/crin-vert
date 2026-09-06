@@ -37,8 +37,7 @@ export function About() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1400&q=70')",
+            backgroundImage: "url('/images/site/horses-field.jpg')",
           }}
           aria-hidden="true"
         />
@@ -77,7 +76,7 @@ export function About() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden border border-hunter-800/10 bg-oat-200">
             <img
-              src="https://images.pexels.com/photos/1996333/pexels-photo-1996333.jpeg?auto=compress&cs=tinysrgb&w=900"
+              src="/images/site/horses-pasture.jpg"
               alt="Chevaux au pré"
               className="h-full w-full object-cover"
               loading="lazy"
