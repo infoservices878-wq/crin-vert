@@ -1,9 +1,9 @@
 /**
- * Helpers d'optimisation d'images (Unsplash + Pexels + générique).
- * - URLs redimensionnées côté CDN
- * - srcSet / sizes responsive
- * - lazy-load + fetchPriority
- * - placeholder LQIP (très petite image floue)
+ * Helpers d'optimisation d'images.
+ * - Unsplash / Pexels : paramètres CDN natifs
+ * - PrestaShop (cheval-energy, etc.) : variante home/medium/large
+ * - Autres HTTPS : proxy images.weserv.nl (webp + resize)
+ * - srcSet / sizes / LQIP / lazy
  */
 
 export type ImageSize = 'thumb' | 'card' | 'detail' | 'hero'
@@ -15,10 +15,7 @@ const WIDTHS: Record<ImageSize, number> = {
   hero: 900,
 }
 
-/** Largeurs pour srcSet (responsive) */
 const SRCSET_WIDTHS = [240, 400, 640, 800, 1200] as const
-
-/** Largeur du placeholder LQIP (très léger) */
 const LQIP_WIDTH = 24
 
 function isUnsplash(url: string): boolean {
@@ -29,7 +26,45 @@ function isPexels(url: string): boolean {
   return url.includes('images.pexels.com')
 }
 
-/** Extrait l'URL de base sans paramètres de taille */
+/** PrestaShop / Woo-style sized filenames */
+function isPrestaStyle(url: string): boolean {
+  return /-(home|medium|large|thickbox|cart|small)_default\./i.test(url)
+}
+
+function prestaSizeForWidth(width: number): string {
+  if (width <= 220) return 'home_default'
+  if (width <= 500) return 'medium_default'
+  return 'large_default'
+}
+
+function withPrestaSize(url: string, width: number): string {
+  const size = prestaSizeForWidth(width)
+  return url.replace(
+    /-(home|medium|large|thickbox|cart|small)_default/i,
+    `-${size}`,
+  )
+}
+
+/** Proxy resize + webp pour images externes non optimisables nativement */
+function viaWeserv(url: string, width: number, quality = 75): string {
+  try {
+    const clean = url.split('?')[0]
+    // weserv : url sans protocole
+    const bare = clean.replace(/^https?:\/\//i, '')
+    const params = new URLSearchParams({
+      url: bare,
+      w: String(width),
+      q: String(quality),
+      output: 'webp',
+      fit: 'contain',
+      we: '',
+    })
+    return `https://images.weserv.nl/?${params.toString()}`
+  } catch {
+    return url
+  }
+}
+
 function baseUrl(url: string): string {
   try {
     const u = new URL(url)
@@ -53,24 +88,25 @@ export function sizedUrl(url: string, width: number, quality = 75): string {
   if (isPexels(url)) {
     return `${base}?auto=compress&cs=tinysrgb&w=${width}`
   }
-  // WooCommerce / autre CDN : URL telle quelle
+  if (isPrestaStyle(url)) {
+    return withPrestaSize(url, width)
+  }
+  // HTTPS externe (dont cheval-energy sans suffixe, ou autres CDN)
+  if (/^https?:\/\//i.test(url)) {
+    return viaWeserv(url, width, quality)
+  }
   return url
 }
 
 /** Placeholder flou très léger (LQIP) */
 export function lqipUrl(url: string): string {
   if (!url) return ''
-  if (isUnsplash(url) || isPexels(url)) {
-    return sizedUrl(url, LQIP_WIDTH, 30)
-  }
-  return url
+  return sizedUrl(url, LQIP_WIDTH, 30)
 }
 
 /** srcSet responsive (plusieurs largeurs) */
 export function buildSrcSet(url: string, quality = 75): string {
   if (!url) return ''
-  if (!isUnsplash(url) && !isPexels(url)) return ''
-
   return SRCSET_WIDTHS.map((w) => `${sizedUrl(url, w, quality)} ${w}w`).join(', ')
 }
 
@@ -108,10 +144,6 @@ export type OptimizedImgOptions = {
 
 /**
  * Props optimisées pour une balise <img>.
- *
- * @example
- * <img {...optimizedImageProps(url, 'card', alt)} />
- * <img {...optimizedImageProps(url, 'detail', alt, { priority: true })} />
  */
 export function optimizedImageProps(
   url: string,
@@ -134,7 +166,6 @@ export function optimizedImageProps(
     height: Math.round(w * ratio),
     loading: (priority ? 'eager' : 'lazy') as 'eager' | 'lazy',
     decoding: 'async' as const,
-    // high uniquement pour LCP ; low pour le reste aide le navigateur à prioriser
     fetchPriority: (priority ? 'high' : 'low') as 'high' | 'low',
   }
 }
