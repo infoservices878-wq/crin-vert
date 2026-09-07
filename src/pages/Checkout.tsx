@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { StepperHeader } from '../components/checkout/StepperHeader'
@@ -8,7 +8,9 @@ import { StepAddress } from '../components/checkout/StepAddress'
 import { StepDelivery } from '../components/checkout/StepDelivery'
 import { StepPayment } from '../components/checkout/StepPayment'
 import { createCheckout } from '../lib/api'
-import { countryCode } from '../data/countries'
+import { countryCode, countryName } from '../data/countries'
+import { useAuth } from '../context/AuthContext'
+import type { CustomerSession } from '../lib/woocommerce'
 
 const FREE_SHIPPING_THRESHOLD = 79
 
@@ -39,15 +41,40 @@ const initialData: CheckoutData = {
   address: { line1: '', line2: '', postalCode: '', city: '', country: 'France', phone: '' },
 }
 
+function checkoutDataForCustomer(user: CustomerSession | null): CheckoutData {
+  const address = user?.address
+  return {
+    ...initialData,
+    firstName: user?.firstName || '',
+    lastName: user?.lastName || '',
+    email: user?.email || '',
+    address: address
+      ? { ...address, country: countryName(address.country) }
+      : { ...initialData.address },
+  }
+}
+
 export function Checkout() {
   const { items, total, clear } = useCart()
-  const [step, setStep] = useState(1)
-  const [data, setData] = useState<CheckoutData>(initialData)
+  const { user, isAuthenticated } = useAuth()
+  const [step, setStep] = useState(() => isAuthenticated && user ? 2 : 1)
+  const [data, setData] = useState<CheckoutData>(() => checkoutDataForCustomer(user))
+  const appliedProfile = useRef('')
   const [carrier, setCarrier] = useState('')
   const [shippingCost, setShippingCost] = useState<number | null>(null)
   const [paymentError, setPaymentError] = useState('')
 
   const freeShippingUnlocked = total >= FREE_SHIPPING_THRESHOLD
+
+  useEffect(() => {
+    if (!isAuthenticated || !user) return
+    const address = user.address
+    const profileKey = [user.id, user.firstName, user.lastName, user.email, address?.line1, address?.postalCode, address?.city, address?.country, address?.phone].join('|')
+    if (appliedProfile.current === profileKey) return
+    appliedProfile.current = profileKey
+    setData(checkoutDataForCustomer(user))
+    setStep(2)
+  }, [isAuthenticated, user])
 
   if (items.length === 0) {
     return <Navigate to="/panier" replace />
@@ -68,7 +95,9 @@ export function Checkout() {
                 data={data}
                 onUpdate={update}
                 onNext={() => setStep(3)}
-                onBack={() => setStep(1)}
+                onBack={isAuthenticated ? undefined : () => setStep(1)}
+                usingAccount={isAuthenticated}
+                hasSavedAddress={Boolean(user?.address)}
               />
             )}
             {step === 3 && (

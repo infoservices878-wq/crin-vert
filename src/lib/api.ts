@@ -56,6 +56,16 @@ export interface ApiCustomer {
   firstName: string
   lastName: string
   accountType: 'particulier' | 'professionnel'
+  address?: ApiAddress
+}
+
+export interface ApiAddress {
+  line1: string
+  line2: string
+  postalCode: string
+  city: string
+  country: string
+  phone: string
 }
 
 export interface ApiOrder {

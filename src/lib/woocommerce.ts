@@ -1,4 +1,4 @@
-import { apiConfigured, getCurrentAccount, getCustomerOrders, loginAccount, logoutAccount, registerAccount, StorefrontApiError, type ApiOrder } from './api'
+import { apiConfigured, getCurrentAccount, getCustomerOrders, loginAccount, logoutAccount, registerAccount, StorefrontApiError, type ApiAddress, type ApiOrder } from './api'
 import { PRODUCTS } from '../data/products'
 import type { Product } from '../types'
 
@@ -24,6 +24,7 @@ export interface CustomerSession {
   firstName: string
   lastName: string
   accountType: CustomerAccountType
+  address?: ApiAddress
 }
 
 export class ApiError extends Error {

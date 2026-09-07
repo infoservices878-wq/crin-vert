@@ -16,11 +16,15 @@ export function StepAddress({
   onUpdate,
   onNext,
   onBack,
+  usingAccount = false,
+  hasSavedAddress = false,
 }: {
   data: CheckoutData
   onUpdate: (patch: Partial<CheckoutData>) => void
   onNext: () => void
-  onBack: () => void
+  onBack?: () => void
+  usingAccount?: boolean
+  hasSavedAddress?: boolean
 }) {
   const [errors, setErrors] = useState<FieldErrors>({})
   const a = data.address
@@ -48,6 +52,13 @@ export function StepAddress({
   return (
     <div className="border border-hunter-800/10 bg-oat-50 p-6 sm:p-8">
       <h2 className="font-display text-lg font-bold text-hunter-900">Adresse de livraison</h2>
+      {usingAccount && (
+        <div className="mt-4 border-l-2 border-straw-400 bg-oat-100 px-4 py-3 text-sm leading-relaxed text-ink-700">
+          {hasSavedAddress
+            ? 'Votre adresse enregistrée a été reprise. Modifiez-la ci-dessous si cette commande doit être livrée ailleurs.'
+            : 'Vos informations de compte ont été reprises. Ajoutez votre adresse de livraison pour poursuivre.'}
+        </div>
+      )}
       <div className="mt-5 space-y-4">
         <div>
           <input
@@ -131,12 +142,7 @@ export function StepAddress({
         </div>
 
         <div className="flex items-center justify-between pt-2">
-          <button
-            onClick={onBack}
-            className="focus-ring font-display text-sm font-semibold text-hunter-900 underline"
-          >
-            Étape précédente
-          </button>
+          {onBack ? <button onClick={onBack} className="focus-ring font-display text-sm font-semibold text-hunter-900 underline">Étape précédente</button> : <span />}
           <button
             onClick={handleNext}
             className="focus-ring bg-hunter-900 px-8 py-3 font-display font-semibold text-oat-50 hover:bg-hunter-800"

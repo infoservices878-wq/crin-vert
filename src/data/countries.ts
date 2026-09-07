@@ -28,3 +28,7 @@ const COUNTRY_CODES: Record<string, string> = {
 export function countryCode(country: string): string {
   return COUNTRY_CODES[country] ?? 'FR'
 }
+
+export function countryName(code: string): string {
+  return Object.entries(COUNTRY_CODES).find(([, countryCodeValue]) => countryCodeValue === code)?.[0] ?? 'France'
+}
