@@ -6,22 +6,13 @@ import { useCart } from '../context/CartContext'
 import { CartLineItem } from '../components/CartLineItem'
 import { ProductCard } from '../components/ProductCard'
 import { ShippingEstimator } from '../components/ShippingEstimator'
-import { ShareOrderModal } from '../components/ShareOrderModal'
 import { EmptyState } from '../components/EmptyState'
 
 export function Cart() {
   const { items, total } = useCart()
-  const [promo, setPromo] = useState('')
-  const [promoMsg, setPromoMsg] = useState<string | null>(null)
-  const [shareMsg, setShareMsg] = useState(false)
-  const [shareModalOpen, setShareModalOpen] = useState(false)
   const [shippingCost, setShippingCost] = useState<number | null>(null)
 
   const crossSell = PRODUCTS.filter((p) => !items.some((i) => i.product.id === p.id)).slice(0, 3)
-
-  const applyPromo = () => {
-    setPromoMsg(promo.trim() ? 'Code non reconnu — aucun code actif sur ce site de démonstration.' : null)
-  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -61,18 +52,7 @@ export function Cart() {
               >
                 Continuer mes achats
               </Link>
-              <button
-                onClick={() => setShareMsg(true)}
-                className="focus-ring text-sm font-semibold text-hunter-900 underline hover:text-leather-600"
-              >
-                Envoyer ce panier pour paiement à un tiers
-              </button>
             </div>
-            {shareMsg && (
-              <p className="mt-2 text-xs text-ink-600">
-                Fonctionnalité de démonstration — aucun envoi réel n'est effectué.
-              </p>
-            )}
 
             {crossSell.length > 0 && (
               <div className="mt-12">
@@ -90,27 +70,6 @@ export function Cart() {
 
           <aside className="h-fit border border-hunter-800/10 bg-oat-50 p-5 md:sticky md:top-24">
             <ShippingEstimator cartTotal={total} onShippingChange={setShippingCost} />
-
-            <div className="border-t border-hunter-800/10 py-4">
-              <p className="text-sm font-semibold text-hunter-900">Vous avez un code promo ?</p>
-              <div className="mt-2 flex gap-2">
-                <input
-                  type="text"
-                  value={promo}
-                  onChange={(e) => setPromo(e.target.value)}
-                  placeholder="Code Promo"
-                  className="focus-ring min-w-0 flex-1 border border-hunter-800/15 bg-oat-50 px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-600/60"
-                />
-                <button
-                  type="button"
-                  onClick={applyPromo}
-                  className="focus-ring btn-quiet shrink-0"
-                >
-                  Appliquer
-                </button>
-              </div>
-              {promoMsg && <p className="mt-2 text-xs text-ink-600">{promoMsg}</p>}
-            </div>
 
             <div className="flex items-center justify-between border-t border-hunter-800/10 py-4">
               <span className="text-sm text-ink-900">Livraison</span>
@@ -134,22 +93,9 @@ export function Cart() {
             <Link to="/commande" className="focus-ring btn-primary btn-block mt-2">
               Finaliser ma commande
             </Link>
-            <button
-              type="button"
-              onClick={() => setShareModalOpen(true)}
-              className="focus-ring btn-ghost mt-4 w-full text-center"
-            >
-              Faire payer par un tiers
-            </button>
           </aside>
         </div>
       )}
-
-      <ShareOrderModal
-        open={shareModalOpen}
-        onClose={() => setShareModalOpen(false)}
-        total={total + (shippingCost ?? 0)}
-      />
 
       <div className="mt-16 flex flex-col items-center gap-3 border-t border-hunter-800/10 pt-12 text-center">
         <MessageCircle className="h-7 w-7 text-hunter-800" strokeWidth={1.5} />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const STORAGE_KEY = 'crin-vert-cookie-consent'
@@ -8,16 +8,13 @@ const STORAGE_KEY = 'crin-vert-cookie-consent'
  * En production : brancher un CMP ou Google Consent Mode.
  */
 export function CookieConsent() {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
+  const [visible, setVisible] = useState(() => {
     try {
-      const v = localStorage.getItem(STORAGE_KEY)
-      if (!v) setVisible(true)
+      return !localStorage.getItem(STORAGE_KEY)
     } catch {
-      setVisible(true)
+      return true
     }
-  }, [])
+  })
 
   const save = (value: 'accepted' | 'essential') => {
     try {

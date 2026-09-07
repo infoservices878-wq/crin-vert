@@ -3,7 +3,7 @@ import type { Product } from '../types'
 import { OptimizedImage } from './OptimizedImage'
 
 /** Uses only the packshots associated with the product: no decorative external photos. */
-export function getGalleryImages(product: Product): string[] {
+function getGalleryImages(product: Product): string[] {
   if (product.images && product.images.length > 0) return product.images.slice(0, 4)
   return product.image ? [product.image] : []
 }

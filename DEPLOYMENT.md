@@ -1,5 +1,17 @@
 # Mise en production : equinutrition.fr
 
+## À faire dans Hostinger et WordPress avant publication
+
+Le build copie `public/.htaccess` à la racine de `dist/`. Conservez ce fichier à la racine de `equinutrition.fr` : il assure la réécriture des routes React, la compression, le cache long des assets versionnés et des en-têtes de sécurité.
+
+1. Activez le SSL sur `equinutrition.fr` et `boutique.equinutrition.fr`, puis forcez HTTPS.
+2. Activez LiteSpeed Cache / la compression Brotli si disponible ; ne cachez jamais les routes `wp-json/equinutrition/v1/*` de l’API.
+3. Installez et configurez WP Mail SMTP avec une boîte `@equinutrition.fr`, SPF, DKIM et DMARC validés.
+4. Activez une protection anti-bots/WAF (Cloudflare ou Hostinger) sur les formulaires publics et la connexion WordPress.
+5. Gardez l’administration WordPress sur `boutique.equinutrition.fr` et activez la double authentification des administrateurs.
+
+Le parcours actuel crée une commande WooCommerce avec paiement par virement. Comme pour Ossau Bois, catalogue et prix restent dans React. Avant d’ajouter Stripe, PayPal ou le paiement carte, déplacez la grille tarifaire vers le serveur afin que le montant soit recalculé côté backend.
+
 ## Architecture retenue
 
 - `https://equinutrition.fr` : build React/Vite statique, hébergé sur Hostinger.
@@ -16,11 +28,11 @@ L'API doit répondre en JSON, envoyer les en-têtes CORS seulement pour `https:/
 | --- | --- |
 | `POST /v1/contact` | Envoie le message au service client et retourne `{ id }`. |
 | `POST /v1/assessments` | Enregistre une demande de bilan équin et notifie l'équipe. |
-| `POST /v1/checkout` | Revalide prix, stock, poids et livraison côté serveur, crée la commande puis retourne `{ checkoutUrl }` Stripe/PayPal/WooCommerce. |
+| `POST /v1/checkout` | Valide les coordonnées, le panier et le mode de livraison, crée une commande WooCommerce en attente de virement, puis retourne `{ checkoutUrl }`. |
 | `POST /v1/orders/lookup` | Retourne le statut et l'URL de suivi après contrôle du numéro de commande + e-mail. |
 | `POST /v1/auth/register`, `POST /v1/auth/login` | Comptes clients, avec cookies `HttpOnly` ou jetons courts et renouvelables. |
 
-Le serveur est l'unique source de vérité pour les comptes, commandes, paiements, livraisons et messages : il ne doit jamais faire confiance aux prix, frais de port, remises ou statuts envoyés par le navigateur.
+Le serveur est l'unique source de vérité pour les comptes, commandes, frais de port, livraisons et messages. Les prix restent temporairement dans le catalogue React, comme pour Ossau Bois ; ils doivent être déplacés vers le serveur avant tout paiement carte ou automatisé.
 Les produits, compositions et posologies restent définis dans `src/data/products.ts` côté frontend. Le serveur ne doit pas devenir une seconde source de catalogue produit sans décision explicite.
 
 ## Où placer les clés WordPress et WooCommerce

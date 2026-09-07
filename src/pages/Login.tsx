@@ -60,7 +60,6 @@ export function Login() {
             </h1>
             <p className="mt-2 text-sm text-ink-600">
               Connecté en tant que <strong>{user.email}</strong>
-              {user.demo && ' (compte démo local)'}
             </p>
             <button
               type="button"

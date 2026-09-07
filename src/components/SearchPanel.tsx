@@ -20,7 +20,6 @@ export function SearchPanel({
 
   useEffect(() => {
     if (open) {
-      setQuery('')
       // Focus après ouverture
       requestAnimationFrame(() => inputRef.current?.focus())
     }
