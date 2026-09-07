@@ -117,6 +117,12 @@ export function verifyEmail(key: string, email: string) {
   })
 }
 
+export function requestPasswordReset(email: string) {
+  return request<{ success: true; message: string }>('/v1/auth/forgot-password', {
+    method: 'POST', body: JSON.stringify({ email }),
+  })
+}
+
 export function resetPassword(key: string, login: string, password: string) {
   return request<{ success: true }>('/v1/auth/reset-password', {
     method: 'POST', body: JSON.stringify({ key, login, password }),
