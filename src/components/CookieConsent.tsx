@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const STORAGE_KEY = 'crin-vert-cookie-consent'
@@ -15,6 +15,12 @@ export function CookieConsent() {
       return true
     }
   })
+
+  useEffect(() => {
+    const reopen = () => setVisible(true)
+    window.addEventListener('equinutrition:cookie-preferences', reopen)
+    return () => window.removeEventListener('equinutrition:cookie-preferences', reopen)
+  }, [])
 
   const save = (value: 'accepted' | 'essential') => {
     try {
@@ -37,7 +43,7 @@ export function CookieConsent() {
         <p className="max-w-2xl text-sm leading-relaxed text-ink-900">
           Nous utilisons des cookies essentiels au fonctionnement du site. Avec votre accord, des
           cookies de mesure d’audience peuvent être déposés pour améliorer nos services.{' '}
-          <Link to="/mentions-legales" className="focus-ring btn-ghost text-sm">
+          <Link to="/politique-de-confidentialite" className="focus-ring btn-ghost text-sm">
             En savoir plus
           </Link>
         </p>

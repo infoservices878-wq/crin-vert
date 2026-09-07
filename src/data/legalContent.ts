@@ -12,53 +12,60 @@ export interface LegalPageContent {
   sections: LegalSection[]
 }
 
+const COMPANY = 'NUTRITION EQUINE, SARL au capital de 2 000 €, inscrite au RCS de Chartres sous le n° 998 932 008'
+const ADDRESS = 'Lieu-dit La Folie, 28130 Maintenon, France'
+const CONTACT = 'contact@equinutrition.fr'
+const UPDATED = 'Dernière mise à jour : septembre 2026'
+
 export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   'mentions-legales': {
     slug: 'mentions-legales',
     title: 'Mentions légales',
-    updated: 'Dernière mise à jour : janvier 2026',
+    updated: UPDATED,
+    intro: 'Ces informations permettent d’identifier l’éditeur du site et de contacter Nutrition Equine en toute transparence.',
     sections: [
       {
         heading: 'Éditeur du site',
         paragraphs: [
-          "Le site equinutrition.fr (ci-après « le Site ») est édité par Nutrition Équine SAS, Société par actions simplifiée (SAS), au capital social de 2 000 €, immatriculée au RCS sous le numéro 998 932 008 R.C.S. Chartres, dont le siège social est situé à la Folie, 28130 Maintenon.",
-            "Le site equinutrition.fr (ci-après « le Site ») est édité par Nutrition Équine SAS, Société par actions simplifiée (SAS), au capital social de 2 000 €, immatriculée au RCS sous le numéro 998 932 008 R.C.S. Chartres, dont le siège social est situé à la Folie, 28130 Maintenon.",
-          'Numéro de TVA : FR48998932008',
-          'Numéro SIRET : 99893200800019',
-          'Dirigeant : TOCZE-THIROUIN Clémentine',
-          'Directeur de la publication : TOCZE-THIROUIN Clémentine',
-            'Contact : contact@equinutrition.fr',
+          `Le site https://equinutrition.fr (le « Site ») est édité par ${COMPANY}.`,
+          `Siège social : ${ADDRESS}. SIREN : 998 932 008. SIRET du siège : 998 932 008 00019. TVA intracommunautaire : FR48 998 932 008. Code APE : 10.91Z — Fabrication d’aliments pour animaux de ferme.`,
+          `La directrice de la publication est Mme Clémentine TOCZE-THIROUIN, gérante. Pour toute demande : ${CONTACT}.`,
         ],
       },
       {
-        heading: 'Hébergement',
+        heading: 'Hébergement et exploitation technique',
         paragraphs: [
-          "Le Site est hébergé par un prestataire d'hébergement web établi dans l'Union européenne. Les coordonnées complètes de l'hébergeur seront communiquées sur demande à l'adresse ci-dessus.",
+          'Le frontend du Site est hébergé chez Hostinger. L’API de la boutique et l’administration WooCommerce sont exploitées sur le sous-domaine boutique.equinutrition.fr.',
+          'L’entité Hostinger contractante et son adresse sont celles figurant sur le bon de commande ou la facture d’hébergement de Nutrition Equine. Elles doivent être conservées dans le registre interne des sous-traitants et communiquées sur demande lorsque la réglementation l’exige.',
         ],
       },
       {
         heading: 'Propriété intellectuelle',
         paragraphs: [
-          "L'ensemble des contenus présents sur le Site (textes, visuels, logos, illustrations, structure) est protégé par le droit de la propriété intellectuelle. Toute reproduction, représentation ou exploitation, totale ou partielle, sans autorisation préalable de Nutrition Équine SAS est interdite.",
+          'La structure du Site, ses textes, logos, éléments graphiques, bases de données et contenus éditoriaux sont protégés par le droit de la propriété intellectuelle. Toute reproduction, adaptation, extraction ou diffusion sans autorisation écrite préalable de Nutrition Equine est interdite, sauf exception légale.',
+          'Les marques, visuels et dénominations de tiers restent la propriété de leurs titulaires respectifs. Leur présence éventuelle sur le Site ne vaut ni transfert de droit ni affiliation.',
         ],
       },
       {
-        heading: 'Données personnelles',
+        heading: 'Responsabilité et informations produits',
         paragraphs: [
-          "Les informations recueillies via le Site (formulaire de contact, création de compte, commande) font l'objet d'un traitement destiné à la gestion de la relation client. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données, que vous pouvez exercer en écrivant à contact@equinutrition.fr.",
-            "Les informations recueillies via le Site (formulaire de contact, création de compte, commande) font l'objet d'un traitement destiné à la gestion de la relation client. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données, que vous pouvez exercer en écrivant à contact@equinutrition.fr.",
+          'Les informations présentées ont un rôle informatif. Les aliments et compléments destinés aux équidés doivent être utilisés conformément à leur étiquetage, leur dosage et les précautions indiquées. Ils ne remplacent ni une ration adaptée, ni l’avis d’un vétérinaire.',
+          'Nutrition Equine veille à l’exactitude des contenus publiés, sans pouvoir garantir l’absence absolue d’erreur ou la disponibilité continue du Site. Toute erreur matérielle peut être signalée à l’adresse de contact ci-dessus.',
         ],
       },
       {
-        heading: 'Cookies',
+        heading: 'Données personnelles et cookies',
         paragraphs: [
-          "Le Site peut utiliser des cookies nécessaires à son bon fonctionnement (panier, préférences d'affichage) ainsi que, le cas échéant, des cookies de mesure d'audience. Vous pouvez à tout moment configurer votre navigateur pour refuser les cookies.",
+          'Nutrition Equine traite certaines données personnelles pour la gestion du Site, des demandes, des comptes et des commandes. Les informations détaillées figurent dans la Politique de confidentialité.',
+          'Le Site utilise des traceurs strictement nécessaires à son fonctionnement. Tout traceur non essentiel est soumis au choix préalable de l’utilisateur conformément à la réglementation applicable.',
         ],
       },
       {
-        heading: 'Médiation et litiges',
+        heading: 'Réclamations, médiation et droit applicable',
         paragraphs: [
-          "En cas de litige, le client peut recourir à une médiation conventionnelle ou à tout autre mode alternatif de règlement des différends. Conformément à la réglementation en vigueur, la plateforme de règlement en ligne des litiges de la Commission européenne est également accessible.",
+          `Toute réclamation doit d’abord être adressée à ${CONTACT}, avec les éléments utiles (numéro de commande, objet de la demande et coordonnées).`,
+          'Après tentative de résolution amiable, un consommateur peut recourir gratuitement au médiateur de la consommation dont relève Nutrition Equine. Ses coordonnées seront publiées ici dès la désignation formelle du médiateur par la société, avant l’ouverture des ventes aux consommateurs.',
+          'Le droit français s’applique, sans priver les consommateurs résidant dans un autre État de l’Union européenne des dispositions impératives protectrices de leur pays de résidence. Les juridictions compétentes sont déterminées par les règles légales applicables.',
         ],
       },
     ],
@@ -67,62 +74,64 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   cgv: {
     slug: 'cgv',
     title: 'Conditions générales de vente',
-    updated: 'Dernière mise à jour : janvier 2026',
-    intro:
-      "Les présentes conditions générales de vente (CGV) régissent les relations contractuelles entre Nutrition Équine SAS et toute personne effectuant un achat sur le Site. Toute commande implique l'acceptation sans réserve des présentes CGV.",
+    updated: UPDATED,
+    intro: `Les présentes conditions générales de vente (« CGV ») s’appliquent aux ventes conclues à distance entre ${COMPANY} (« Nutrition Equine », « nous ») et tout client achetant sur le Site. Elles sont disponibles avant toute commande et sont archivables par le client.`,
     sections: [
       {
-        heading: 'Article 1 — Objet',
+        heading: '1. Produits, destination et informations précontractuelles',
         paragraphs: [
-          "Les présentes CGV s'appliquent à toutes les ventes d'aliments complémentaires et de compléments alimentaires pour chevaux et poneys conclues sur le Site, à distance, entre Nutrition Équine SAS et ses clients.",
+          'Le Site propose notamment des aliments, compléments et produits liés à la nutrition équine. Les caractéristiques essentielles, formats, précautions d’emploi, prix TTC et informations disponibles au moment de la commande figurent sur les fiches produits.',
+          'Les conseils diffusés par Nutrition Equine sont généraux. Le client reste responsable du choix du produit au regard de la situation de l’équidé, de son alimentation et de son état de santé. En cas de doute, il doit demander l’avis d’un professionnel compétent, notamment d’un vétérinaire.',
         ],
       },
       {
-        heading: 'Article 2 — Produits et prix',
+        heading: '2. Prix, disponibilité et commande',
         paragraphs: [
-          "Les produits proposés à la vente sont ceux figurant sur le Site au jour de la consultation, dans la limite des stocks disponibles. Les prix sont indiqués en euros, toutes taxes comprises (TTC). Nutrition Équine SAS se réserve le droit de modifier ses prix à tout moment, les produits étant facturés sur la base du tarif en vigueur au moment de la validation de la commande.",
+          'Les prix sont exprimés en euros TTC, hors frais de livraison éventuellement applicables. Les frais, modalités de livraison et total de la commande sont présentés avant la confirmation. Les offres sont valables tant qu’elles sont visibles sur le Site et dans la limite des stocks disponibles.',
+          'Le client vérifie le détail de son panier et renseigne les informations nécessaires à l’exécution de sa commande. La réception de la demande est confirmée par e-mail. Nutrition Equine peut refuser ou annuler une demande en cas d’information manifestement erronée, d’indisponibilité, de défaut de règlement antérieur ou de suspicion de fraude, en en informant le client.',
         ],
       },
       {
-        heading: 'Article 3 — Commande',
+        heading: '3. Paiement et formation de la vente',
         paragraphs: [
-          "La commande est enregistrée après confirmation du panier et saisie des informations de livraison. Un e-mail récapitulatif contenant les instructions de règlement est envoyé au client. Nutrition Équine SAS se réserve le droit d'annuler ou de refuser toute commande d'un client avec lequel existerait un litige relatif au règlement d'une commande antérieure.",
+          'Le règlement est actuellement effectué par virement bancaire. Après l’enregistrement de la commande, les coordonnées bancaires et la référence à indiquer sont adressées par e-mail au client.',
+          'La commande est traitée sous réserve de la réception effective du virement correspondant. Le client doit utiliser la référence communiquée afin de permettre le rapprochement du paiement. Aucun numéro de carte bancaire n’est demandé ni conservé par Nutrition Equine dans le cadre du parcours actuel.',
         ],
       },
       {
-        heading: 'Article 4 — Paiement',
+        heading: '4. Livraison internationale',
         paragraphs: [
-          'Le règlement est dû selon les instructions de virement communiquées après l’enregistrement de la commande. Les modalités sont détaillées sur la page Paiement du Site.',
+          'Nutrition Equine livre les destinations affichées lors du passage de commande. Les délais communiqués sont indicatifs, exprimés en jours ouvrés et courent après confirmation du règlement, sous réserve de l’exactitude de l’adresse et de l’absence de difficulté de transport.',
+          'Pour une livraison hors de France ou hors de l’Union européenne, le client est responsable de vérifier les règles applicables à l’importation. Les droits de douane, taxes, formalités et frais éventuellement exigés à destination restent à sa charge, sauf indication contraire écrite de Nutrition Equine.',
         ],
       },
       {
-        heading: 'Article 5 — Livraison',
+        heading: '5. Réception, transfert des risques et réclamations',
         paragraphs: [
-          'Les délais et modalités de livraison sont détaillés sur la page Livraison du Site. Le transfert des risques s\'opère au moment de la remise des produits au transporteur.',
+          'Le client doit vérifier l’état apparent du colis à la livraison. En cas d’anomalie, il est invité à émettre des réserves précises auprès du transporteur, à conserver les éléments utiles et à contacter Nutrition Equine sans délai avec des photographies.',
+          'Lorsque le client est un consommateur, les risques liés au bien sont transférés lors de sa prise de possession physique ou de celle d’un tiers désigné par lui, conformément aux règles applicables.',
         ],
       },
       {
-        heading: 'Article 6 — Droit de rétractation',
+        heading: '6. Droit de rétractation et retours',
         paragraphs: [
-          "Conformément au Code de la consommation, le client dispose d'un délai de 14 jours à compter de la réception de sa commande pour exercer son droit de rétractation, sous réserve des exceptions applicables aux denrées et compléments alimentaires descellés. Le détail de cette procédure figure sur la page Retour et remboursement du Site.",
+          'Le consommateur dispose en principe d’un délai de quatorze jours à compter de la réception du bien pour exercer son droit de rétractation. Les modalités pratiques, les exceptions liées aux produits scellés et le modèle de formulaire sont présentés sur la page Retour et remboursement.',
+          'Les clients professionnels ne bénéficient pas automatiquement du droit de rétractation réservé aux consommateurs ; toute demande éventuelle est étudiée au cas par cas, sans renonciation aux droits de Nutrition Equine.',
         ],
       },
       {
-        heading: 'Article 7 — Garanties',
+        heading: '7. Garanties légales',
         paragraphs: [
-          'Les produits vendus bénéficient de la garantie légale de conformité et de la garantie contre les vices cachés, dans les conditions prévues par le Code civil et le Code de la consommation.',
+          'Les consommateurs bénéficient de la garantie légale de conformité et de la garantie contre les vices cachés dans les conditions prévues par les textes applicables. Ces garanties s’appliquent indépendamment de toute garantie commerciale éventuelle.',
+          `Pour les mettre en œuvre, contactez ${CONTACT} en indiquant la référence de commande, une description précise du problème et, lorsque cela est utile, des photographies.`,
         ],
       },
       {
-        heading: 'Article 8 — Responsabilité',
+        heading: '8. Service client, médiation et litiges',
         paragraphs: [
-          "Les compléments alimentaires proposés sur le Site sont destinés à l'alimentation des équidés et doivent être utilisés conformément aux dosages indiqués. Nutrition Équine SAS ne saurait être tenue responsable d'une utilisation non conforme aux préconisations figurant sur l'emballage ou la fiche produit. En cas de doute, il est recommandé de consulter un vétérinaire.",
-        ],
-      },
-      {
-        heading: 'Article 9 — Droit applicable et litiges',
-        paragraphs: [
-          "Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée avant toute action judiciaire, les tribunaux français étant seuls compétents à défaut d'accord.",
+          `Le service client est joignable à ${CONTACT}. Nous nous engageons à examiner les demandes avec diligence et à rechercher une solution amiable.`,
+          'Après une réclamation écrite restée sans solution, le consommateur peut saisir gratuitement le médiateur de la consommation dont relève Nutrition Equine. Les coordonnées du médiateur seront ajoutées dès sa désignation formelle, avant l’ouverture des ventes aux consommateurs.',
+          'Les présentes CGV sont soumises au droit français sous réserve des dispositions impératives protectrices applicables au consommateur dans son pays de résidence. Aucune clause ne prive le consommateur de son droit de saisir la juridiction compétente selon les règles légales applicables.',
         ],
       },
     ],
@@ -131,41 +140,41 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   livraison: {
     slug: 'livraison',
     title: 'Livraison',
-    updated: 'Dernière mise à jour : janvier 2026',
+    updated: UPDATED,
+    intro: 'Nous préparons les commandes avec une attention particulière au conditionnement, à la traçabilité et aux contraintes de transport des produits de nutrition équine.',
     sections: [
       {
-        heading: 'Zones de livraison',
+        heading: 'Destinations desservies',
         paragraphs: [
-          'Nutrition Équine livre en France métropolitaine, en Belgique, au Luxembourg et en Suisse. Pour toute autre destination, contactez notre service client afin d\'obtenir un devis de livraison.',
+          'Les options proposées au checkout dépendent de l’adresse de livraison, du poids, du volume et de la nature des produits. La France métropolitaine est prise en charge en standard ; certaines destinations européennes peuvent être ouvertes selon les solutions de transport disponibles.',
+          'Pour une livraison hors zone affichée, une commande de volume important, une écurie difficile d’accès ou une demande d’exportation, contactez-nous avant commande afin de recevoir une proposition adaptée.',
         ],
       },
       {
-        heading: 'Frais et délais',
+        heading: 'Préparation, frais et délais',
         paragraphs: [
-          "La livraison est offerte en France métropolitaine dès 79 € d'achat. En dessous de ce montant, une participation forfaitaire aux frais de port est appliquée et calculée automatiquement dans le panier selon la destination et le poids de la commande.",
-        ],
-        list: [
-          'France métropolitaine : 2 à 4 jours ouvrés',
-          'Belgique, Luxembourg : 3 à 5 jours ouvrés',
-          'Suisse : 5 à 8 jours ouvrés (frais de douane éventuels à la charge du destinataire)',
+          'Les commandes sont préparées après réception et rapprochement du règlement. Les frais de livraison, le transporteur sélectionné et le délai indicatif sont affichés avant confirmation. La livraison est offerte en France métropolitaine à partir de 79 € de produits, sauf restriction clairement indiquée dans le panier.',
+          'Les délais de préparation et de transport sont exprimés en jours ouvrés. Ils peuvent être prolongés en période de forte activité, en cas d’intempérie, de contrôle douanier, de fermeture exceptionnelle ou de circonstances indépendantes de notre volonté.',
         ],
       },
       {
-        heading: 'Transporteurs',
+        heading: 'Transport, suivi et réception',
         paragraphs: [
-          'Selon le poids et le volume de votre commande, celle-ci est confiée à Colissimo, Chronopost ou un transporteur spécialisé pour les colis volumineux (seaux et sacs de plusieurs kilos). Une livraison en point relais est proposée pour les colis éligibles.',
+          'Le transporteur est choisi selon les caractéristiques de la commande. Dès l’expédition, le client reçoit les informations disponibles pour suivre l’acheminement. L’absence de suivi immédiat ne signifie pas que le colis n’est pas pris en charge : certains flux sont activés après la première lecture transporteur.',
+          'Le client doit s’assurer que l’adresse, le nom sur la boîte aux lettres, le téléphone et les conditions d’accès sont exacts. Des frais peuvent être facturés en cas de réexpédition causée par une adresse erronée, un refus injustifié ou une absence prolongée.',
         ],
       },
       {
-        heading: 'Suivi de commande',
+        heading: 'Livraison hors de France et douanes',
         paragraphs: [
-          "Dès l'expédition de votre commande, un e-mail contenant le numéro de suivi vous est envoyé. Vous pouvez également suivre l'état de votre commande depuis la rubrique « Suivi de commande » accessible depuis votre compte.",
+          'Lorsqu’une destination internationale est acceptée, les délais varient selon le pays et le réseau du transporteur. Le client est invité à vérifier les restrictions d’importation, particulièrement pour les aliments et compléments destinés aux animaux.',
+          'Hors Union européenne, les droits de douane, taxes locales, frais de présentation et formalités imposés par les autorités sont dus par le destinataire, sauf indication contraire communiquée avant commande.',
         ],
       },
       {
-        heading: 'Colis manquant ou endommagé',
+        heading: 'Colis endommagé, manquant ou retardé',
         paragraphs: [
-          "En cas de colis manquant, endommagé ou de retard anormal, contactez notre service client dans les 7 jours suivant la date de livraison indiquée afin que nous puissions ouvrir une enquête auprès du transporteur.",
+          `En cas de colis endommagé, de produit manquant ou de retard anormal, contactez ${CONTACT} dès que possible avec le numéro de commande, des photos du colis et de son contenu, ainsi que toute réserve émise à la livraison. Nous ouvrirons les vérifications nécessaires auprès du transporteur.`,
         ],
       },
     ],
@@ -174,42 +183,51 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   'retours-remboursement': {
     slug: 'retours-remboursement',
     title: 'Retour et remboursement',
-    updated: 'Dernière mise à jour : janvier 2026',
+    updated: UPDATED,
+    intro: 'Notre procédure de retour concilie le droit des consommateurs, la sécurité des produits destinés aux animaux et la traçabilité indispensable à leur commercialisation.',
     sections: [
       {
         heading: 'Droit de rétractation',
         paragraphs: [
-          "Conformément au Code de la consommation, vous disposez d'un délai de 14 jours calendaires à compter de la réception de votre commande pour exercer votre droit de rétractation, sans avoir à justifier de motif.",
+          'Lorsque vous êtes consommateur, vous disposez en principe de quatorze jours calendaires à compter de la réception du bien pour nous notifier votre décision de vous rétracter, sans avoir à justifier de motif. Vous devez ensuite renvoyer le bien dans les quatorze jours suivant cette notification.',
+          `Pour exercer ce droit, envoyez une déclaration dénuée d’ambiguïté à ${CONTACT}, en indiquant votre nom, votre adresse, votre numéro de commande et les produits concernés.`,
         ],
       },
       {
-        heading: 'Exception applicable aux produits alimentaires',
+        heading: 'Produits exclus pour raisons d’hygiène et de protection de la santé',
         paragraphs: [
-          "Nos compléments et aliments pour chevaux étant des denrées scellées pour des raisons d'hygiène et de conservation, ils ne peuvent être ni repris ni échangés une fois l'emballage ouvert, sauf en cas de produit non conforme ou défectueux. Seuls les produits dans leur emballage d'origine, non ouverts et non entamés, peuvent faire l'objet d'un retour.",
+          'Le droit de rétractation ne s’applique pas aux biens scellés qui ont été descellés après livraison et ne peuvent être renvoyés pour des raisons d’hygiène ou de protection de la santé. Cette exception est notamment susceptible de concerner les aliments et compléments ouverts ou dont le scellement a été retiré.',
+          'Les produits non ouverts, dans leur emballage d’origine intact et permettant leur remise en vente, peuvent être examinés dans le cadre de la procédure de retour, sous réserve des conditions légales applicables.',
         ],
       },
       {
-        heading: 'Procédure de retour',
+        heading: 'Conditions pratiques du retour',
         paragraphs: [
-          'Pour retourner un article, contactez notre service client à contact@equinutrition.fr en indiquant votre numéro de commande. Nous vous communiquerons la marche à suivre et, si nécessaire, une adresse de retour. Les frais de retour sont à la charge du client, sauf en cas de produit non conforme ou erreur de notre part.',
-            'Pour retourner un article, contactez notre service client à contact@equinutrition.fr en indiquant votre numéro de commande. Nous vous communiquerons la marche à suivre et, si nécessaire, une adresse de retour. Les frais de retour sont à la charge du client, sauf en cas de produit non conforme ou erreur de notre part.',
+          'Contactez le service client avant tout envoi afin de recevoir les instructions et l’adresse de retour adaptées. Le client doit protéger correctement les produits durant le transport retour et conserver une preuve d’expédition.',
         ],
         list: [
-          "Produit dans son emballage d'origine, non ouvert",
-          'Accompagné de la facture ou du numéro de commande',
-          'Retour expédié dans les 14 jours suivant la demande',
+          'Référence de commande et coordonnées du client jointes au colis ;',
+          'Produit complet, propre, non ouvert et dans son emballage d’origine lorsque le retour relève de la rétractation ;',
+          'Frais de retour à la charge du client, sauf erreur de Nutrition Equine, produit non conforme, défectueux ou endommagé à la réception.',
         ],
       },
       {
         heading: 'Remboursement',
         paragraphs: [
-          'Le remboursement est effectué par le même moyen de paiement que celui utilisé lors de la commande, dans un délai maximum de 14 jours après réception et contrôle du produit retourné. Les frais de livraison initiaux sont remboursés uniquement en cas de retour intégral de la commande.',
+          'En cas de rétractation valable, Nutrition Equine rembourse les sommes dues, y compris les frais de livraison standard initiaux lorsque la commande entière est retournée, au plus tard dans les quatorze jours suivant la notification. Le remboursement peut être différé jusqu’à récupération des biens ou réception d’une preuve d’expédition, selon l’événement intervenant le plus tôt.',
+          'Pour un règlement par virement, le remboursement est réalisé par virement sur les coordonnées bancaires communiquées de manière sécurisée par le client. Les frais supplémentaires de livraison choisis volontairement par le client ne sont pas remboursés au-delà du coût de la livraison standard.',
         ],
       },
       {
-        heading: 'Produit non conforme ou endommagé',
+        heading: 'Produit non conforme, erreur ou dommage',
         paragraphs: [
-          "Si vous recevez un produit non conforme, défectueux ou endommagé pendant le transport, contactez-nous sous 7 jours avec une photo du produit concerné : nous procédons à un échange ou à un remboursement intégral, frais de retour inclus.",
+          `Si vous recevez un produit non conforme, défectueux, incomplet ou endommagé, contactez ${CONTACT} sans tarder avec votre référence de commande et des photos. N’utilisez pas le produit avant nos instructions, sauf nécessité liée à la sécurité de l’animal. Nous organiserons, selon le cas, un remplacement, un retour pris en charge ou un remboursement conformément aux garanties légales.`,
+        ],
+      },
+      {
+        heading: 'Modèle de déclaration de rétractation',
+        paragraphs: [
+          'À l’attention de NUTRITION EQUINE, Lieu-dit La Folie, 28130 Maintenon, France, ou par e-mail à contact@equinutrition.fr : « Je vous notifie par la présente ma rétractation du contrat portant sur la vente du ou des produits ci-dessous : [désignation], commandé(s) le [date], reçu(s) le [date], nom du consommateur : [nom], adresse : [adresse], date et signature si envoi postal. »',
         ],
       },
     ],
@@ -218,31 +236,26 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   paiement: {
     slug: 'paiement',
     title: 'Paiement',
-    updated: 'Dernière mise à jour : janvier 2026',
+    updated: UPDATED,
     sections: [
       {
-        heading: 'Moyens de paiement acceptés',
-        paragraphs: ['Le règlement de votre commande s’effectue actuellement par :'],
-        list: [
-          'Virement bancaire : les coordonnées bancaires et la référence de commande sont envoyées par e-mail après confirmation.',
+        heading: 'Virement bancaire',
+        paragraphs: [
+          'Le paiement est actuellement réalisé par virement bancaire. Une fois la commande enregistrée, nous transmettons par e-mail les coordonnées de règlement et la référence à reporter impérativement dans le libellé du virement.',
+          'La préparation commence après identification du règlement. En cas de virement effectué par un tiers (écurie, club, association ou propriétaire), le client doit nous prévenir afin de faciliter le rapprochement.',
         ],
       },
       {
-        heading: 'Sécurité des paiements',
+        heading: 'Sécurité et prévention de la fraude',
         paragraphs: [
-          "Les échanges avec le site utilisent HTTPS. Aucune donnée de carte bancaire n’est demandée ni conservée par Nutrition Équine : le règlement est réalisé depuis votre banque, au moyen des coordonnées communiquées par e-mail.",
+          'Les échanges avec le Site utilisent HTTPS. Nutrition Equine ne demande ni ne conserve de données de carte bancaire dans le parcours de commande actuel. Vérifiez toujours l’adresse de l’expéditeur de nos e-mails et la référence de commande avant tout virement.',
+          `En cas de doute sur une instruction de paiement, ne procédez pas au règlement et contactez-nous exclusivement à ${CONTACT}.`,
         ],
       },
       {
-        heading: 'Facturation',
+        heading: 'Justificatifs et facture',
         paragraphs: [
-          "Un e-mail de confirmation récapitule votre commande et sa référence. Pour toute demande de facture, contactez le service client en indiquant cette référence.",
-        ],
-      },
-      {
-        heading: 'Règlement par un tiers',
-        paragraphs: [
-          "Si un club, un propriétaire ou une association règle votre commande, contactez le service client avant le virement afin que le règlement soit correctement rapproché de votre référence.",
+          'L’e-mail de confirmation comporte la référence permettant d’identifier votre commande. Pour une facture ou une correction d’informations de facturation, contactez le service client avant l’expédition lorsque cela est possible.',
         ],
       },
     ],
@@ -251,33 +264,64 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   'politique-de-confidentialite': {
     slug: 'politique-de-confidentialite',
     title: 'Politique de confidentialité',
-    updated: 'Dernière mise à jour : janvier 2026',
-    intro:
-      'Nutrition Équine protège les informations confiées lors de la navigation, d’une demande de conseil, de la création d’un compte ou d’une commande.',
+    updated: UPDATED,
+    intro: `Nutrition Equine s’engage à traiter les données personnelles de façon loyale, transparente et proportionnée. Cette politique décrit les traitements réalisés lorsque vous utilisez le Site, créez un compte, commandez ou contactez notre équipe.`,
     sections: [
       {
-        heading: 'Données collectées',
+        heading: 'Responsable du traitement et contact',
         paragraphs: [
-          'Selon votre parcours, nous pouvons traiter votre nom, vos coordonnées, votre adresse de livraison, les informations nécessaires à votre commande et les éléments que vous choisissez de partager dans un bilan équin.',
+          `${COMPANY}, dont le siège est situé ${ADDRESS}, est responsable des traitements décrits dans cette politique.`,
+          `Pour toute question relative à vos données ou pour exercer vos droits : ${CONTACT}. Merci d’indiquer « Données personnelles » dans l’objet de votre message.`,
         ],
       },
       {
-        heading: 'Finalités et durée',
+        heading: 'Données traitées',
         paragraphs: [
-          'Ces données servent à répondre à vos demandes, préparer et suivre vos commandes, assurer le service après-vente et, si vous y avez consenti, vous envoyer des informations de la boutique. Elles sont conservées pendant la durée nécessaire à ces finalités et aux obligations légales.',
+          'Selon votre utilisation du Site, nous pouvons traiter vos données d’identification et de contact, vos informations de compte, de commande, de livraison, de règlement, les échanges avec le service client et les données techniques indispensables à la sécurité et au fonctionnement du Site.',
+          'Dans le cadre d’un bilan équin, nous pouvons également traiter les informations que vous choisissez de communiquer sur l’équidé, son alimentation, son activité ou son environnement. Ces informations concernent l’animal ; nous vous demandons de ne pas transmettre de données de santé humaine non nécessaires.',
+        ],
+      },
+      {
+        heading: 'Finalités et bases juridiques',
+        paragraphs: [
+          'Nous traitons vos données pour exécuter la commande, organiser la livraison, répondre à vos demandes, gérer le compte client et assurer le service après-vente. Ces traitements sont nécessaires à l’exécution de mesures précontractuelles ou du contrat.',
+          'Nous pouvons aussi traiter certaines données pour respecter nos obligations comptables, fiscales et de sécurité, ainsi que pour prévenir la fraude et défendre nos droits, sur la base de nos obligations légales ou de notre intérêt légitime.',
+          'L’envoi de communications commerciales par e-mail repose sur votre consentement lorsque celui-ci est requis. Vous pouvez vous désinscrire à tout moment depuis le lien inclus dans les messages ou en nous contactant.',
+        ],
+      },
+      {
+        heading: 'Destinataires et transferts',
+        paragraphs: [
+          'Vos données sont accessibles uniquement aux personnes habilitées de Nutrition Equine et aux prestataires nécessaires à la fourniture du service : hébergement, WordPress/WooCommerce, messagerie transactionnelle, transport, comptabilité et assistance technique. Ils interviennent dans le cadre de nos instructions et, le cas échéant, d’engagements contractuels appropriés.',
+          'Lorsque certains prestataires traitent des données hors de l’Espace économique européen, nous veillons à ce que le transfert soit encadré par un mécanisme reconnu par la réglementation applicable, tel qu’une décision d’adéquation ou des clauses contractuelles types, lorsque cela est nécessaire.',
+        ],
+      },
+      {
+        heading: 'Durées de conservation',
+        paragraphs: [
+          'Les données de compte et de relation client sont conservées pendant la durée nécessaire à la gestion du compte et de la relation commerciale, puis archivées ou supprimées selon les obligations applicables. Les données de prospection sont conservées pendant trois ans à compter du dernier contact ou jusqu’au retrait du consentement, sous réserve de la preuve d’opposition.',
+          'Les données de facturation et pièces comptables sont archivées pendant la durée légale applicable, généralement dix ans. Les données techniques de sécurité sont conservées pour une durée limitée et proportionnée à la prévention des incidents.',
         ],
       },
       {
         heading: 'Vos droits',
         paragraphs: [
-          'Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données. Vous pouvez aussi vous opposer à la prospection. Écrivez à contact@equinutrition.fr en précisant l’objet de votre demande.',
-            'Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données. Vous pouvez aussi vous opposer à la prospection. Écrivez à contact@equinutrition.fr en précisant l’objet de votre demande.',
+          'Vous pouvez demander l’accès à vos données, leur rectification, leur effacement, la limitation du traitement, leur portabilité lorsque les conditions sont réunies, ou vous opposer à certains traitements. Vous pouvez retirer votre consentement à tout moment pour les traitements fondés sur celui-ci.',
+          'Nous pouvons demander un justificatif d’identité en cas de doute raisonnable afin de protéger vos données. Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de la CNIL.',
         ],
       },
       {
-        heading: 'Cookies et sécurité',
+        heading: 'Cookies et gestion des préférences',
         paragraphs: [
-          'Le panier, les préférences et la session peuvent nécessiter des cookies ou du stockage local. Nutrition Équine ne collecte aucune donnée de carte bancaire : le règlement s’effectue par virement depuis la banque du client.',
+          'Le Site utilise des traceurs strictement nécessaires, notamment pour le panier, la session de connexion, la sécurité et la mémorisation de votre choix de consentement. Ils ne requièrent pas de consentement lorsqu’ils sont indispensables au service demandé.',
+          'Si des outils de mesure d’audience ou des traceurs non essentiels sont activés, ils ne doivent être déposés qu’après votre choix préalable, sauf exception réglementaire. Vous pouvez modifier votre choix à tout moment depuis le lien « Gérer mes cookies » disponible dans le pied de page.',
+        ],
+      },
+      {
+        heading: 'Sécurité et mise à jour de la politique',
+        paragraphs: [
+          'Nous mettons en œuvre des mesures techniques et organisationnelles raisonnables : HTTPS, accès restreints, authentification, sauvegardes et journalisation de sécurité. Aucun système n’offrant une sécurité absolue, nous vous invitons à utiliser un mot de passe unique et à ne jamais transmettre vos identifiants.',
+          'Cette politique peut évoluer pour tenir compte d’une modification de nos services, de nos prestataires ou de la réglementation. La date de mise à jour indique la version applicable.',
         ],
       },
     ],

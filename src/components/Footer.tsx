@@ -91,6 +91,18 @@ export function Footer() {
                   Confidentialité
                 </Link>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    try { localStorage.removeItem('crin-vert-cookie-consent') } catch { /* storage unavailable */ }
+                    window.dispatchEvent(new Event('equinutrition:cookie-preferences'))
+                  }}
+                  className="focus-ring text-left hover:text-oat-50"
+                >
+                  Gérer mes cookies
+                </button>
+              </li>
             </ul>
           </div>
         </div>
