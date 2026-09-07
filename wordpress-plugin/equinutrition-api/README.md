@@ -134,7 +134,7 @@ Les fiches produits restent dans `src/data/products.ts` côté React. Comme pour
 
 Les produits n’ont donc pas besoin d’exister dans le catalogue WooCommerce pour cette version. WooCommerce sert à stocker les commandes et à envoyer les e-mails transactionnels.
 
-Chaque nouvelle commande reçoit une référence indépendante de WooCommerce au format `NE-26-10456`. La première commande de chaque année démarre à `10456`, puis la séquence est incrémentée de façon atomique. La page de confirmation charge les lignes et le total avec un jeton aléatoire valable 48 heures ; aucune donnée personnelle n’est placée dans l’URL.
+Chaque nouvelle commande reçoit une référence indépendante de WooCommerce au format `NE26-10456`. La première commande de chaque année démarre à `10456`, puis la séquence est incrémentée de façon atomique. La page de confirmation charge les lignes et le total avec un jeton aléatoire valable 48 heures ; aucune donnée personnelle n’est placée dans l’URL.
 
 ## Sécurité avant mise en production
 

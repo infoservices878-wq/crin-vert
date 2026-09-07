@@ -28,7 +28,7 @@ L'API doit répondre en JSON, envoyer les en-têtes CORS seulement pour `https:/
 | --- | --- |
 | `POST /v1/contact` | Envoie le message au service client et retourne `{ id }`. |
 | `POST /v1/assessments` | Enregistre une demande de bilan équin et notifie l'équipe. |
-| `POST /v1/checkout` | Valide les coordonnées, le panier et le mode de livraison, crée une commande WooCommerce en attente de virement, puis retourne une référence `NE-26-10456` et une URL de confirmation sécurisée. |
+| `POST /v1/checkout` | Valide les coordonnées, le panier et le mode de livraison, crée une commande WooCommerce en attente de virement, puis retourne une référence `NE26-10456` et une URL de confirmation sécurisée. |
 | `GET /v1/orders/confirmation?token=…` | Retourne pendant 48 h le détail et le total de la commande associée au jeton aléatoire de confirmation. |
 | `POST /v1/orders/lookup` | Retourne le statut et l'URL de suivi après contrôle du numéro de commande + e-mail. |
 | `POST /v1/auth/register`, `POST /v1/auth/login` | Comptes clients, avec cookies `HttpOnly` ou jetons courts et renouvelables. |

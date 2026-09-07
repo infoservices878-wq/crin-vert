@@ -2,12 +2,12 @@
 /**
  * Plugin Name: EquiNutrition - Store API
  * Description: API sécurisée pour les comptes clients, commandes, e-mails, contact et suivi EquiNutrition.
- * Version: 1.4.0
+ * Version: 1.5.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-const EQUINUTRITION_API_VERSION = '1.4.0';
+const EQUINUTRITION_API_VERSION = '1.5.0';
 
 add_action( 'rest_api_init', function () {
     $routes = array(
@@ -109,7 +109,7 @@ function equinutrition_next_order_sequence( $year ) {
     $wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->options} SET option_value = LAST_INSERT_ID(CAST(option_value AS UNSIGNED) + 1) WHERE option_name = %s", $option_name ) );
     return max( 10456, (int) $wpdb->get_var( 'SELECT LAST_INSERT_ID()' ) - 1 );
 }
-function equinutrition_new_order_reference() { $year = wp_date( 'y' ); return sprintf( 'NE-%s-%05d', $year, equinutrition_next_order_sequence( $year ) ); }
+function equinutrition_new_order_reference() { $year = wp_date( 'y' ); return sprintf( 'NE%s-%05d', $year, equinutrition_next_order_sequence( $year ) ); }
 function equinutrition_order_reference( WC_Order $order ) { return (string) ( $order->get_meta( '_equinutrition_order_reference', true ) ?: $order->get_order_number() ); }
 function equinutrition_send_mail( $recipient, $subject, $message, $headers ) {
     $mail_error = '';
@@ -125,6 +125,17 @@ function equinutrition_mail_headers( $reply_to = '' ) {
     if ( $reply_to && is_email( $reply_to ) ) $headers[] = 'Reply-To: ' . $reply_to;
     return $headers;
 }
+function equinutrition_order_address_html( WC_Order $order ) {
+    $lines = array_filter( array(
+        trim( $order->get_billing_first_name() . ' ' . $order->get_billing_last_name() ),
+        $order->get_billing_address_1(),
+        $order->get_billing_address_2(),
+        trim( $order->get_billing_postcode() . ' ' . $order->get_billing_city() ),
+        $order->get_billing_country(),
+    ) );
+
+    return implode( '<br>', array_map( 'esc_html', $lines ) );
+}
 function equinutrition_order_email( WC_Order $order, $bank, $internal = false ) {
     $reference = equinutrition_order_reference( $order );
     $customer_name = trim( $order->get_billing_first_name() . ' ' . $order->get_billing_last_name() ) ?: 'Client EquiNutrition';
@@ -136,12 +147,13 @@ function equinutrition_order_email( WC_Order $order, $bank, $internal = false ) 
         $unit = max( 0, (float) $item->get_total() / $quantity );
         $rows .= '<tr><td style="padding:12px 0;border-bottom:1px solid #e6e1d8;">' . esc_html( $name ) . '<br><small style="color:#667276;">' . ( $size ? esc_html( $size ) . ' · ' : '' ) . 'quantité ' . $quantity . '</small></td><td style="padding:12px 0;border-bottom:1px solid #e6e1d8;text-align:right;white-space:nowrap;">' . number_format_i18n( $unit * $quantity, 2 ) . ' €</td></tr>';
     }
-    $address = nl2br( esc_html( $order->get_formatted_billing_address() ) );
+    $address = equinutrition_order_address_html( $order );
+    $address_block = '<div style="margin-top:24px;padding:18px;background:#f8faf8;border:1px solid #e6e1d8;"><div style="margin-bottom:8px;font-size:12px;font-weight:bold;letter-spacing:.08em;text-transform:uppercase;color:#526267;">Adresse de facturation</div><div style="font-size:14px;line-height:1.65;color:#1d2a2e;">' . $address . '</div></div>';
     $bank_block = '<div style="margin-top:26px;padding:18px;background:#f5f1e8;border-left:4px solid #b85b43;"><strong>Coordonnées du virement</strong><br>Titulaire : ' . esc_html( $bank['holder'] ) . '<br>IBAN : ' . esc_html( $bank['iban'] ) . '<br>BIC : ' . esc_html( $bank['bic'] ) . '<br><small>Indiquez la référence ' . esc_html( $reference ) . ' dans le libellé du virement.</small></div>';
     $subject = $internal ? '[EquiNutrition] Nouvelle commande ' . $reference : 'Confirmation de commande ' . $reference . ' - EquiNutrition';
     $heading = $internal ? 'Nouvelle commande à traiter' : 'Votre commande est enregistrée';
     $intro = $internal ? 'Une nouvelle commande a été enregistrée par ' . esc_html( $customer_name ) . '.' : 'Bonjour ' . esc_html( $customer_name ) . ',<br>Merci pour votre commande. Elle est actuellement en attente de réception et validation du virement.';
-    $message = '<!doctype html><html lang="fr"><body style="margin:0;background:#f5f1e8;font-family:Arial,sans-serif;color:#1d2a2e;"><div style="max-width:640px;margin:0 auto;padding:24px 14px;"><header style="background:#173d46;color:#fff;padding:28px 30px;"><div style="font-size:12px;letter-spacing:2px;color:#e1b866;font-weight:bold;">EQUINUTRITION</div><h1 style="margin:12px 0 0;font-size:25px;">' . $heading . '</h1></header><main style="background:#fff;padding:28px 30px;"><p style="font-size:16px;line-height:1.6;">' . $intro . '</p><div style="padding:14px;background:#f5f1e8;border-left:4px solid #b85b43;"><strong>Référence :</strong> ' . esc_html( $reference ) . '<br><strong>Total :</strong> ' . esc_html( $order->get_total() ) . ' €<br><strong>E-mail :</strong> ' . esc_html( $order->get_billing_email() ) . '</div><h2 style="font-size:17px;margin-top:28px;">Détail de la commande</h2><table style="width:100%;border-collapse:collapse;font-size:14px;"><tbody>' . $rows . '</tbody><tfoot><tr><td style="padding-top:16px;font-weight:bold;">Total TTC</td><td style="padding-top:16px;text-align:right;font-weight:bold;">' . esc_html( $order->get_total() ) . ' €</td></tr></tfoot></table><p style="margin-top:24px;font-size:14px;line-height:1.6;"><strong>Adresse de facturation</strong><br>' . $address . '</p>' . ( $internal ? $bank_block . '<p style="margin-top:20px;font-size:14px;">Le client a reçu les coordonnées bancaires dans son e-mail de confirmation.</p>' : $bank_block ) . '</main><footer style="padding:16px 30px;color:#526267;font-size:12px;">EquiNutrition · ' . esc_html( equinutrition_email() ) . '</footer></div></body></html>';
+    $message = '<!doctype html><html lang="fr"><body style="margin:0;background:#f5f1e8;font-family:Arial,sans-serif;color:#1d2a2e;"><div style="max-width:640px;margin:0 auto;padding:24px 14px;"><header style="background:#173d46;color:#fff;padding:28px 30px;"><div style="font-size:12px;letter-spacing:2px;color:#e1b866;font-weight:bold;">EQUINUTRITION</div><h1 style="margin:12px 0 0;font-size:25px;">' . $heading . '</h1></header><main style="background:#fff;padding:28px 30px;"><p style="font-size:16px;line-height:1.6;">' . $intro . '</p><div style="padding:14px;background:#f5f1e8;border-left:4px solid #b85b43;"><strong>Référence :</strong> ' . esc_html( $reference ) . '<br><strong>Total :</strong> ' . esc_html( $order->get_total() ) . ' €<br><strong>E-mail :</strong> ' . esc_html( $order->get_billing_email() ) . '</div><h2 style="font-size:17px;margin-top:28px;">Détail de la commande</h2><table style="width:100%;border-collapse:collapse;font-size:14px;"><tbody>' . $rows . '</tbody><tfoot><tr><td style="padding-top:16px;font-weight:bold;">Total TTC</td><td style="padding-top:16px;text-align:right;font-weight:bold;">' . esc_html( $order->get_total() ) . ' €</td></tr></tfoot></table>' . $address_block . ( $internal ? $bank_block . '<p style="margin-top:20px;font-size:14px;">Le client a reçu les coordonnées bancaires dans son e-mail de confirmation.</p>' : $bank_block ) . '</main><footer style="padding:16px 30px;color:#526267;font-size:12px;">EquiNutrition · ' . esc_html( equinutrition_email() ) . '</footer></div></body></html>';
     return equinutrition_send_mail( $internal ? equinutrition_order_email_recipient() : $order->get_billing_email(), $subject, $message, equinutrition_mail_headers( $internal ? '' : equinutrition_order_email_recipient() ) );
 }
 
