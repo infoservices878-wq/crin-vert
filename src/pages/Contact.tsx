@@ -9,6 +9,7 @@ import {
   type FieldErrors,
 } from '../lib/validation'
 import { sendContactMessage } from '../lib/api'
+import { CONTACT_EMAIL, CONTACT_PHONE } from '../config/site'
 
 const base =
   'focus-ring mt-1.5 w-full border bg-oat-50 px-3 py-2.5 text-sm text-ink-900 placeholder:text-ink-600/60 border-hunter-800/15'
@@ -70,8 +71,8 @@ export function Contact() {
       </div>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-3">
-        <ContactInfoCard icon={Mail} title="Par e-mail" detail="contact@nutrition-equine.com" />
-        <ContactInfoCard icon={Phone} title="Par téléphone" detail="+33 1 23 45 67 89" />
+        <ContactInfoCard icon={Mail} title="Par e-mail" detail={CONTACT_EMAIL} />
+        <ContactInfoCard icon={Phone} title="Par téléphone" detail={CONTACT_PHONE} />
         <ContactInfoCard icon={Clock3} title="Notre délai" detail="Réponse sous 48 h ouvrées" />
       </div>
 

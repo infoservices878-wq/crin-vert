@@ -1,8 +1,8 @@
 # Nutrition Équine — storefront e-commerce
 
 Frontend React/Vite pour Nutrition Équine. Il est destiné à être déployé sur
-`nutrition-equine.com` et communique avec l'API sécurisée située sur
-`boutique.nutrition-equine.com`.
+`equinutrition.fr` et communique avec l'API sécurisée située sur
+`boutique.equinutrition.fr`.
 
 ## Démarrer (avec données de démo, sans rien configurer)
 
@@ -16,12 +16,12 @@ Le site fonctionne immédiatement avec 9 produits de démonstration
 ## Configurer l'API de production
 
 1. Copie `.env.example` en `.env`
-2. Renseigne `VITE_API_URL=https://boutique.nutrition-equine.com`
+2. Renseigne `VITE_API_URL=https://boutique.equinutrition.fr/wp-json/equinutrition`
 3. Relance `npm run dev`.
 
 Les clés WooCommerce et celles des prestataires de paiement restent exclusivement
-sur le serveur. Ne les ajoutez jamais au frontend : les variables `VITE_*` sont
-visibles dans le navigateur.
+sur `boutique.equinutrition.fr`. Ne les ajoutez jamais au frontend : les variables
+`VITE_*` sont visibles dans le navigateur.
 
 ⚠️ Les champs **composition** et **posologie** n'existent pas nativement dans
 WooCommerce : ajoute-les comme champs personnalisés sur chaque produit
@@ -34,6 +34,7 @@ sinon un texte par défaut s'affiche à la place.
 - `src/components/` — Header (mega menu), Footer, ProductCard, panier
 - `src/data/products.ts` — produits de démo
 - `src/lib/woocommerce.ts` — bascule démo ↔ API réelle
+- `src/config/site.ts` — domaine public, API et coordonnées officielles
 
 ## Publier sur GitHub (via VS Code, sans ligne de commande)
 

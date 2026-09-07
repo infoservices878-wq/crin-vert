@@ -1,11 +1,13 @@
+import { API_URL as DEFAULT_API_URL } from '../config/site'
+
 /**
  * Public storefront API client.
  *
  * This browser application must only ever use public endpoints. WooCommerce
  * consumer keys, payment-provider secrets and SMTP credentials belong on the
- * server at boutique.nutrition-equine.com, never in a VITE_ variable.
+ * server at boutique.equinutrition.fr, never in a VITE_ variable.
  */
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
+const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) || DEFAULT_API_URL).replace(/\/$/, '')
 
 export const apiConfigured = Boolean(API_URL)
 

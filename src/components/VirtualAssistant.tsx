@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Sparkles, X, Send } from 'lucide-react'
 import { answerQuestion, ASSISTANT_STARTERS } from '../lib/assistant'
+import { CONTACT_EMAIL } from '../config/site'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -125,7 +126,7 @@ export function VirtualAssistant() {
             Cet assistant répond aux questions générales. Pour une question précise, contactez-nous
             par{' '}
             <a
-              href="mailto:contact@nutritionequine.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="focus-ring font-semibold text-leather-600 underline hover:text-leather-700"
             >
               e-mail

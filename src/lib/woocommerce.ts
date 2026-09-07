@@ -1,12 +1,13 @@
 import type { Product } from '../types'
 import { PRODUCTS } from '../data/products'
 import { apiConfigured } from './api'
+import { API_URL as DEFAULT_API_URL } from '../config/site'
 
 // --- Connexion à un backend WooCommerce (optionnel) -----------------------
 // Renseigne ces variables dans .env (voir .env.example).
 // Sans elles : mode démo (localStorage pour les comptes).
 
-const WC_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
+const WC_URL = ((import.meta.env.VITE_API_URL as string | undefined) || DEFAULT_API_URL).replace(/\/$/, '')
 const JWT_ENDPOINT = WC_URL ? `${WC_URL}/v1/auth/login` : undefined
 
 const isConfigured = apiConfigured

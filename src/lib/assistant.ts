@@ -1,6 +1,7 @@
 import { PRODUCTS } from '../data/products'
 import { FAQ_ITEMS } from '../data/faq'
 import { CATEGORY_LABELS } from '../types'
+import { CONTACT_EMAIL } from '../config/site'
 
 // Assistant automatique basé sur une recherche par mots-clés dans le
 // contenu réel du site (FAQ, fiches produits, politiques). Aucune IA
@@ -52,7 +53,7 @@ const GENERAL_KNOWLEDGE: KnowledgeEntry[] = [
   {
     keywords: tokenize('contact contacter joindre telephone email mail question service client'),
     answer:
-      'Vous pouvez nous écrire à contact@nutritionequine.com, utiliser le formulaire de la page Contact, ou nous joindre par WhatsApp depuis le menu.',
+      `Vous pouvez nous écrire à ${CONTACT_EMAIL}, utiliser le formulaire de la page Contact, ou nous joindre par WhatsApp depuis le menu.`,
   },
   {
     keywords: tokenize('mentions legales entreprise siret societe'),

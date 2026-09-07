@@ -21,12 +21,13 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Éditeur du site',
         paragraphs: [
-          "Le site nutritionequine.com (ci-après « le Site ») est édité par Nutrition Équine SAS, Société par actions simplifiée (SAS), au capital social de 2 000 €, immatriculée au RCS sous le numéro 998 932 008 R.C.S. Chartres, dont le siège social est situé à la Folie, 28130 Maintenon.",
+          "Le site equinutrition.fr (ci-après « le Site ») est édité par Nutrition Équine SAS, Société par actions simplifiée (SAS), au capital social de 2 000 €, immatriculée au RCS sous le numéro 998 932 008 R.C.S. Chartres, dont le siège social est situé à la Folie, 28130 Maintenon.",
+            "Le site equinutrition.fr (ci-après « le Site ») est édité par Nutrition Équine SAS, Société par actions simplifiée (SAS), au capital social de 2 000 €, immatriculée au RCS sous le numéro 998 932 008 R.C.S. Chartres, dont le siège social est situé à la Folie, 28130 Maintenon.",
           'Numéro de TVA : FR48998932008',
           'Numéro SIRET : 99893200800019',
           'Dirigeant : TOCZE-THIROUIN Clémentine',
           'Directeur de la publication : TOCZE-THIROUIN Clémentine',
-          'Contact : contact@nutritionequine.com',
+            'Contact : contact@equinutrition.fr',
         ],
       },
       {
@@ -44,7 +45,8 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Données personnelles',
         paragraphs: [
-          "Les informations recueillies via le Site (formulaire de contact, création de compte, commande) font l'objet d'un traitement destiné à la gestion de la relation client. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données, que vous pouvez exercer en écrivant à contact@nutritionequine.com.",
+          "Les informations recueillies via le Site (formulaire de contact, création de compte, commande) font l'objet d'un traitement destiné à la gestion de la relation client. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données, que vous pouvez exercer en écrivant à contact@equinutrition.fr.",
+            "Les informations recueillies via le Site (formulaire de contact, création de compte, commande) font l'objet d'un traitement destiné à la gestion de la relation client. Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données, que vous pouvez exercer en écrivant à contact@equinutrition.fr.",
         ],
       },
       {
@@ -189,7 +191,8 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Procédure de retour',
         paragraphs: [
-          'Pour retourner un article, contactez notre service client à contact@nutritionequine.com en indiquant votre numéro de commande. Nous vous communiquerons la marche à suivre et, si nécessaire, une adresse de retour. Les frais de retour sont à la charge du client, sauf en cas de produit non conforme ou erreur de notre part.',
+          'Pour retourner un article, contactez notre service client à contact@equinutrition.fr en indiquant votre numéro de commande. Nous vous communiquerons la marche à suivre et, si nécessaire, une adresse de retour. Les frais de retour sont à la charge du client, sauf en cas de produit non conforme ou erreur de notre part.',
+            'Pour retourner un article, contactez notre service client à contact@equinutrition.fr en indiquant votre numéro de commande. Nous vous communiquerons la marche à suivre et, si nécessaire, une adresse de retour. Les frais de retour sont à la charge du client, sauf en cas de produit non conforme ou erreur de notre part.',
         ],
         list: [
           "Produit dans son emballage d'origine, non ouvert",
@@ -269,7 +272,8 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Vos droits',
         paragraphs: [
-          'Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données. Vous pouvez aussi vous opposer à la prospection. Écrivez à contact@nutrition-equine.com en précisant l’objet de votre demande.',
+          'Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données. Vous pouvez aussi vous opposer à la prospection. Écrivez à contact@equinutrition.fr en précisant l’objet de votre demande.',
+            'Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données. Vous pouvez aussi vous opposer à la prospection. Écrivez à contact@equinutrition.fr en précisant l’objet de votre demande.',
         ],
       },
       {

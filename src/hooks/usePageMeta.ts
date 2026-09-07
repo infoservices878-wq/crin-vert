@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { SITE_URL } from '../config/site'
 
 const DEFAULT_TITLE = 'Nutrition Équine — Compléments naturels pour chevaux'
 const DEFAULT_DESC =
@@ -35,5 +36,13 @@ export function usePageMeta(title?: string, description?: string) {
     setOg('og:description', desc)
     setOg('og:type', 'website')
     setOg('og:locale', 'fr_FR')
+
+    let canonical = document.querySelector('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.setAttribute('rel', 'canonical')
+      document.head.appendChild(canonical)
+    }
+    canonical.setAttribute('href', `${SITE_URL}${window.location.pathname}`)
   }, [title, description])
 }

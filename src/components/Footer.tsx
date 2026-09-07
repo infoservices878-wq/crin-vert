@@ -3,6 +3,7 @@ import { FacebookIcon, YoutubeIcon, InstagramIcon } from './SocialIcons'
 import { CATEGORY_LABELS, type Category } from '../types'
 import { TrustBadges } from './TrustBadges'
 import { PaymentMethodsRow } from './PaymentBadge'
+import { CONTACT_EMAIL } from '../config/site'
 
 export function Footer() {
   const categories = Object.keys(CATEGORY_LABELS) as Category[]
@@ -14,7 +15,6 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <span className="font-display text-lg font-bold text-oat-50">Nutrition Équine</span>
             <span className="font-display text-xl font-semibold text-oat-50">Nutrition Équine</span>
             <p className="mt-3 max-w-xs text-sm text-oat-100/70">
               Une sélection exigeante de nutrition équine, conçue pour accompagner chaque cheval
@@ -37,8 +37,7 @@ export function Footer() {
           </div>
           <div>
             <p className="font-display text-sm font-semibold uppercase tracking-wide text-oat-50">
-              Le nécessaire
-                          Service & confiance
+              Service & confiance
             </p>
             <ul className="mt-3 space-y-2 text-sm text-oat-100/80">
               <li>Fabriqué en France</li>
@@ -49,7 +48,7 @@ export function Footer() {
               <li><Link to="/faq" className="focus-ring hover:text-oat-50">Questions fréquentes</Link></li>
               <li><Link to="/livraison" className="focus-ring hover:text-oat-50">Livraison & retours</Link></li>
               <li><Link to="/suivi-commande" className="focus-ring hover:text-oat-50">Suivre ma commande</Link></li>
-              <li>contact@nutrition-equine.com</li>
+              <li>{CONTACT_EMAIL}</li>
             </ul>
           </div>
           <div>
