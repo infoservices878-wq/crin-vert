@@ -28,32 +28,34 @@ L'API doit répondre en JSON, envoyer les en-têtes CORS seulement pour `https:/
 | --- | --- |
 | `POST /v1/contact` | Envoie le message au service client et retourne `{ id }`. |
 | `POST /v1/assessments` | Enregistre une demande de bilan équin et notifie l'équipe. |
-| `POST /v1/checkout` | Valide les coordonnées, le panier et le mode de livraison, crée une commande WooCommerce en attente de virement, puis retourne `{ checkoutUrl }`. |
+| `POST /v1/checkout` | Valide les coordonnées, le panier et le mode de livraison, crée une commande WooCommerce en attente de virement, puis retourne une référence `NE-26-10456` et une URL de confirmation sécurisée. |
+| `GET /v1/orders/confirmation?token=…` | Retourne pendant 48 h le détail et le total de la commande associée au jeton aléatoire de confirmation. |
 | `POST /v1/orders/lookup` | Retourne le statut et l'URL de suivi après contrôle du numéro de commande + e-mail. |
 | `POST /v1/auth/register`, `POST /v1/auth/login` | Comptes clients, avec cookies `HttpOnly` ou jetons courts et renouvelables. |
 
 Le serveur est l'unique source de vérité pour les comptes, commandes, frais de port, livraisons et messages. Les prix restent temporairement dans le catalogue React, comme pour Ossau Bois ; ils doivent être déplacés vers le serveur avant tout paiement carte ou automatisé.
 Les produits, compositions et posologies restent définis dans `src/data/products.ts` côté frontend. Le serveur ne doit pas devenir une seconde source de catalogue produit sans décision explicite.
 
-## Où placer les clés WordPress et WooCommerce
+## Clés WooCommerce : aucune clé à insérer actuellement
 
-Les clés se configurent uniquement sur le serveur `boutique.equinutrition.fr`, jamais dans le projet React et jamais dans une variable `VITE_*`.
+L’architecture actuelle n’utilise pas l’API REST WooCommerce. Le plugin `equinutrition-api` est exécuté à l’intérieur de WordPress et appelle directement les fonctions natives de WooCommerce pour créer et lire les commandes. Il ne faut donc créer ni renseigner de clé `ck_...` / `cs_...` pour le fonctionnement actuel.
 
-Dans le fichier d’environnement privé du backend, configurez par exemple :
+Ne mettez jamais de clé WooCommerce, Stripe, SMTP ou JWT dans React, `.env`, `.env.example` ou une variable `VITE_*` : elles seraient visibles dans le navigateur après compilation.
 
-```env
-PUBLIC_STORE_URL=https://equinutrition.fr
-WORDPRESS_URL=https://votre-wordpress-interne.example
-WOOCOMMERCE_CONSUMER_KEY=ck_...
-WOOCOMMERCE_CONSUMER_SECRET=cs_...
-WORDPRESS_JWT_SECRET=une-valeur-longue-et-aleatoire
-STRIPE_SECRET_KEY=sk_...
-SMTP_HOST=smtp.example
-SMTP_USER=...
-SMTP_PASSWORD=...
+## E-mails de commande : configuration obligatoire
+
+Le code envoie désormais depuis l’adresse déclarée dans `wp-config.php` et journalise tout échec de `wp_mail`. Ajoutez, avant le test réel :
+
+```php
+define( 'EQUINUTRITION_SENDER_NAME', 'EquiNutrition' );
+define( 'EQUINUTRITION_CONTACT_EMAIL', 'info@equinutrition.fr' );
+define( 'EQUINUTRITION_ORDER_EMAIL', 'info@equinutrition.fr' );
+define( 'EQUINUTRITION_SENDER_EMAIL', 'info@equinutrition.fr' );
 ```
 
-Dans WordPress, créez les clés WooCommerce depuis `WooCommerce > Réglages > Avancé > API REST`, avec les permissions `Lecture/Écriture`. Le serveur backend les utilise ensuite pour communiquer avec WooCommerce. Le navigateur appelle uniquement les routes publiques `/v1/...` de `boutique.equinutrition.fr`.
+Dans WordPress, installez **WP Mail SMTP**, reliez-le à cette boîte (ou à Brevo, Mailjet ou Postmark), puis envoyez un test depuis l’écran du plugin. Vérifiez aussi SPF et DKIM du domaine. Sans un transport SMTP valide, WordPress peut accepter l’envoi sans que le message n’arrive au client.
+
+Si une future intégration serveur distincte doit utiliser l’API REST WooCommerce, les clés seront créées dans `WooCommerce > Réglages > Avancé > API REST` et stockées exclusivement dans le gestionnaire de secrets de ce serveur distinct. Cette étape ne s’applique pas aujourd’hui.
 
 Dans le frontend, le seul fichier concerné est `.env` :
 

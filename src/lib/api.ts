@@ -32,7 +32,7 @@ async function request<T>(path: string, init: RequestInit): Promise<T> {
     response = await fetch(`${API_URL}${path}`, {
       ...init,
       credentials: 'include',
-      headers: { 'Content-Type': 'application/json', ...init.headers },
+      headers: { ...(init.body ? { 'Content-Type': 'application/json' } : {}), ...init.headers },
       signal: controller.signal,
     })
   } catch (error) {
@@ -129,7 +129,24 @@ export interface CheckoutPayload {
 }
 
 export function createCheckout(payload: CheckoutPayload) {
-  return request<{ checkoutUrl: string }>('/v1/checkout', { method: 'POST', body: JSON.stringify(payload) })
+  return request<{ checkoutUrl: string; orderId: number; reference: string; customerEmailSent: boolean }>('/v1/checkout', {
+    method: 'POST', body: JSON.stringify(payload),
+  })
+}
+
+export interface OrderConfirmation {
+  reference: string
+  status: string
+  items: { name: string; quantity: number; total: number }[]
+  subtotal: number
+  shipping: number
+  total: number
+  currency: string
+  customerEmailSent: boolean
+}
+
+export function getOrderConfirmation(token: string) {
+  return request<OrderConfirmation>(`/v1/orders/confirmation?token=${encodeURIComponent(token)}`, { method: 'GET' })
 }
 
 export function lookupOrder(orderNumber: string, email: string) {

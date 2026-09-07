@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
 import {
   registerParticulierSchema,
@@ -23,7 +23,6 @@ const baseInput =
 export function Register() {
   const { register } = useAuth()
   const { toast } = useToast()
-  const navigate = useNavigate()
   const [type, setType] = useState<AccountType>('particulier')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -85,7 +84,6 @@ export function Register() {
       })
       setSuccess(true)
       toast('Vérifiez votre e-mail pour activer votre compte', 'success')
-      setTimeout(() => navigate('/connexion'), 1200)
     } catch (err) {
       const msg =
         err instanceof ApiError
@@ -359,7 +357,7 @@ export function Register() {
               disabled={loading || success}
               className="focus-ring w-full bg-hunter-900 py-3.5 font-display font-semibold text-oat-50 transition-colors hover:bg-hunter-800 disabled:opacity-60"
             >
-              {loading ? 'Création…' : success ? 'E-mail envoyé ✓' : 'Créer mon compte'}
+              {loading ? 'Envoi…' : success ? 'E-mail envoyé ✓' : 'Créer mon compte'}
             </button>
           </form>
 
@@ -370,7 +368,7 @@ export function Register() {
           )}
           {success && (
             <p className="mt-5 rounded-sm border border-hunter-800/15 bg-oat-100 px-3 py-2.5 text-center text-sm text-hunter-900">
-              Compte créé. Consultez votre e-mail pour confirmer votre adresse, puis connectez-vous.
+              Votre compte sera créé après confirmation de votre adresse e-mail. Consultez votre boîte de réception et cliquez sur le lien reçu : il est valable 48 heures.
             </p>
           )}
 
