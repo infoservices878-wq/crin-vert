@@ -33,26 +33,16 @@ const CATEGORY_STYLE: Record<
 
 /** Images de secours par catégorie (photos libres) */
 const CATEGORY_FALLBACK: Record<Category, string> = {
-  alimentation:
-    'https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg',
-  digestion:
-    'https://images.unsplash.com/photo-1598974357801-cbca100e65d3',
-  articulations:
-    'https://images.unsplash.com/photo-1534773728080-3b1205b1d1c2',
-  respiration:
-    'https://images.unsplash.com/photo-1445116572660-236099ec97a0',
-  recuperation:
-    'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a',
-  senior:
-    'https://images.pexels.com/photos/633767/pexels-photo-633767.jpeg',
-  sabots:
-    'https://images.unsplash.com/photo-1553284965-83fd3e82fa5a',
-  'robe-peau':
-    'https://images.pexels.com/photos/1996333/pexels-photo-1996333.jpeg',
-  stress:
-    'https://images.unsplash.com/photo-1445116572660-236099ec97a0',
-  electrolytes:
-    'https://images.pexels.com/photos/7882510/pexels-photo-7882510.jpeg',
+  alimentation: '/images/site/horses-field.jpg',
+  digestion: '/images/site/horse-calm.jpg',
+  articulations: '/images/site/horses-pasture.jpg',
+  respiration: '/images/site/horses-field.jpg',
+  recuperation: '/images/site/horse-calm.jpg',
+  senior: '/images/site/horses-pasture.jpg',
+  sabots: '/images/site/horses-field.jpg',
+  'robe-peau': '/images/site/horse-calm.jpg',
+  stress: '/images/site/horses-pasture.jpg',
+  electrolytes: '/images/site/horses-field.jpg',
 }
 
 type Props =

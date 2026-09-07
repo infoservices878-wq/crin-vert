@@ -159,6 +159,7 @@ function equinutrition_me( WP_REST_Request $request ) { $user = equinutrition_us
 function equinutrition_verify_email( WP_REST_Request $request ) {
     $data = equinutrition_data( $request ); $key = sanitize_text_field( $data['key'] ?? '' ); $email = sanitize_email( $data['email'] ?? '' ); $pending = get_transient( 'equinutrition_pending_' . hash( 'sha256', $key ) );
     if ( ! is_array( $pending ) || strtolower( $pending['email'] ) !== strtolower( $email ) ) return equinutrition_fail( 'invalid_verification_key', 'Lien de vérification invalide ou expiré.', 400 );
+    if ( email_exists( $email ) ) { delete_transient( 'equinutrition_pending_' . hash( 'sha256', $key ) ); return equinutrition_fail( 'email_exists', 'Cette adresse e-mail est déjà enregistrée. Connectez-vous.', 409 ); }
     $encoded = base64_decode( $pending['password'], true ); $iv_len = openssl_cipher_iv_length( 'aes-256-cbc' ); $password = openssl_decrypt( substr( $encoded, $iv_len + 0 ), 'aes-256-cbc', wp_salt( 'auth' ), OPENSSL_RAW_DATA, substr( $encoded, 0, $iv_len ) );
     if ( ! $password ) return equinutrition_fail( 'invalid_registration', 'Les données d’inscription sont invalides.', 400 );
     $username = sanitize_user( strstr( $email, '@', true ), true ) ?: 'client'; $base = $username; $i = 2; while ( username_exists( $username ) ) $username = $base . $i++;
@@ -174,6 +175,9 @@ function equinutrition_assessment( WP_REST_Request $request ) { $data = equinutr
 function equinutrition_checkout( WP_REST_Request $request ) {
     if ( ! function_exists( 'wc_create_order' ) ) return equinutrition_fail( 'woocommerce_missing', 'WooCommerce doit être activé.', 500 );
     $data = equinutrition_data( $request ); $items = is_array( $data['items'] ?? null ) ? $data['items'] : array(); $customer = is_array( $data['customer'] ?? null ) ? $data['customer'] : array(); $address = is_array( $data['shippingAddress'] ?? null ) ? $data['shippingAddress'] : array();
+    $first_name = sanitize_text_field( $customer['firstName'] ?? '' ); $last_name = sanitize_text_field( $customer['lastName'] ?? '' ); $line_1 = sanitize_text_field( $address['line1'] ?? '' ); $postal_code = sanitize_text_field( $address['postalCode'] ?? '' ); $city = sanitize_text_field( $address['city'] ?? '' ); $phone = sanitize_text_field( $address['phone'] ?? '' ); $country = strtoupper( sanitize_text_field( $address['country'] ?? '' ) );
+    if ( ! $first_name || ! $last_name || ! $line_1 || ! $postal_code || ! $city || ! $phone || ! preg_match( '/^[A-Z]{2}$/', $country ) ) return equinutrition_fail( 'invalid_checkout_details', 'Les coordonnées de livraison sont incomplètes.', 422 );
+    $address['country'] = $country;
     if ( ! $items || ! is_email( $customer['email'] ?? '' ) ) return equinutrition_fail( 'invalid_checkout', 'Articles et e-mail requis.', 422 );
     $bank = equinutrition_bank_details();
     if ( ! $bank ) return equinutrition_fail( 'bank_details_not_configured', 'Le paiement par virement est momentanément indisponible. Contactez le service client.', 503 );

@@ -8,6 +8,7 @@ import { API_URL as DEFAULT_API_URL } from '../config/site'
  * server at boutique.equinutrition.fr, never in a VITE_ variable.
  */
 const API_URL = ((import.meta.env.VITE_API_URL as string | undefined) || DEFAULT_API_URL).replace(/\/$/, '')
+const REQUEST_TIMEOUT_MS = 20_000
 
 export const apiConfigured = Boolean(API_URL)
 
@@ -23,11 +24,25 @@ async function request<T>(path: string, init: RequestInit): Promise<T> {
   if (!API_URL) {
     throw new StorefrontApiError('La boutique est en cours de configuration. Merci de réessayer bientôt.')
   }
-  const response = await fetch(`${API_URL}${path}`, {
-    ...init,
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json', ...init.headers },
-  })
+  const controller = new AbortController()
+  const timeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+  let response: Response
+
+  try {
+    response = await fetch(`${API_URL}${path}`, {
+      ...init,
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json', ...init.headers },
+      signal: controller.signal,
+    })
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new StorefrontApiError('Le serveur met trop de temps à répondre. Vérifiez votre connexion puis réessayez.')
+    }
+    throw new StorefrontApiError('La boutique est momentanément inaccessible. Réessayez dans quelques instants.')
+  } finally {
+    window.clearTimeout(timeout)
+  }
   const body = await response.json().catch(() => ({}))
   if (!response.ok) {
     throw new StorefrontApiError(body.message || 'Une erreur est survenue. Réessayez dans quelques instants.', response.status)
@@ -41,7 +56,14 @@ export interface ApiCustomer {
   firstName: string
   lastName: string
   accountType: 'particulier' | 'professionnel'
-  demo: false
+}
+
+export interface ApiOrder {
+  id: number
+  reference: string
+  status: string
+  total: string
+  date: string
 }
 
 export interface RegisterAccountPayload {
@@ -75,6 +97,10 @@ export function getCurrentAccount() {
   return request<{ success: true; user: ApiCustomer }>('/v1/auth/me', { method: 'GET' })
 }
 
+export function getCustomerOrders() {
+  return request<{ orders: ApiOrder[] }>('/v1/auth/orders', { method: 'GET' })
+}
+
 export function verifyEmail(key: string, email: string) {
   return request<{ success: true; message: string }>('/v1/auth/verify-email', {
     method: 'POST', body: JSON.stringify({ key, email }),
@@ -100,8 +126,6 @@ export interface CheckoutPayload {
   shippingAddress: { line1: string; line2: string; postalCode: string; city: string; country: string; phone: string }
   shippingMethod: string
   items: { productId: string; name: string; variation: string; price: number; quantity: number }[]
-  successUrl: string
-  cancelUrl: string
 }
 
 export function createCheckout(payload: CheckoutPayload) {

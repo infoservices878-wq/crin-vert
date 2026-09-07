@@ -59,7 +59,7 @@ export function ShippingReturnsBlock({ price }: { price: number }) {
         <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-leather-600" strokeWidth={1.75} />
         <div>
           <p className="font-display font-semibold text-hunter-900">Paiement sécurisé</p>
-          <p className="mt-0.5 text-ink-600">CB, PayPal · transaction chiffrée.</p>
+          <p className="mt-0.5 text-ink-600">Virement bancaire · coordonnées et référence envoyées par e-mail.</p>
         </div>
       </div>
     </div>

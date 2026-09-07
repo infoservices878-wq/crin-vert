@@ -35,6 +35,7 @@ export function OptimizedImage({
   blurPlaceholder = true,
   className = '',
   onLoad,
+  onError,
   style,
   ...rest
 }: Props) {
@@ -61,6 +62,16 @@ export function OptimizedImage({
       onLoad={(e) => {
         setLoaded(true)
         onLoad?.(e)
+      }}
+      onError={(e) => {
+        const image = e.currentTarget
+        if (image.dataset.fallback !== 'true') {
+          image.dataset.fallback = 'true'
+          image.removeAttribute('srcset')
+          image.removeAttribute('sizes')
+          image.src = '/images/site/horses-pasture.jpg'
+        }
+        onError?.(e)
       }}
     />
   )

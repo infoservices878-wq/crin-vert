@@ -8,6 +8,7 @@ import { StepAddress } from '../components/checkout/StepAddress'
 import { StepDelivery } from '../components/checkout/StepDelivery'
 import { StepPayment } from '../components/checkout/StepPayment'
 import { createCheckout } from '../lib/api'
+import { countryCode } from '../data/countries'
 
 const FREE_SHIPPING_THRESHOLD = 79
 
@@ -15,7 +16,6 @@ export interface CheckoutData {
   firstName: string
   lastName: string
   email: string
-  password: string
   dataConsent: boolean
   newsletter: boolean
   acceptTerms: boolean
@@ -33,7 +33,6 @@ const initialData: CheckoutData = {
   firstName: '',
   lastName: '',
   email: '',
-  password: '',
   dataConsent: false,
   newsletter: false,
   acceptTerms: false,
@@ -94,11 +93,9 @@ export function Checkout() {
                   try {
                     const checkout = await createCheckout({
                       customer: { firstName: data.firstName, lastName: data.lastName, email: data.email, newsletter: data.newsletter },
-                      shippingAddress: data.address,
+                      shippingAddress: { ...data.address, country: countryCode(data.address.country) },
                       shippingMethod: carrier,
                       items: items.map((item) => ({ productId: item.product.id, name: item.product.name, variation: item.size, price: item.pricePerUnit, quantity: item.qty })),
-                      successUrl: `${window.location.origin}/commande-confirmee`,
-                      cancelUrl: `${window.location.origin}/commande`,
                     })
                     clear()
                     window.location.assign(checkout.checkoutUrl)

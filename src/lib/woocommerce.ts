@@ -1,4 +1,4 @@
-import { apiConfigured, getCurrentAccount, loginAccount, logoutAccount, registerAccount, StorefrontApiError } from './api'
+import { apiConfigured, getCurrentAccount, getCustomerOrders, loginAccount, logoutAccount, registerAccount, StorefrontApiError, type ApiOrder } from './api'
 import { PRODUCTS } from '../data/products'
 import type { Product } from '../types'
 
@@ -24,8 +24,6 @@ export interface CustomerSession {
   firstName: string
   lastName: string
   accountType: CustomerAccountType
-  /** Display-only state; production authentication is held in an HttpOnly cookie. */
-  demo: boolean
 }
 
 export class ApiError extends Error {
@@ -59,7 +57,7 @@ export async function loginCustomer(email: string, password: string): Promise<Cu
   if (!apiConfigured) throw new ApiError('La connexion est momentanément indisponible.', 503)
   try {
     const { user } = await loginAccount(email.trim(), password)
-    const session: CustomerSession = { ...user, demo: false }
+    const session: CustomerSession = user
     persistSession(session)
     return session
   } catch (error) {
@@ -71,7 +69,7 @@ export async function refreshSession(): Promise<CustomerSession | null> {
   if (!apiConfigured) return null
   try {
     const { user } = await getCurrentAccount()
-    const session: CustomerSession = { ...user, demo: false }
+    const session: CustomerSession = user
     persistSession(session)
     return session
   } catch {
@@ -97,6 +95,17 @@ export function loadSession(): CustomerSession | null {
 export function clearSession() {
   localStorage.removeItem(SESSION_KEY)
   void logoutAccount().catch(() => undefined)
+}
+
+export type CustomerOrder = ApiOrder
+
+export async function getOrders(): Promise<CustomerOrder[]> {
+  try {
+    const { orders } = await getCustomerOrders()
+    return orders
+  } catch (error) {
+    rethrowApiError(error)
+  }
 }
 
 export const wooCommerceConfigured = apiConfigured

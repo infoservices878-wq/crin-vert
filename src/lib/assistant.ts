@@ -48,7 +48,7 @@ const GENERAL_KNOWLEDGE: KnowledgeEntry[] = [
   {
     keywords: tokenize('paiement carte visa mastercard paypal payer plusieurs fois facilite securise'),
     answer:
-      "Nous acceptons la carte bancaire, PayPal, et le paiement en plusieurs fois sans frais dès 100 € d'achat. Le paiement est sécurisé et aucune donnée bancaire n'est stockée sur nos serveurs.",
+      "Le règlement s’effectue actuellement par virement bancaire. Après confirmation de votre commande, vous recevez par e-mail les coordonnées bancaires et la référence à indiquer.",
   },
   {
     keywords: tokenize('contact contacter joindre telephone email mail question service client'),

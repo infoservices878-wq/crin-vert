@@ -1,4 +1,4 @@
-import { MessageCircle, Timer, ClipboardCheck, CreditCard } from 'lucide-react'
+import { MessageCircle, Timer, ClipboardCheck, Building2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const ITEMS = [
@@ -21,9 +21,9 @@ const ITEMS = [
     to: '/conseils',
   },
   {
-    icon: CreditCard,
-    title: 'Paiement sécurisé',
-    text: 'Paiement 100% sécurisé. Rapide, sûr et pratique.',
+    icon: Building2,
+    title: 'Virement bancaire',
+    text: 'Coordonnées et référence envoyées après confirmation.',
     to: '/paiement',
   },
 ]

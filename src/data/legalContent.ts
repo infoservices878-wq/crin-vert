@@ -86,13 +86,13 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Article 3 — Commande',
         paragraphs: [
-          "La commande est validée après confirmation du panier, saisie des informations de livraison et paiement. Un e-mail de confirmation récapitulant la commande est envoyé au client. Nutrition Équine SAS se réserve le droit d'annuler ou de refuser toute commande d'un client avec lequel existerait un litige relatif au paiement d'une commande antérieure.",
+          "La commande est enregistrée après confirmation du panier et saisie des informations de livraison. Un e-mail récapitulatif contenant les instructions de règlement est envoyé au client. Nutrition Équine SAS se réserve le droit d'annuler ou de refuser toute commande d'un client avec lequel existerait un litige relatif au règlement d'une commande antérieure.",
         ],
       },
       {
         heading: 'Article 4 — Paiement',
         paragraphs: [
-          'Le paiement est exigible immédiatement à la commande. Les moyens de paiement acceptés et les modalités de sécurisation sont détaillés sur la page Paiement du Site.',
+          'Le règlement est dû selon les instructions de virement communiquées après l’enregistrement de la commande. Les modalités sont détaillées sur la page Paiement du Site.',
         ],
       },
       {
@@ -222,29 +222,27 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
     sections: [
       {
         heading: 'Moyens de paiement acceptés',
-        paragraphs: ['Le règlement de votre commande peut s\'effectuer par :'],
+        paragraphs: ['Le règlement de votre commande s’effectue actuellement par :'],
         list: [
-          'Carte bancaire (Visa, Mastercard)',
-          'PayPal',
-          'Paiement en plusieurs fois sans frais (dès 100 € d\'achat), via notre partenaire de paiement fractionné',
+          'Virement bancaire : les coordonnées bancaires et la référence de commande sont envoyées par e-mail après confirmation.',
         ],
       },
       {
         heading: 'Sécurité des paiements',
         paragraphs: [
-          "Toutes les transactions sont chiffrées et sécurisées via le protocole SSL et l'authentification 3D Secure. Nutrition Équine SAS ne stocke à aucun moment les données bancaires de ses clients : celles-ci sont directement traitées par notre prestataire de paiement certifié.",
+          "Les échanges avec le site utilisent HTTPS. Aucune donnée de carte bancaire n’est demandée ni conservée par Nutrition Équine : le règlement est réalisé depuis votre banque, au moyen des coordonnées communiquées par e-mail.",
         ],
       },
       {
         heading: 'Facturation',
         paragraphs: [
-          "Une facture est automatiquement générée et envoyée par e-mail après validation de votre commande. Elle est également téléchargeable à tout moment depuis votre espace client.",
+          "Un e-mail de confirmation récapitule votre commande et sa référence. Pour toute demande de facture, contactez le service client en indiquant cette référence.",
         ],
       },
       {
-        heading: 'Paiement à un tiers',
+        heading: 'Règlement par un tiers',
         paragraphs: [
-          "Depuis votre panier, vous pouvez générer un lien de paiement à transmettre à un tiers (club, propriétaire, association) qui souhaite régler votre commande à votre place.",
+          "Si un club, un propriétaire ou une association règle votre commande, contactez le service client avant le virement afin que le règlement soit correctement rapproché de votre référence.",
         ],
       },
     ],
@@ -279,7 +277,7 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Cookies et sécurité',
         paragraphs: [
-          'Le panier, les préférences et la session peuvent nécessiter des cookies ou du stockage local. Les paiements sont traités par un prestataire sécurisé; Nutrition Équine ne conserve pas vos données bancaires complètes.',
+          'Le panier, les préférences et la session peuvent nécessiter des cookies ou du stockage local. Nutrition Équine ne collecte aucune donnée de carte bancaire : le règlement s’effectue par virement depuis la banque du client.',
         ],
       },
     ],

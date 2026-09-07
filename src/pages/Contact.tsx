@@ -238,7 +238,7 @@ export function Contact() {
             <p className="mt-1 text-sm text-oat-100/75">La Folie<br />28130 Maintenon, France</p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            <ContactInfoCard icon={Lock} title="Paiement sécurisé" detail="Visa, Mastercard et PayPal" />
+            <ContactInfoCard icon={Lock} title="Paiement par virement" detail="Coordonnées envoyées après confirmation" />
             <ContactInfoCard icon={Truck} title="Livraison suivie" detail="France et Europe" />
             <ContactInfoCard icon={Zap} title="Conseil humain" detail="Une réponse adaptée au contexte" />
           </div>
