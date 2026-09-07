@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -11,6 +12,7 @@ import {
   loadSession,
   loginCustomer,
   registerCustomer,
+  refreshSession,
   type CustomerSession,
   type RegisterCustomerPayload,
 } from '../lib/woocommerce'
@@ -19,7 +21,7 @@ interface AuthContextValue {
   user: CustomerSession | null
   isAuthenticated: boolean
   login: (email: string, password: string) => Promise<CustomerSession>
-  register: (payload: RegisterCustomerPayload) => Promise<CustomerSession>
+  register: (payload: RegisterCustomerPayload) => Promise<void>
   logout: () => void
 }
 
@@ -28,6 +30,12 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<CustomerSession | null>(() => loadSession())
 
+  useEffect(() => {
+    let active = true
+    void refreshSession().then((session) => { if (active) setUser(session) })
+    return () => { active = false }
+  }, [])
+
   const login = useCallback(async (email: string, password: string) => {
     const session = await loginCustomer(email, password)
     setUser(session)
@@ -35,9 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const register = useCallback(async (payload: RegisterCustomerPayload) => {
-    const session = await registerCustomer(payload)
-    setUser(session)
-    return session
+    await registerCustomer(payload)
   }, [])
 
   const logout = useCallback(() => {

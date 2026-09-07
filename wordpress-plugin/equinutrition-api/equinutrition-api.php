@@ -9,14 +9,6 @@ defined( 'ABSPATH' ) || exit;
 
 const EQUINUTRITION_API_VERSION = '1.3.0';
 
-function equinutrition_catalog() {
-    static $catalog;
-    if ( null === $catalog ) {
-        $catalog = require __DIR__ . '/catalog.php';
-    }
-    return $catalog;
-}
-
 add_action( 'rest_api_init', function () {
     $routes = array(
         array( 'auth/register', 'POST', 'equinutrition_register', 'equinutrition_public_permission' ),
@@ -91,8 +83,6 @@ function equinutrition_data( WP_REST_Request $request ) { $data = $request->get_
 function equinutrition_email() { return defined( 'EQUINUTRITION_CONTACT_EMAIL' ) && is_email( EQUINUTRITION_CONTACT_EMAIL ) ? EQUINUTRITION_CONTACT_EMAIL : 'info@equinutrition.fr'; }
 function equinutrition_order_email_recipient() { return defined( 'EQUINUTRITION_ORDER_EMAIL' ) && is_email( EQUINUTRITION_ORDER_EMAIL ) ? EQUINUTRITION_ORDER_EMAIL : 'info@equinutrition.fr'; }
 function equinutrition_frontend() { return defined( 'EQUINUTRITION_FRONTEND_URL' ) ? untrailingslashit( EQUINUTRITION_FRONTEND_URL ) : ''; }
-function equinutrition_size_multiplier( $value ) { if ( stripos( $value, 'palette' ) !== false && preg_match( '/(\d+)\s*sacs/i', $value, $match ) ) return (int) $match[1]; return preg_match( '/^(\d+)/', $value, $match ) ? max( 1, (int) $match[1] ) : 1; }
-function equinutrition_server_price( $product, $size ) { $base = (float) $product['price']; $base_multiplier = equinutrition_size_multiplier( $product['format'] ); $selected_multiplier = equinutrition_size_multiplier( $size ?: $product['format'] ); $price = ( $base * $selected_multiplier ) / max( 1, $base_multiplier ); if ( stripos( $size, 'palette' ) !== false ) $price *= 0.65; return round( $price, 2 ); }
 function equinutrition_bank_details() {
     $details = array(
         'holder' => defined( 'EQUINUTRITION_BANK_HOLDER' ) ? trim( EQUINUTRITION_BANK_HOLDER ) : '',
@@ -111,12 +101,11 @@ function equinutrition_order_email( WC_Order $order, $items, $bank, $internal = 
     $customer_name = trim( $order->get_billing_first_name() . ' ' . $order->get_billing_last_name() ) ?: 'Client EquiNutrition';
     $rows = '';
     foreach ( $items as $item ) {
-        $sku = sanitize_text_field( $item['sku'] ?? '' );
-        $product = equinutrition_catalog()[ $sku ];
+        $name = sanitize_text_field( $item['name'] ?? 'Produit EquiNutrition' );
         $size = sanitize_text_field( $item['variation'] ?? '' );
         $quantity = max( 1, absint( $item['quantity'] ?? 1 ) );
-        $unit = equinutrition_server_price( $product, $size );
-        $rows .= '<tr><td style="padding:12px 0;border-bottom:1px solid #e6e1d8;">' . esc_html( $product['name'] ) . '<br><small style="color:#667276;">Réf. ' . esc_html( $sku ) . ( $size ? ' · ' . esc_html( $size ) : '' ) . ' · quantité ' . $quantity . '</small></td><td style="padding:12px 0;border-bottom:1px solid #e6e1d8;text-align:right;white-space:nowrap;">' . number_format_i18n( $unit * $quantity, 2 ) . ' €</td></tr>';
+        $unit = max( 0, (float) ( $item['price'] ?? 0 ) );
+        $rows .= '<tr><td style="padding:12px 0;border-bottom:1px solid #e6e1d8;">' . esc_html( $name ) . '<br><small style="color:#667276;">' . ( $size ? esc_html( $size ) . ' · ' : '' ) . 'quantité ' . $quantity . '</small></td><td style="padding:12px 0;border-bottom:1px solid #e6e1d8;text-align:right;white-space:nowrap;">' . number_format_i18n( $unit * $quantity, 2 ) . ' €</td></tr>';
     }
     $address = nl2br( esc_html( $order->get_formatted_billing_address() ) );
     $bank_block = '<div style="margin-top:26px;padding:18px;background:#f5f1e8;border-left:4px solid #b85b43;"><strong>Coordonnées du virement</strong><br>Titulaire : ' . esc_html( $bank['holder'] ) . '<br>IBAN : ' . esc_html( $bank['iban'] ) . '<br>BIC : ' . esc_html( $bank['bic'] ) . '<br><small>Indiquez la référence ' . esc_html( $reference ) . ' dans le libellé du virement.</small></div>';
@@ -130,11 +119,13 @@ function equinutrition_order_email( WC_Order $order, $items, $bank, $internal = 
 function equinutrition_rate_key() { $ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown'; return 'equinutrition_rate_' . md5( $ip ); }
 function equinutrition_public_permission() { $key = equinutrition_rate_key(); if ( (int) get_transient( $key ) >= 20 ) return equinutrition_fail( 'rate_limited', 'Trop de demandes. Réessayez dans quelques minutes.', 429 ); return true; }
 function equinutrition_rate_failure() { $key = equinutrition_rate_key(); set_transient( $key, (int) get_transient( $key ) + 1, 15 * MINUTE_IN_SECONDS ); }
-function equinutrition_bearer( WP_REST_Request $request ) { return preg_replace( '/^Bearer\s+/i', '', (string) $request->get_header( 'authorization' ) ); }
+function equinutrition_session_cookie_name() { return 'equinutrition_session'; }
+function equinutrition_bearer( WP_REST_Request $request ) { $header = preg_replace( '/^Bearer\s+/i', '', (string) $request->get_header( 'authorization' ) ); return $header ?: sanitize_text_field( wp_unslash( $_COOKIE[ equinutrition_session_cookie_name() ] ?? '' ) ); }
 function equinutrition_session_key( $token ) { return 'equinutrition_session_' . hash( 'sha256', $token ); }
 function equinutrition_user( WP_REST_Request $request ) { $token = equinutrition_bearer( $request ); $id = $token ? (int) get_transient( equinutrition_session_key( $token ) ) : 0; return $id ? get_user_by( 'id', $id ) : false; }
 function equinutrition_session_permission( WP_REST_Request $request ) { $user = equinutrition_user( $request ); return $user ? true : equinutrition_fail( 'auth_required', 'Connexion requise.', 401 ); }
-function equinutrition_issue_session( WP_User $user ) { $token = wp_generate_password( 64, false, false ); set_transient( equinutrition_session_key( $token ), $user->ID, 14 * DAY_IN_SECONDS ); return $token; }
+function equinutrition_issue_session( WP_User $user ) { $token = wp_generate_password( 64, false, false ); set_transient( equinutrition_session_key( $token ), $user->ID, 14 * DAY_IN_SECONDS ); setcookie( equinutrition_session_cookie_name(), $token, array( 'expires' => time() + 14 * DAY_IN_SECONDS, 'path' => '/', 'secure' => is_ssl(), 'httponly' => true, 'samesite' => 'Lax' ) ); return $token; }
+function equinutrition_clear_session_cookie() { setcookie( equinutrition_session_cookie_name(), '', array( 'expires' => time() - HOUR_IN_SECONDS, 'path' => '/', 'secure' => is_ssl(), 'httponly' => true, 'samesite' => 'Lax' ) ); }
 function equinutrition_user_payload( WP_User $user, $token = '' ) { $payload = array( 'id' => $user->ID, 'email' => $user->user_email, 'firstName' => get_user_meta( $user->ID, 'first_name', true ), 'lastName' => get_user_meta( $user->ID, 'last_name', true ), 'accountType' => get_user_meta( $user->ID, 'equinutrition_account_type', true ) ?: 'particulier', 'demo' => false ); if ( $token ) $payload['token'] = $token; return $payload; }
 
 function equinutrition_register( WP_REST_Request $request ) {
@@ -149,7 +140,8 @@ function equinutrition_register( WP_REST_Request $request ) {
     $key = wp_generate_password( 64, false, false );
     $iv = random_bytes( openssl_cipher_iv_length( 'aes-256-cbc' ) );
     $encrypted = base64_encode( $iv . openssl_encrypt( $password, 'aes-256-cbc', wp_salt( 'auth' ), OPENSSL_RAW_DATA, $iv ) );
-    set_transient( 'equinutrition_pending_' . hash( 'sha256', $key ), array( 'email' => $email, 'first' => $first, 'last' => $last, 'password' => $encrypted, 'accountType' => sanitize_key( $data['accountType'] ?? 'particulier' ) ), 2 * DAY_IN_SECONDS );
+    $account_type = in_array( $data['accountType'] ?? 'particulier', array( 'particulier', 'professionnel' ), true ) ? $data['accountType'] : 'particulier';
+    set_transient( 'equinutrition_pending_' . hash( 'sha256', $key ), array( 'email' => $email, 'first' => $first, 'last' => $last, 'password' => $encrypted, 'accountType' => $account_type, 'company' => sanitize_text_field( $data['company'] ?? '' ), 'vat' => sanitize_text_field( $data['vat'] ?? '' ), 'newsletter' => ! empty( $data['newsletter'] ) ), 2 * DAY_IN_SECONDS );
     $url = add_query_arg( array( 'key' => $key, 'email' => rawurlencode( $email ) ), equinutrition_frontend() . '/verification-email' );
     $headers = array( 'Content-Type: text/html; charset=UTF-8', 'From: EquiNutrition <' . equinutrition_email() . '>', 'Reply-To: ' . equinutrition_email() );
     if ( ! wp_mail( $email, 'Confirmez votre adresse e-mail - EquiNutrition', '<p>Bonjour ' . esc_html( $name ) . ',</p><p><a href="' . esc_url( $url ) . '">Confirmer mon adresse e-mail</a></p><p>Ce lien est valable 48 heures.</p>', $headers ) ) return equinutrition_fail( 'mail_failed', 'L’e-mail de confirmation n’a pas pu être envoyé.', 500 );
@@ -159,9 +151,9 @@ function equinutrition_register( WP_REST_Request $request ) {
 function equinutrition_login( WP_REST_Request $request ) {
     $data = equinutrition_data( $request ); $email = sanitize_email( $data['email'] ?? '' ); $user = $email ? get_user_by( 'email', $email ) : false; $auth = $user ? wp_authenticate( $user->user_login, (string) ( $data['password'] ?? '' ) ) : new WP_Error( 'invalid' );
     if ( is_wp_error( $auth ) ) { equinutrition_rate_failure(); return equinutrition_fail( 'invalid_login', 'E-mail ou mot de passe incorrect.', 401 ); }
-    delete_transient( equinutrition_rate_key() ); $token = equinutrition_issue_session( $auth ); return equinutrition_json( array( 'success' => true, 'user' => equinutrition_user_payload( $auth, $token ) ) );
+    delete_transient( equinutrition_rate_key() ); equinutrition_issue_session( $auth ); return equinutrition_json( array( 'success' => true, 'user' => equinutrition_user_payload( $auth ) ) );
 }
-function equinutrition_logout( WP_REST_Request $request ) { delete_transient( equinutrition_session_key( equinutrition_bearer( $request ) ) ); return equinutrition_json( array( 'success' => true ) ); }
+function equinutrition_logout( WP_REST_Request $request ) { delete_transient( equinutrition_session_key( equinutrition_bearer( $request ) ) ); equinutrition_clear_session_cookie(); return equinutrition_json( array( 'success' => true ) ); }
 function equinutrition_me( WP_REST_Request $request ) { $user = equinutrition_user( $request ); return equinutrition_json( array( 'success' => true, 'user' => equinutrition_user_payload( $user ) ) ); }
 
 function equinutrition_verify_email( WP_REST_Request $request ) {
@@ -171,7 +163,7 @@ function equinutrition_verify_email( WP_REST_Request $request ) {
     if ( ! $password ) return equinutrition_fail( 'invalid_registration', 'Les données d’inscription sont invalides.', 400 );
     $username = sanitize_user( strstr( $email, '@', true ), true ) ?: 'client'; $base = $username; $i = 2; while ( username_exists( $username ) ) $username = $base . $i++;
     $id = function_exists( 'wc_create_new_customer' ) ? wc_create_new_customer( $email, $username, $password ) : wp_create_user( $username, $password, $email ); if ( is_wp_error( $id ) ) return $id;
-    wp_update_user( array( 'ID' => $id, 'first_name' => $pending['first'], 'last_name' => $pending['last'], 'display_name' => trim( $pending['first'] . ' ' . $pending['last'] ) ) ); update_user_meta( $id, 'equinutrition_account_type', $pending['accountType'] ); delete_transient( 'equinutrition_pending_' . hash( 'sha256', $key ) ); return equinutrition_json( array( 'success' => true, 'message' => 'Adresse confirmée. Vous pouvez vous connecter.' ) );
+    wp_update_user( array( 'ID' => $id, 'first_name' => $pending['first'], 'last_name' => $pending['last'], 'display_name' => trim( $pending['first'] . ' ' . $pending['last'] ) ) ); update_user_meta( $id, 'equinutrition_account_type', $pending['accountType'] ); update_user_meta( $id, 'equinutrition_company', $pending['company'] ); update_user_meta( $id, 'equinutrition_vat', $pending['vat'] ); update_user_meta( $id, 'equinutrition_newsletter', $pending['newsletter'] ? '1' : '0' ); delete_transient( 'equinutrition_pending_' . hash( 'sha256', $key ) ); return equinutrition_json( array( 'success' => true, 'message' => 'Adresse confirmée. Vous pouvez vous connecter.' ) );
 }
 function equinutrition_forgot_password( WP_REST_Request $request ) { $email = sanitize_email( equinutrition_data( $request )['email'] ?? '' ); $user = $email ? get_user_by( 'email', $email ) : false; if ( $user ) { $key = get_password_reset_key( $user ); $url = add_query_arg( array( 'key' => $key, 'login' => $user->user_login ), equinutrition_frontend() . '/reinitialisation' ); wp_mail( $email, 'Réinitialisation de votre mot de passe - EquiNutrition', '<p><a href="' . esc_url( $url ) . '">Choisir un nouveau mot de passe</a></p>', array( 'Content-Type: text/html; charset=UTF-8' ) ); } return equinutrition_json( array( 'success' => true, 'message' => 'Si le compte existe, un e-mail a été envoyé.' ) ); }
 function equinutrition_reset_password( WP_REST_Request $request ) { $data = equinutrition_data( $request ); if ( strlen( (string) ( $data['password'] ?? '' ) ) < 8 ) return equinutrition_fail( 'invalid_password', 'Mot de passe trop court.', 422 ); $user = check_password_reset_key( sanitize_text_field( $data['key'] ?? '' ), sanitize_text_field( $data['login'] ?? '' ) ); if ( is_wp_error( $user ) ) return equinutrition_fail( 'invalid_reset_key', 'Lien invalide ou expiré.', 400 ); wp_set_password( (string) $data['password'], $user->ID ); return equinutrition_json( array( 'success' => true ) ); }
@@ -185,35 +177,42 @@ function equinutrition_checkout( WP_REST_Request $request ) {
     if ( ! $items || ! is_email( $customer['email'] ?? '' ) ) return equinutrition_fail( 'invalid_checkout', 'Articles et e-mail requis.', 422 );
     $bank = equinutrition_bank_details();
     if ( ! $bank ) return equinutrition_fail( 'bank_details_not_configured', 'Le paiement par virement est momentanément indisponible. Contactez le service client.', 503 );
-    $order = wc_create_order(); $billing = array( 'first_name' => sanitize_text_field( $customer['firstName'] ?? '' ), 'last_name' => sanitize_text_field( $customer['lastName'] ?? '' ), 'email' => sanitize_email( $customer['email'] ), 'phone' => sanitize_text_field( $address['phone'] ?? '' ), 'address_1' => sanitize_text_field( $address['line1'] ?? '' ), 'address_2' => sanitize_text_field( $address['line2'] ?? '' ), 'postcode' => sanitize_text_field( $address['postalCode'] ?? '' ), 'city' => sanitize_text_field( $address['city'] ?? '' ), 'country' => sanitize_text_field( $address['country'] ?? 'FR' ) ); $order->set_address( $billing, 'billing' ); $order->set_address( $billing, 'shipping' );
-    $catalog = equinutrition_catalog();
+    $validated_items = array();
     foreach ( $items as $item ) {
-        $sku = sanitize_text_field( $item['sku'] ?? '' );
-        if ( empty( $catalog[ $sku ] ) ) return equinutrition_fail( 'product_unavailable', 'La référence produit ' . $sku . ' n’est pas autorisée côté serveur.', 409 );
-        $product = $catalog[ $sku ];
+        $product_id = absint( $item['productId'] ?? 0 );
+        $name = sanitize_text_field( $item['name'] ?? '' );
+        $size = sanitize_text_field( $item['variation'] ?? '' );
+        $quantity = absint( $item['quantity'] ?? 0 );
+        $unit_price = max( 0, (float) ( $item['price'] ?? 0 ) );
+        if ( ! $product_id || ! $name || $quantity < 1 || $quantity > 20 || $unit_price <= 0 ) return equinutrition_fail( 'invalid_cart', 'Un article du panier est invalide.', 422 );
+        $validated_items[] = array( 'productId' => $product_id, 'name' => $name, 'variation' => $size, 'quantity' => $quantity, 'unit_price' => $unit_price );
+    }
+    $subtotal = array_sum( array_map( function ( $item ) { return $item['unit_price'] * $item['quantity']; }, $validated_items ) );
+    $shipping_methods = array( 'point-relais' => 4.90, 'dpd-travail' => 6.50, 'dpd-domicile' => 7.90, 'colissimo' => 6.90, 'chronopost' => 12.90, 'click-collect' => 0.00 );
+    $shipping_method = sanitize_key( $data['shippingMethod'] ?? '' );
+    if ( ! array_key_exists( $shipping_method, $shipping_methods ) ) return equinutrition_fail( 'invalid_shipping_method', 'Le mode de livraison sélectionné est invalide.', 422 );
+    $shipping_cost = ( 'click-collect' === $shipping_method || $subtotal >= 79 ) ? 0.00 : $shipping_methods[ $shipping_method ];
+    $order = wc_create_order(); $billing = array( 'first_name' => sanitize_text_field( $customer['firstName'] ?? '' ), 'last_name' => sanitize_text_field( $customer['lastName'] ?? '' ), 'email' => sanitize_email( $customer['email'] ), 'phone' => sanitize_text_field( $address['phone'] ?? '' ), 'address_1' => sanitize_text_field( $address['line1'] ?? '' ), 'address_2' => sanitize_text_field( $address['line2'] ?? '' ), 'postcode' => sanitize_text_field( $address['postalCode'] ?? '' ), 'city' => sanitize_text_field( $address['city'] ?? '' ), 'country' => sanitize_text_field( $address['country'] ?? 'FR' ) ); $order->set_address( $billing, 'billing' ); $order->set_address( $billing, 'shipping' );
+    foreach ( $validated_items as $item ) {
         $size = sanitize_text_field( $item['variation'] ?? '' );
         $quantity = max( 1, absint( $item['quantity'] ?? 1 ) );
-        $unit_price = equinutrition_server_price( $product, $size );
+        $unit_price = $item['unit_price'];
         $order_item = new WC_Order_Item_Product();
-        $order_item->set_name( $product['name'] . ( $size ? ' - ' . $size : '' ) );
+        $order_item->set_name( $item['name'] . ( $size ? ' - ' . $size : '' ) );
         $order_item->set_quantity( $quantity );
         $order_item->set_subtotal( $unit_price * $quantity );
         $order_item->set_total( $unit_price * $quantity );
-        $order_item->add_meta_data( 'Référence', $sku, true );
+        $order_item->add_meta_data( 'Identifiant produit', $item['productId'], true );
         $order->add_item( $order_item );
     }
+    if ( $shipping_cost > 0 ) { $shipping = new WC_Order_Item_Shipping(); $shipping->set_method_title( $shipping_method ); $shipping->set_method_id( $shipping_method ); $shipping->set_total( $shipping_cost ); $order->add_item( $shipping ); }
     $order->calculate_totals(); $order->set_payment_method( 'bacs' ); $order->set_payment_method_title( 'Virement bancaire' ); $order->update_status( 'pending' ); $order->save();
     $customer_mail_sent = equinutrition_order_email( $order, $items, $bank, false );
     $admin_mail_sent = equinutrition_order_email( $order, $items, $bank, true );
     if ( ! $customer_mail_sent || ! $admin_mail_sent ) {
         error_log( '[EquiNutrition] Echec e-mail commande ' . $order->get_order_number() . ' : client=' . ( $customer_mail_sent ? 'ok' : 'ko' ) . ', admin=' . ( $admin_mail_sent ? 'ok' : 'ko' ) );
     }
-    $confirmation_url = add_query_arg( array(
-        'order' => $order->get_order_number(),
-        'email' => $customer['email'],
-        'total' => $order->get_total(),
-        'items' => count( $items ),
-    ), equinutrition_frontend() . '/commande-confirmee' );
+    $confirmation_url = add_query_arg( array( 'order' => $order->get_order_number() ), equinutrition_frontend() . '/commande-confirmee' );
     return equinutrition_json( array( 'checkoutUrl' => $confirmation_url, 'orderId' => $order->get_id(), 'reference' => $order->get_order_number(), 'customerEmailSent' => (bool) $customer_mail_sent, 'adminEmailSent' => (bool) $admin_mail_sent ), 201 );
 }
 function equinutrition_orders( WP_REST_Request $request ) { $user = equinutrition_user( $request ); if ( ! function_exists( 'wc_get_orders' ) ) return equinutrition_fail( 'woocommerce_missing', 'WooCommerce doit être activé.', 500 ); $orders = wc_get_orders( array( 'billing_email' => $user->user_email, 'limit' => 50, 'orderby' => 'date', 'order' => 'DESC', 'return' => 'objects' ) ); return equinutrition_json( array( 'orders' => array_map( function ( $order ) { return array( 'id' => $order->get_id(), 'reference' => $order->get_order_number(), 'status' => $order->get_status(), 'total' => $order->get_total(), 'date' => $order->get_date_created() ? $order->get_date_created()->date( 'c' ) : '' ); }, $orders ) ) ); }

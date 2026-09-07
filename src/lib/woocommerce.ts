@@ -1,34 +1,9 @@
-import type { Product } from '../types'
+import { apiConfigured, getCurrentAccount, loginAccount, logoutAccount, registerAccount, StorefrontApiError } from './api'
 import { PRODUCTS } from '../data/products'
-import { apiConfigured } from './api'
-import { API_URL as DEFAULT_API_URL } from '../config/site'
+import type { Product } from '../types'
 
-// --- Connexion à un backend WooCommerce (optionnel) -----------------------
-// Renseigne ces variables dans .env (voir .env.example).
-// Sans elles : mode démo (localStorage pour les comptes).
-
-const WC_URL = ((import.meta.env.VITE_API_URL as string | undefined) || DEFAULT_API_URL).replace(/\/$/, '')
-const JWT_ENDPOINT = WC_URL ? `${WC_URL}/v1/auth/login` : undefined
-
-const isConfigured = apiConfigured
-
-function authHeader(): HeadersInit {
-  return {}
-}
-
-export async function getProducts(): Promise<Product[]> {
-  // Catalogue 100 % local — pas d'API produits WooCommerce
-  return PRODUCTS
-}
-
-export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  const products = await getProducts()
-  return products.find((p) => p.slug === slug)
-}
-
-export const wooCommerceConfigured = isConfigured
-
-// —— Comptes clients ——————————————————————————————————————
+export async function getProducts(): Promise<Product[]> { return PRODUCTS }
+export async function getProductBySlug(slug: string): Promise<Product | undefined> { return PRODUCTS.find((product) => product.slug === slug) }
 
 export type CustomerAccountType = 'particulier' | 'professionnel'
 
@@ -49,9 +24,7 @@ export interface CustomerSession {
   firstName: string
   lastName: string
   accountType: CustomerAccountType
-  /** Présent si JWT branché */
-  token?: string
-  /** true = stocké localement (mode démo) */
+  /** Display-only state; production authentication is held in an HttpOnly cookie. */
   demo: boolean
 }
 
@@ -66,190 +39,49 @@ export class ApiError extends Error {
   }
 }
 
-const DEMO_ACCOUNTS_KEY = 'crin-vert-demo-accounts'
-const SESSION_KEY = 'crin-vert-session'
+const SESSION_KEY = 'equinutrition-session-profile'
 
-interface DemoAccount {
-  id: string
-  email: string
-  password: string
-  firstName: string
-  lastName: string
-  accountType: CustomerAccountType
-  company?: string
-  vat?: string
-  newsletter?: boolean
-  createdAt: string
+function rethrowApiError(error: unknown): never {
+  if (error instanceof StorefrontApiError) throw new ApiError(error.message, error.status)
+  throw error
 }
 
-function readDemoAccounts(): DemoAccount[] {
+/** Starts email verification. The customer can log in only after confirming their address. */
+export async function registerCustomer(payload: RegisterCustomerPayload): Promise<void> {
   try {
-    const raw = localStorage.getItem(DEMO_ACCOUNTS_KEY)
-    return raw ? (JSON.parse(raw) as DemoAccount[]) : []
+    await registerAccount(payload)
+  } catch (error) {
+    rethrowApiError(error)
+  }
+}
+
+export async function loginCustomer(email: string, password: string): Promise<CustomerSession> {
+  if (!apiConfigured) throw new ApiError('La connexion est momentanément indisponible.', 503)
+  try {
+    const { user } = await loginAccount(email.trim(), password)
+    const session: CustomerSession = { ...user, demo: false }
+    persistSession(session)
+    return session
+  } catch (error) {
+    rethrowApiError(error)
+  }
+}
+
+export async function refreshSession(): Promise<CustomerSession | null> {
+  if (!apiConfigured) return null
+  try {
+    const { user } = await getCurrentAccount()
+    const session: CustomerSession = { ...user, demo: false }
+    persistSession(session)
+    return session
   } catch {
-    return []
+    localStorage.removeItem(SESSION_KEY)
+    return null
   }
-}
-
-function writeDemoAccounts(list: DemoAccount[]) {
-  localStorage.setItem(DEMO_ACCOUNTS_KEY, JSON.stringify(list))
-}
-
-function sessionFromDemo(acc: DemoAccount): CustomerSession {
-  return {
-    id: acc.id,
-    email: acc.email,
-    firstName: acc.firstName,
-    lastName: acc.lastName,
-    accountType: acc.accountType,
-    demo: true,
-  }
-}
-
-/** Crée un client WooCommerce (ou en local si API non configurée). */
-export async function registerCustomer(
-  payload: RegisterCustomerPayload,
-): Promise<CustomerSession> {
-  if (!isConfigured) {
-    // —— Mode démo : localStorage ——————————————————————
-    const accounts = readDemoAccounts()
-    const email = payload.email.trim().toLowerCase()
-    if (accounts.some((a) => a.email === email)) {
-      throw new ApiError('Un compte existe déjà avec cette adresse e-mail.', 400, 'email_exists')
-    }
-    const account: DemoAccount = {
-      id: `demo-${Date.now()}`,
-      email,
-      password: payload.password,
-      firstName: payload.firstName.trim(),
-      lastName: payload.lastName.trim(),
-      accountType: payload.accountType,
-      company: payload.company,
-      vat: payload.vat,
-      newsletter: payload.newsletter,
-      createdAt: new Date().toISOString(),
-    }
-    accounts.push(account)
-    writeDemoAccounts(accounts)
-    const session = sessionFromDemo(account)
-    persistSession(session)
-    return session
-  }
-
-  // —— WooCommerce REST ————————————————————————————————
-  const body: Record<string, unknown> = {
-    email: payload.email.trim(),
-    first_name: payload.firstName.trim(),
-    last_name: payload.lastName.trim(),
-    username: payload.email.trim(),
-    password: payload.password,
-    meta_data: [
-      { key: 'account_type', value: payload.accountType },
-      { key: 'newsletter', value: payload.newsletter ? '1' : '0' },
-    ],
-  }
-
-  if (payload.accountType === 'professionnel') {
-    body.billing = {
-      company: payload.company?.trim() || '',
-      email: payload.email.trim(),
-      first_name: payload.firstName.trim(),
-      last_name: payload.lastName.trim(),
-    }
-    ;(body.meta_data as { key: string; value: string }[]).push(
-      { key: 'vat_number', value: payload.vat?.trim() || '' },
-      { key: 'billing_vat', value: payload.vat?.trim() || '' },
-    )
-  }
-
-  const res = await fetch(`${WC_URL}/v1/auth/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...authHeader(),
-    },
-    body: JSON.stringify(body),
-  })
-
-  const data = await res.json().catch(() => ({}))
-
-  if (!res.ok) {
-    const msg =
-      data?.message ||
-      (data?.code === 'registration-error-email-exists'
-        ? 'Un compte existe déjà avec cette adresse e-mail.'
-        : 'Impossible de créer le compte. Réessayez plus tard.')
-    throw new ApiError(msg, res.status, data?.code)
-  }
-
-  const session: CustomerSession = {
-    id: data.id,
-    email: data.email,
-    firstName: data.firstName || data.first_name || payload.firstName,
-    lastName: data.lastName || data.last_name || payload.lastName,
-    accountType: payload.accountType,
-    demo: false,
-  }
-  persistSession(session)
-  return session
-}
-
-/** Connexion : JWT si configuré, sinon comptes démo localStorage. */
-export async function loginCustomer(
-  email: string,
-  password: string,
-): Promise<CustomerSession> {
-  const normalized = email.trim().toLowerCase()
-
-  // JWT (plugin WordPress)
-  if (JWT_ENDPOINT && isConfigured) {
-    const res = await fetch(JWT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: email.trim(), password }),
-    })
-    const data = await res.json().catch(() => ({}))
-    if (!res.ok) {
-      throw new ApiError(
-        data?.message || 'Identifiants incorrects.',
-        res.status,
-        data?.code,
-      )
-    }
-    const session: CustomerSession = {
-      id: data.id ?? data.user_id ?? data.data?.user?.id ?? email,
-      email: data.email || data.user_email || email,
-      firstName: data.firstName || data.user_display_name?.split(' ')[0] || '',
-      lastName: data.lastName || data.user_display_name?.split(' ').slice(1).join(' ') || '',
-      accountType: data.accountType || 'particulier',
-      token: data.token,
-      demo: false,
-    }
-    persistSession(session)
-    return session
-  }
-
-  // Mode démo
-  if (!isConfigured) {
-    const accounts = readDemoAccounts()
-    const acc = accounts.find((a) => a.email === normalized && a.password === password)
-    if (!acc) {
-      throw new ApiError('E-mail ou mot de passe incorrect.', 401, 'invalid_credentials')
-    }
-    const session = sessionFromDemo(acc)
-    persistSession(session)
-    return session
-  }
-
-  // WC configuré mais pas de JWT : on ne peut pas authentifier côté client de façon sûre
-  throw new ApiError(
-    'Connexion API non configurée. Ajoutez le plugin JWT Authentication et VITE_WC_JWT_ENDPOINT, ou testez en mode démo (sans clés WC).',
-    501,
-    'auth_not_configured',
-  )
 }
 
 export function persistSession(session: CustomerSession) {
+  // No credential is stored in the browser; this only avoids a visual flash on reload.
   localStorage.setItem(SESSION_KEY, JSON.stringify(session))
 }
 
@@ -264,4 +96,7 @@ export function loadSession(): CustomerSession | null {
 
 export function clearSession() {
   localStorage.removeItem(SESSION_KEY)
+  void logoutAccount().catch(() => undefined)
 }
+
+export const wooCommerceConfigured = apiConfigured

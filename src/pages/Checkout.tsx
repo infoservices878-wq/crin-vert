@@ -96,7 +96,7 @@ export function Checkout() {
                       customer: { firstName: data.firstName, lastName: data.lastName, email: data.email, newsletter: data.newsletter },
                       shippingAddress: data.address,
                       shippingMethod: carrier,
-                      items: items.map((item) => ({ productId: item.product.id, sku: item.product.sku, variation: item.size, quantity: item.qty })),
+                      items: items.map((item) => ({ productId: item.product.id, name: item.product.name, variation: item.size, price: item.pricePerUnit, quantity: item.qty })),
                       successUrl: `${window.location.origin}/commande-confirmee`,
                       cancelUrl: `${window.location.origin}/commande`,
                     })

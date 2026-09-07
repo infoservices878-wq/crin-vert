@@ -25,6 +25,7 @@ async function request<T>(path: string, init: RequestInit): Promise<T> {
   }
   const response = await fetch(`${API_URL}${path}`, {
     ...init,
+    credentials: 'include',
     headers: { 'Content-Type': 'application/json', ...init.headers },
   })
   const body = await response.json().catch(() => ({}))
@@ -32,6 +33,58 @@ async function request<T>(path: string, init: RequestInit): Promise<T> {
     throw new StorefrontApiError(body.message || 'Une erreur est survenue. Réessayez dans quelques instants.', response.status)
   }
   return body as T
+}
+
+export interface ApiCustomer {
+  id: number
+  email: string
+  firstName: string
+  lastName: string
+  accountType: 'particulier' | 'professionnel'
+  demo: false
+}
+
+export interface RegisterAccountPayload {
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  accountType: 'particulier' | 'professionnel'
+  company?: string
+  vat?: string
+  newsletter?: boolean
+}
+
+export function registerAccount(payload: RegisterAccountPayload) {
+  return request<{ success: true; verification_required: true; message: string }>('/v1/auth/register', {
+    method: 'POST', body: JSON.stringify(payload),
+  })
+}
+
+export function loginAccount(email: string, password: string) {
+  return request<{ success: true; user: ApiCustomer }>('/v1/auth/login', {
+    method: 'POST', body: JSON.stringify({ email, password }),
+  })
+}
+
+export function logoutAccount() {
+  return request<{ success: true }>('/v1/auth/logout', { method: 'POST' })
+}
+
+export function getCurrentAccount() {
+  return request<{ success: true; user: ApiCustomer }>('/v1/auth/me', { method: 'GET' })
+}
+
+export function verifyEmail(key: string, email: string) {
+  return request<{ success: true; message: string }>('/v1/auth/verify-email', {
+    method: 'POST', body: JSON.stringify({ key, email }),
+  })
+}
+
+export function resetPassword(key: string, login: string, password: string) {
+  return request<{ success: true }>('/v1/auth/reset-password', {
+    method: 'POST', body: JSON.stringify({ key, login, password }),
+  })
 }
 
 export function sendContactMessage(payload: { name: string; email: string; phone?: string; subject: string; message: string }) {
@@ -46,7 +99,7 @@ export interface CheckoutPayload {
   customer: { firstName: string; lastName: string; email: string; newsletter: boolean }
   shippingAddress: { line1: string; line2: string; postalCode: string; city: string; country: string; phone: string }
   shippingMethod: string
-  items: { productId: string; sku: string; variation: string; quantity: number }[]
+  items: { productId: string; name: string; variation: string; price: number; quantity: number }[]
   successUrl: string
   cancelUrl: string
 }

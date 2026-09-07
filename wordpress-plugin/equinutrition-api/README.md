@@ -94,9 +94,9 @@ Pour le paiement par virement, remplacez impérativement les trois valeurs banca
 
 ## Produits et commandes
 
-Les fiches produits restent dans `src/data/products.ts` côté React. Le fichier `catalog.php` contient la liste blanche serveur des SKU et des prix de base autorisés. Le plugin refuse une référence inconnue et recalcule le prix côté serveur selon le conditionnement; il ne fait jamais confiance au prix envoyé par le navigateur.
+Les fiches produits restent dans `src/data/products.ts` côté React. Comme pour Ossau Bois, le plugin reçoit les lignes de commande (`productId`, nom, conditionnement, prix unitaire et quantité) et crée les lignes WooCommerce correspondantes. Les SKU ne sont ni transmis, ni enregistrés, ni affichés côté serveur.
 
-Les produits n’ont donc pas besoin d’exister dans le catalogue WooCommerce pour cette version. WooCommerce sert à stocker la commande et à fournir la page de paiement. Si le catalogue local change, mettez à jour `catalog.php` en même temps que `src/data/products.ts`.
+Les produits n’ont donc pas besoin d’exister dans le catalogue WooCommerce pour cette version. WooCommerce sert à stocker les commandes et à envoyer les e-mails transactionnels.
 
 ## Sécurité avant mise en production
 
@@ -107,3 +107,19 @@ Les produits n’ont donc pas besoin d’exister dans le catalogue WooCommerce p
 - Utiliser un compte WordPress dédié à l’API, sans administrateur global si possible.
 - Ne jamais publier de clés WooCommerce, Stripe, SMTP ou JWT dans `dist/`.
 - Tester inscription, vérification e-mail, connexion, reset, commande et suivi avec de vraies données de test.
+
+## Sessions et validation serveur
+
+L’API dépose la session dans un cookie `HttpOnly`, `Secure`, `SameSite=Lax` : le frontend ne stocke aucun jeton d’authentification. HTTPS est donc obligatoire sur `boutique.equinutrition.fr`.
+
+Le panier est contrôlé côté serveur avant la création d’une commande : identifiant frontend, nom, quantité, prix strictement positif et transport. Les SKU ne font pas partie de ce flux.
+
+La redirection vers `/commande-confirmee` contient uniquement la référence de commande. L’e-mail, le total et le détail restent dans WooCommerce et dans l’e-mail transactionnel.
+
+## Sessions et validation serveur
+
+L’API dépose la session dans un cookie `HttpOnly`, `Secure`, `SameSite=Lax` : le frontend ne stocke aucun jeton d’authentification. Le HTTPS est donc obligatoire sur `boutique.equinutrition.fr`.
+
+Le panier est contrôlé avant toute création de commande : identifiant frontend, nom, conditionnement, quantité, prix strictement positif et mode de livraison. Les SKU ne font pas partie de ce flux.
+
+La redirection de confirmation ne contient plus l’e-mail, le montant ni le détail de la commande : ces données personnelles restent dans WooCommerce et dans l’e-mail transactionnel.

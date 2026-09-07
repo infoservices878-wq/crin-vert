@@ -84,8 +84,8 @@ export function Register() {
         newsletter,
       })
       setSuccess(true)
-      toast('Compte créé — vous êtes connecté', 'success')
-      setTimeout(() => navigate('/'), 1200)
+      toast('Vérifiez votre e-mail pour activer votre compte', 'success')
+      setTimeout(() => navigate('/connexion'), 1200)
     } catch (err) {
       const msg =
         err instanceof ApiError
@@ -359,7 +359,7 @@ export function Register() {
               disabled={loading || success}
               className="focus-ring w-full bg-hunter-900 py-3.5 font-display font-semibold text-oat-50 transition-colors hover:bg-hunter-800 disabled:opacity-60"
             >
-              {loading ? 'Création…' : success ? 'Compte créé ✓' : 'Enregistrer'}
+              {loading ? 'Création…' : success ? 'E-mail envoyé ✓' : 'Créer mon compte'}
             </button>
           </form>
 
@@ -370,7 +370,7 @@ export function Register() {
           )}
           {success && (
             <p className="mt-5 rounded-sm border border-hunter-800/15 bg-oat-100 px-3 py-2.5 text-center text-sm text-hunter-900">
-              Compte créé. Vous êtes connecté — redirection…
+              Compte créé. Consultez votre e-mail pour confirmer votre adresse, puis connectez-vous.
             </p>
           )}
 

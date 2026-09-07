@@ -13,9 +13,9 @@ export function OrderConfirmation() {
   const state = (location.state || { total: 0, itemCount: 0 }) as OrderConfirmationState
   const params = new URLSearchParams(location.search)
   const orderId = state?.orderId || params.get('order') || params.get('order_number')
-  const email = state?.email || params.get('email') || undefined
-  const total = state?.total || Number(params.get('total') || 0)
-  const itemCount = state?.itemCount || Number(params.get('items') || 0)
+  const email = state?.email
+  const total = state?.total
+  const itemCount = state?.itemCount
 
   if (!orderId) {
     return <Navigate to="/" replace />
@@ -34,7 +34,7 @@ export function OrderConfirmation() {
       </h1>
       <p className="mt-2 text-ink-600">
         Merci pour votre confiance. Votre demande a bien été enregistrée sous la référence <strong>{orderId}</strong>.
-        Un récapitulatif sera envoyé à {email || 'votre adresse e-mail'}.
+        Un récapitulatif contenant les modalités de règlement sera envoyé à l’adresse utilisée lors de la commande.
       </p>
 
       <div className="mt-8 border border-hunter-800/10 bg-oat-50 px-6 py-5 text-left">
@@ -43,16 +43,16 @@ export function OrderConfirmation() {
         </p>
         <p className="mt-1 font-mono text-xl font-bold text-hunter-900">{orderId}</p>
         <dl className="mt-4 space-y-2 text-sm">
-          <div className="flex justify-between">
+          {itemCount !== undefined && <div className="flex justify-between">
             <dt className="text-ink-600">Articles</dt>
-            <dd className="font-medium text-hunter-900">{itemCount || '—'}</dd>
-          </div>
-          <div className="flex justify-between">
+            <dd className="font-medium text-hunter-900">{itemCount}</dd>
+          </div>}
+          {total !== undefined && <div className="flex justify-between">
             <dt className="text-ink-600">Total</dt>
             <dd className="font-mono font-semibold text-hunter-900">
               {total.toFixed(2)} €
             </dd>
-          </div>
+          </div>}
           {email && (
             <div className="flex justify-between gap-4">
               <dt className="text-ink-600">Confirmation</dt>
