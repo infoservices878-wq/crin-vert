@@ -4,7 +4,11 @@ import { OptimizedImage } from './OptimizedImage'
 
 /** Uses only the packshots associated with the product: no decorative external photos. */
 function getGalleryImages(product: Product): string[] {
-  if (product.images && product.images.length > 0) return product.images.slice(0, 4)
+  const productImages = product.images?.filter((image) => {
+    const value = image.toLowerCase()
+    return !value.includes('/images/site/') && !value.includes('horse') && !value.includes('cheval')
+  })
+  if (productImages && productImages.length > 0) return productImages.slice(0, 4)
   return product.image ? [product.image] : []
 }
 

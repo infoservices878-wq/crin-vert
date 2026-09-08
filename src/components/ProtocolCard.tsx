@@ -7,8 +7,11 @@ import { useToast } from '../context/ToastContext'
 import { calculateAdjustedPrice } from '../lib/pricing'
 
 export function ProtocolCard({ protocol }: { protocol: Protocol }) {
-    const { addItem } = useCart()
+  const { addItem } = useCart()
   const { toast } = useToast()
+  const protocolProducts = [...new Set(protocol.categories)]
+    .map((category) => PRODUCTS.find((product) => product.category === category))
+    .filter((product): product is NonNullable<typeof product> => Boolean(product))
 
     const handleAdd = () => {
     try {
@@ -17,10 +20,7 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
         return
       }
 
-      const uniqueCats = [...new Set(protocol.categories)]
-      const products = uniqueCats
-        .map((cat) => PRODUCTS.find((p) => p.category === cat))
-        .filter((p): p is NonNullable<typeof p> => Boolean(p))
+      const products = protocolProducts
 
       if (products.length === 0) {
         toast(
@@ -57,9 +57,9 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
       </span>
 
       <div className="flex gap-2">
-        {protocol.categories.slice(0, 3).map((cat, i) => (
-          <div key={i} className="w-1/3">
-            <ProductIllustration category={cat} compact />
+        {protocolProducts.slice(0, 3).map((product) => (
+          <div key={product.id} className="w-1/3">
+            <ProductIllustration product={product} compact />
           </div>
         ))}
       </div>
