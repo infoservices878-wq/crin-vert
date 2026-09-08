@@ -12,6 +12,19 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
   const protocolProducts = [...new Set(protocol.categories)]
     .map((category) => PRODUCTS.find((product) => product.category === category))
     .filter((product): product is NonNullable<typeof product> => Boolean(product))
+  const protocolImageProducts = protocol.categories
+    .map((category, index) => PRODUCTS.find(
+      (product) => product.category === category && (
+        index === 0 || !protocol.categories.slice(0, index).includes(product.category)
+      ),
+    ))
+    .filter((product): product is NonNullable<typeof product> => Boolean(product))
+  const imageProducts = [
+    ...protocolImageProducts,
+    ...PRODUCTS.filter(
+      (product) => protocol.categories.includes(product.category) && !protocolImageProducts.includes(product),
+    ),
+  ].slice(0, 3)
 
     const handleAdd = () => {
     try {
@@ -57,7 +70,7 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
       </span>
 
       <div className="flex gap-2">
-        {protocolProducts.slice(0, 3).map((product) => (
+        {imageProducts.map((product) => (
           <div key={product.id} className="w-1/3">
             <ProductIllustration product={product} compact />
           </div>
