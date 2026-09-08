@@ -8,6 +8,13 @@
  * Ex: "1 palette – 50 sacs de 20 kg" → 50
  */
 export function extractSizeMultiplier(sizeString: string): number {
+  // Normalize liquid volumes so that 1 L is priced as two 500 ml units.
+  const volumeMatch = sizeString.match(/(\d+(?:[.,]\d+)?)\s*(ml|l)\b/i)
+  if (volumeMatch) {
+    const volume = Number(volumeMatch[1].replace(',', '.'))
+    return volumeMatch[2].toLowerCase() === 'l' ? volume * 1000 : volume
+  }
+
   // Si c'est une palette, extraire le nombre de sacs après "sacs"
   if (sizeString.includes('palette')) {
     const match = sizeString.match(/(\d+)\s*sacs/)
