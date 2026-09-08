@@ -53,7 +53,9 @@ export function ProductIllustration({
   const cat = product?.category ?? category!
   const style = CATEGORY_STYLE[cat]
   const Icon = style.icon
-  const rawSrc = product?.image || CATEGORY_FALLBACK[cat]
+  const productImage = product?.image
+  const hasUsableProductImage = productImage && !productImage.includes('drive.google.com/drive/folders/')
+  const rawSrc = hasUsableProductImage ? productImage : CATEGORY_FALLBACK[cat]
   const alt = product ? product.name : `Illustration ${CATEGORY_LABELS[cat]}`
   const context = compact ? 'compact' : priority ? 'detail' : 'card'
 

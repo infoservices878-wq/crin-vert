@@ -29,12 +29,15 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<CustomerSession | null>(() => loadSession())
+  const hasSession = user !== null
 
   useEffect(() => {
+    if (!hasSession) return
+
     let active = true
     void refreshSession().then((session) => { if (active) setUser(session) })
     return () => { active = false }
-  }, [])
+  }, [hasSession])
 
   const login = useCallback(async (email: string, password: string) => {
     const session = await loginCustomer(email, password)

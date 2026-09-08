@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  Wheat, Leaf, Activity, Heart,
+  Wheat, Leaf, Activity, Heart, Shield, Droplets,
   ChevronLeft, ChevronRight, HeartHandshake, Users, Sprout,
 } from 'lucide-react'
 import { PRODUCTS } from '../data/products'
 import { PROTOCOLS } from '../data/protocols'
-import { CATEGORY_LABELS, type Category } from '../types'
+import { CATEGORY_LABELS, CATEGORY_ORDER, type Category } from '../types'
 import { ProductCard } from '../components/ProductCard'
 import { ProtocolCard } from '../components/ProtocolCard'
 import { CompositionLabel } from '../components/CompositionLabel'
@@ -23,6 +23,8 @@ const ICONS: Partial<Record<Category, typeof Wheat>> = {
   digestion: Leaf,
   articulations: Activity,
   senior: Heart,
+  sabots: Shield,
+  electrolytes: Droplets,
 }
 
 const HERO_SLIDES = [
@@ -57,7 +59,7 @@ const TESTIMONIALS = [
 
 export function Home() {
   usePageMeta()
-  const categories = (Object.keys(ICONS) as Category[])
+  const categories = CATEGORY_ORDER
   const featured = PRODUCTS.slice(0, 6)
   const [slide, setSlide] = useState(0)
   const [review, setReview] = useState(0)

@@ -47,6 +47,7 @@ export function HeaderSearch() {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
           placeholder="Saisissez un mot clé ou une référence article…"
+          aria-label="Rechercher un produit"
           className="focus-ring w-full bg-transparent text-sm text-hunter-900 placeholder:text-ink-600/70 outline-none"
           autoComplete="off"
         />
