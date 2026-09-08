@@ -1,4 +1,4 @@
-import { MessageCircle, Timer, ClipboardCheck, Building2 } from 'lucide-react'
+import { MessageCircle, Timer, ClipboardCheck } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const ITEMS = [
@@ -19,12 +19,6 @@ const ITEMS = [
     title: 'Choix éclairé',
     text: 'Composition, utilisation et informations nutritionnelles consultables avant l’achat.',
     to: '/conseils',
-  },
-  {
-    icon: Building2,
-    title: 'Virement bancaire',
-    text: 'Coordonnées et référence envoyées après confirmation.',
-    to: '/paiement',
   },
 ]
 

@@ -25,7 +25,7 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
-  const [categoriesOpen, setCategoriesOpen] = useState(false)
+  const [categoriesOpen, setCategoriesOpen] = useState(true)
   const { count } = useCart()
   const { isAuthenticated, user } = useAuth()
   const { count: wishCount } = useWishlist()
@@ -151,7 +151,7 @@ export function Header() {
               type="button"
               onClick={() => {
                 setMobileOpen((v) => {
-                  if (v) setCategoriesOpen(false)
+                  setCategoriesOpen(!v)
                   return !v
                 })
               }}
