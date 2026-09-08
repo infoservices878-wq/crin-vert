@@ -258,7 +258,7 @@ export function Header() {
                   />
                 </button>
                 {categoriesOpen && (
-                  <ul className="mb-4 max-h-[40vh] space-y-0.5 overflow-y-auto overscroll-contain border-l border-oat-50/15 pl-3">
+                  <ul className="mb-4 space-y-0.5 border-l border-oat-50/15 pl-3">
                     <li>
                       <Link
                         to="/catalogue"

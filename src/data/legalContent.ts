@@ -13,9 +13,9 @@ export interface LegalPageContent {
 }
 
 const COMPANY = 'NUTRITION EQUINE, SARL au capital de 2 000 €, inscrite au RCS de Chartres sous le n° 998 932 008'
-const ADDRESS = 'Lieu-dit La Folie, 28130 Maintenon, France'
-const CONTACT = 'contact@equinutrition.fr'
-const UPDATED = 'Dernière mise à jour : septembre 2026'
+const ADDRESS = 'La Folie, 28130 Maintenon, France'
+const CONTACT = 'info@equinutrition.fr'
+const UPDATED = 'Dernière mise à jour : Mars 2026'
 
 export const LEGAL_PAGES: Record<string, LegalPageContent> = {
   'mentions-legales': {
@@ -30,13 +30,6 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
           `Le site https://equinutrition.fr (le « Site ») est édité par ${COMPANY}.`,
           `Siège social : ${ADDRESS}. SIREN : 998 932 008. SIRET du siège : 998 932 008 00019. TVA intracommunautaire : FR48 998 932 008. Code APE : 10.91Z — Fabrication d’aliments pour animaux de ferme.`,
           `La directrice de la publication est Mme Clémentine TOCZE-THIROUIN, gérante. Pour toute demande : ${CONTACT}.`,
-        ],
-      },
-      {
-        heading: 'Hébergement et exploitation technique',
-        paragraphs: [
-          'Le frontend du Site est hébergé chez Hostinger. L’API de la boutique et l’administration WooCommerce sont exploitées sur le sous-domaine boutique.equinutrition.fr.',
-          'L’entité Hostinger contractante et son adresse sont celles figurant sur le bon de commande ou la facture d’hébergement de Nutrition Equine. Elles doivent être conservées dans le registre interne des sous-traitants et communiquées sur demande lorsque la réglementation l’exige.',
         ],
       },
       {
@@ -227,7 +220,7 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Modèle de déclaration de rétractation',
         paragraphs: [
-          'À l’attention de NUTRITION EQUINE, Lieu-dit La Folie, 28130 Maintenon, France, ou par e-mail à contact@equinutrition.fr : « Je vous notifie par la présente ma rétractation du contrat portant sur la vente du ou des produits ci-dessous : [désignation], commandé(s) le [date], reçu(s) le [date], nom du consommateur : [nom], adresse : [adresse], date et signature si envoi postal. »',
+          'À l’attention de NUTRITION EQUINE, Lieu-dit La Folie, 28130 Maintenon, France, ou par e-mail à info@equinutrition.fr : « Je vous notifie par la présente ma rétractation du contrat portant sur la vente du ou des produits ci-dessous : [désignation], commandé(s) le [date], reçu(s) le [date], nom du consommateur : [nom], adresse : [adresse], date et signature si envoi postal. »',
         ],
       },
     ],
