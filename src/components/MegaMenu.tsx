@@ -3,12 +3,8 @@ import {
   Wheat,
   Leaf,
   Activity,
-  Wind,
-  Zap,
   Heart,
   Shield,
-  Sparkles,
-  Moon,
   Droplets,
 } from 'lucide-react'
 import { CATEGORY_LABELS, CATEGORY_ORDER, type Category } from '../types'
@@ -17,12 +13,8 @@ const ICONS: Record<Category, typeof Wheat> = {
   alimentation: Wheat,
   digestion: Leaf,
   articulations: Activity,
-  respiration: Wind,
-  recuperation: Zap,
   senior: Heart,
   sabots: Shield,
-  'robe-peau': Sparkles,
-  stress: Moon,
   electrolytes: Droplets,
 }
 
@@ -30,12 +22,8 @@ const BLURBS: Record<Category, string> = {
   alimentation: 'CMV et minéraux du quotidien',
   digestion: 'Confort gastrique et flore',
   articulations: 'Mobilité et souplesse',
-  respiration: 'Voies respiratoires dégagées',
-  recuperation: "Après l'effort",
   senior: "Pour les chevaux d'âge",
   sabots: 'Cornée et fourchette',
-  'robe-peau': 'Brillance et confort cutané',
-  stress: 'Calme et transports',
   electrolytes: 'Réhydratation',
 }
 

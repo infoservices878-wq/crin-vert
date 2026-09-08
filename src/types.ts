@@ -2,12 +2,8 @@ export type Category =
   | 'alimentation'
   | 'digestion'
   | 'articulations'
-  | 'respiration'
-  | 'recuperation'
   | 'senior'
   | 'sabots'
-  | 'robe-peau'
-  | 'stress'
   | 'electrolytes'
 
 export interface CompositionItem {
@@ -65,12 +61,8 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   alimentation: 'Aliments & CMV',
   digestion: 'Confort digestif',
   articulations: 'Articulations & mobilité',
-  respiration: 'Respiration',
-  recuperation: 'Récupération & sport',
   senior: 'Sénior',
   sabots: 'Sabots & fourchette',
-  'robe-peau': 'Robe, peau & crin',
-  stress: 'Stress & comportement',
   electrolytes: 'Électrolytes & hydratation',
 }
 
@@ -79,11 +71,7 @@ export const CATEGORY_ORDER: Category[] = [
   'alimentation',
   'digestion',
   'articulations',
-  'respiration',
-  'recuperation',
   'electrolytes',
   'sabots',
-  'robe-peau',
-  'stress',
   'senior',
 ]

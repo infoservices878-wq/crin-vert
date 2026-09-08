@@ -12,10 +12,10 @@ export const PROTOCOLS: Protocol[] = [
   },
   {
     id: 'p2',
-    name: 'Protocole Sport & Récupération',
-    description: 'Pour les chevaux au travail : minéraux, tonus, récupération.',
+    name: 'Protocole Performance',
+    description: 'Pour les chevaux au travail : minéraux, tonus et articulations.',
     duration: '3 mois',
-    categories: ['alimentation', 'recuperation', 'articulations'],
+    categories: ['alimentation', 'articulations'],
     price: 129,
     compareAtPrice: 159,
   },

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  Wheat, Leaf, Activity, Wind, Zap, Heart,
+  Wheat, Leaf, Activity, Heart,
   ChevronLeft, ChevronRight, HeartHandshake, Users, Sprout,
 } from 'lucide-react'
 import { PRODUCTS } from '../data/products'
@@ -22,8 +22,6 @@ const ICONS: Partial<Record<Category, typeof Wheat>> = {
   alimentation: Wheat,
   digestion: Leaf,
   articulations: Activity,
-  respiration: Wind,
-  recuperation: Zap,
   senior: Heart,
 }
 

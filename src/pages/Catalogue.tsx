@@ -72,7 +72,7 @@ export function Catalogue() {
   const [page, setPage] = useState(1)
   usePageMeta(
     activeCategory ? CATEGORY_LABELS[activeCategory] : 'Catalogue',
-    'Parcourez nos compléments et aliments pour chevaux : CMV, digestion, articulations, sabots, stress…',
+    'Parcourez nos compléments et aliments pour chevaux : CMV, digestion, articulations, sabots et électrolytes.',
   )
 
   const categories = CATEGORY_ORDER

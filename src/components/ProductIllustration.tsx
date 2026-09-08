@@ -2,12 +2,8 @@ import {
   Wheat,
   Leaf,
   Activity,
-  Wind,
-  Zap,
   Heart,
   Shield,
-  Sparkles,
-  Moon,
   Droplets,
   type LucideIcon,
 } from 'lucide-react'
@@ -22,12 +18,8 @@ const CATEGORY_STYLE: Record<
   alimentation: { icon: Wheat, badge: '#f2a733', accent: '#2c5690', label: 'CMV' },
   digestion: { icon: Leaf, badge: '#24a45c', accent: '#145c34', label: 'Digestion' },
   articulations: { icon: Activity, badge: '#e0568c', accent: '#163254', label: 'Articulations' },
-  respiration: { icon: Wind, badge: '#2fb6c4', accent: '#146470', label: 'Respiration' },
-  recuperation: { icon: Zap, badge: '#f2a733', accent: '#c8102e', label: 'Récupération' },
   senior: { icon: Heart, badge: '#e0568c', accent: '#1e4270', label: 'Sénior' },
   sabots: { icon: Shield, badge: '#8b6914', accent: '#5c4a1a', label: 'Sabots' },
-  'robe-peau': { icon: Sparkles, badge: '#c45c8a', accent: '#7a2f52', label: 'Robe & crin' },
-  stress: { icon: Moon, badge: '#6b7fd7', accent: '#3d4a8a', label: 'Stress' },
   electrolytes: { icon: Droplets, badge: '#2fb6c4', accent: '#0e5c66', label: 'Électrolytes' },
 }
 
@@ -36,12 +28,8 @@ const CATEGORY_FALLBACK: Record<Category, string> = {
   alimentation: '/images/site/horses-field.jpg',
   digestion: '/images/site/horse-calm.jpg',
   articulations: '/images/site/horses-pasture.jpg',
-  respiration: '/images/site/horses-field.jpg',
-  recuperation: '/images/site/horse-calm.jpg',
   senior: '/images/site/horses-pasture.jpg',
   sabots: '/images/site/horses-field.jpg',
-  'robe-peau': '/images/site/horse-calm.jpg',
-  stress: '/images/site/horses-pasture.jpg',
   electrolytes: '/images/site/horses-field.jpg',
 }
 

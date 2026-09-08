@@ -88,7 +88,7 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
         heading: '2. Prix, disponibilité et commande',
         paragraphs: [
           'Les prix sont exprimés en euros TTC, hors frais de livraison éventuellement applicables. Les frais, modalités de livraison et total de la commande sont présentés avant la confirmation. Les offres sont valables tant qu’elles sont visibles sur le Site et dans la limite des stocks disponibles.',
-          'Le client vérifie le détail de son panier et renseigne les informations nécessaires à l’exécution de sa commande. La réception de la demande est confirmée par e-mail. Nutrition Equine peut refuser ou annuler une demande en cas d’information manifestement erronée, d’indisponibilité, de défaut de règlement antérieur ou de suspicion de fraude, en en informant le client.',
+          'Le client vérifie le détail de son panier et renseigne les informations nécessaires à l’exécution de sa commande. La réception de la demande est confirmée par e-mail. Nutrition Equine peut refuser ou annuler une demande en cas d’information manifestement erronée, d’indisponibilité, de défaut de règlement antérieur ou de suspicion de fraude, et en informant le client.',
         ],
       },
       {

@@ -3,7 +3,7 @@ import { SITE_URL } from '../config/site'
 
 const DEFAULT_TITLE = 'Nutrition Équine — Compléments naturels pour chevaux'
 const DEFAULT_DESC =
-  'Compléments et aliments naturels pour chevaux : CMV, digestion, articulations, sabots, stress et électrolytes. Fabriqué en France.'
+  'Compléments et aliments naturels pour chevaux : CMV, digestion, articulations, sabots et électrolytes. Fabriqué en France.'
 
 /**
  * Met à jour title + meta description (et OG de base) par page.

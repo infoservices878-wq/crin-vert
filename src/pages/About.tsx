@@ -65,8 +65,8 @@ export function About() {
             <p className="mt-4 text-sm leading-relaxed text-ink-900">
               Nutrition Équine est née d’un constat simple : trop de gammes opaques, des compositions
               difficiles à lire, et peu de lien entre le terrain et le laboratoire. Nous avons
-              choisi de bâtir une offre lisible — CMV, digestion, articulations, respiration,
-              sabots, robe, stress, électrolytes — avec des posologies nettes et des actifs
+              choisi de bâtir une offre lisible — CMV, digestion, articulations, sabots,
+              électrolytes — avec des posologies nettes et des actifs
               choisis pour leur pertinence.
             </p>
             <p className="mt-3 text-sm leading-relaxed text-ink-900">
@@ -156,7 +156,7 @@ export function About() {
               Découvrez la gamme
             </h2>
             <p className="mt-1 text-sm text-ink-600">
-              CMV, digestion, articulations, sabots, stress, électrolytes…
+              CMV, digestion, articulations, sabots, électrolytes…
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
