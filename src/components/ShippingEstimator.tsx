@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { COUNTRIES } from '../data/countries'
 import { CarrierList } from './CarrierList'
 
-const FREE_SHIPPING_THRESHOLD = 79
+const FREE_SHIPPING_THRESHOLD = 155
 
 export function ShippingEstimator({
   cartTotal,

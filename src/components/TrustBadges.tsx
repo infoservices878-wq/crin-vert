@@ -11,7 +11,7 @@ const ITEMS = [
   {
     icon: Timer,
     title: 'Livraison express',
-    text: 'Livraison en 24h ou 48h. Frais de port offerts dès 79 €.',
+    text: 'Livraison en 24h ou 48h. Frais de port offerts dès 155 €.',
     to: '/livraison',
   },
   {

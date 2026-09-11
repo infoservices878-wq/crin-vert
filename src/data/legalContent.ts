@@ -146,7 +146,7 @@ export const LEGAL_PAGES: Record<string, LegalPageContent> = {
       {
         heading: 'Préparation, frais et délais',
         paragraphs: [
-          'Les commandes sont préparées après réception et rapprochement du règlement. Les frais de livraison, le transporteur sélectionné et le délai indicatif sont affichés avant confirmation. La livraison est offerte en France métropolitaine à partir de 79 € de produits, sauf restriction clairement indiquée dans le panier.',
+          'Les commandes sont préparées après réception et rapprochement du règlement. Les frais de livraison, le transporteur sélectionné et le délai indicatif sont affichés avant confirmation. La livraison est offerte en France métropolitaine à partir de 155 € de produits, sauf restriction clairement indiquée dans le panier.',
           'Les délais de préparation et de transport sont exprimés en jours ouvrés. Ils peuvent être prolongés en période de forte activité, en cas d’intempérie, de contrôle douanier, de fermeture exceptionnelle ou de circonstances indépendantes de notre volonté.',
         ],
       },

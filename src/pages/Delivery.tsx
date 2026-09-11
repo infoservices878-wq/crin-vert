@@ -10,7 +10,7 @@ const STEPS = [
 
 const DELIVERY_POINTS = [
   'Frais affichés avant confirmation, selon l’adresse, le poids et le service choisi.',
-  'Livraison offerte en France métropolitaine dès 79 € de produits, sauf mention contraire dans le panier.',
+  'Livraison offerte en France métropolitaine dès 155 € de produits, sauf mention contraire dans le panier.',
   'Délais indicatifs en jours ouvrés : ils varient selon le transporteur, la destination et les contraintes logistiques.',
 ]
 

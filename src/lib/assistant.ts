@@ -38,7 +38,7 @@ const GENERAL_KNOWLEDGE: KnowledgeEntry[] = [
   {
     keywords: tokenize('livraison délai frais port expédition offerte gratuite combien temps'),
     answer:
-      "La livraison est offerte dès 79 € d'achat en France métropolitaine. Comptez 2 à 4 jours ouvrés en France, 3 à 5 jours pour la Belgique et le Luxembourg, et 5 à 8 jours pour la Suisse. Détails complets sur la page Livraison.",
+      "La livraison est offerte dès 155 € d'achat en France métropolitaine. Comptez 2 à 4 jours ouvrés en France, 3 à 5 jours pour la Belgique et le Luxembourg, et 5 à 8 jours pour la Suisse. Détails complets sur la page Livraison.",
   },
   {
     keywords: tokenize('retour remboursement rétractation renvoyer échanger annuler'),

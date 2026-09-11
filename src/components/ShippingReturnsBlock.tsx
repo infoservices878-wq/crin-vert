@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Truck, RotateCcw, ShieldCheck } from 'lucide-react'
 
-const FREE_SHIPPING = 79
+const FREE_SHIPPING = 155
 
 /**
  * Bloc confiance livraison / retours — fiche produit.
