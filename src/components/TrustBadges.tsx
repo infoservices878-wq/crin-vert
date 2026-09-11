@@ -25,7 +25,7 @@ const ITEMS = [
 export function TrustBadges() {
   return (
     <div className="border-t border-hunter-800/10 bg-oat-100">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 sm:px-6 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 sm:px-6 lg:grid-cols-3">
         {ITEMS.map(({ icon: Icon, title, text, to }) => {
           const content = (
             <div className="flex flex-col items-center text-center">

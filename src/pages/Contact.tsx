@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { Mail, MapPin, Lock, Truck, Zap, Check, Clock3, HelpCircle } from 'lucide-react'
+import { Mail, MapPin, Lock, Truck, Zap, Check, Clock3, HelpCircle, Phone } from 'lucide-react'
 import { ContactInfoCard } from '../components/ContactInfoCard'
 import {
   contactSchema,
@@ -72,8 +72,8 @@ export function Contact() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-3">
         <ContactInfoCard icon={Mail} title="Par e-mail" detail={CONTACT_EMAIL} />
-        <ContactInfoCard icon={MapPin} title="Notre siège" detail="Lieu-dit La Folie · 28130 Maintenon" />
-        <ContactInfoCard icon={Clock3} title="Notre délai" detail="Réponse sous 48 h ouvrées" />
+        <ContactInfoCard icon={Phone} title="Par Appel" detail="+33 7 48 24 88 69" />
+        <ContactInfoCard icon={Clock3} title="Notre délai" detail="Réponse sous 24 h ouvrées" />
       </div>
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_300px] lg:items-start">

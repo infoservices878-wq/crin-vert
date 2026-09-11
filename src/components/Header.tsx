@@ -82,12 +82,7 @@ export function Header() {
             >
               Notre approche
             </Link>
-            <Link
-              to="/contact"
-              className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
-            >
-              Contact
-            </Link>
+            
             <Link
               to="/bilan-equin"
               className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
@@ -99,6 +94,12 @@ export function Header() {
               className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
             >
               Conseils
+            </Link>
+            <Link
+              to="/contact"
+              className="focus-ring px-3 py-2 font-display text-sm font-semibold text-hunter-900 hover:text-leather-600"
+            >
+              Contact
             </Link>
           </nav>
 
