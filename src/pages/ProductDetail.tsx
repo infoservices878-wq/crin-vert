@@ -72,7 +72,7 @@ export function ProductDetail() {
   }
 
   const handleAdd = () => {
-    const adjustedPrice = calculateAdjustedPrice(product.price, product.format, size)
+    const adjustedPrice = calculateAdjustedPrice(product.price, product.format, size, product.sizePrices)
     for (let i = 0; i < qty; i++) {
       addItem(product, size, adjustedPrice)
     }
@@ -142,11 +142,11 @@ export function ProductDetail() {
 
             <div className="mt-4 flex items-baseline gap-2 font-mono">
               <span className="text-2xl font-semibold text-hunter-900">
-                {(calculateAdjustedPrice(product.price, product.format, size) * qty).toFixed(2)} €
+                {(calculateAdjustedPrice(product.price, product.format, size, product.sizePrices) * qty).toFixed(2)} €
               </span>
               {product.compareAtPrice && (
                 <span className="text-base text-ink-600 line-through">
-                  {(calculateAdjustedPrice(product.compareAtPrice, product.format, size) * qty).toFixed(2)} €
+                  {(calculateAdjustedPrice(product.compareAtPrice, product.format, size, product.sizePrices) * qty).toFixed(2)} €
                 </span>
               )}
             </div>
@@ -274,7 +274,7 @@ export function ProductDetail() {
               <MadeInFranceBadge />
             </div>
 
-            <ShippingReturnsBlock price={calculateAdjustedPrice(product.price, product.format, size) * qty} />
+            <ShippingReturnsBlock price={calculateAdjustedPrice(product.price, product.format, size, product.sizePrices) * qty} />
 
             <div className="mt-5">
               <AiVetBanner product={product} />

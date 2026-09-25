@@ -45,7 +45,7 @@ export function ProtocolCard({ protocol }: { protocol: Protocol }) {
 
       products.forEach((p) => {
         const defaultSize = p.sizes[0] || p.format
-        const adjustedPrice = calculateAdjustedPrice(p.price, p.format, defaultSize)
+        const adjustedPrice = calculateAdjustedPrice(p.price, p.format, defaultSize, p.sizePrices)
         addItem(p, defaultSize, adjustedPrice)
       })
 

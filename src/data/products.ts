@@ -6,6 +6,59 @@ import type { Product } from '../types'
  */
 export const PRODUCTS: Product[] = [
   {
+    id: '60',
+    slug: 'lambey-master-builder-stallion',
+    sku: 'LB201055',
+    name: 'Lambey - Master Builder Stallion',
+    category: 'alimentation',
+    categoryLabel: 'Aliments & CMV',
+    tagline:
+      'Aliment floconné pour accompagner la prise d’état et le développement musculaire du cheval adulte',
+    price: 117,
+    rating: 0,
+    reviewCount: 0,
+    format: 'Lot de 4 × 20 kg',
+    sizes: ['Lot de 4 × 20 kg', 'Lot de 50 × 20 kg'],
+    sizePrices: {
+      'Lot de 4 × 20 kg': 117,
+      'Lot de 50 × 20 kg': 1390,
+    },
+    description:
+      "Master Builder Stallion est un aliment floconné destiné aux chevaux adultes ayant des besoins énergétiques et protéiques soutenus, notamment lors d’une remise en état ou d’un programme de développement musculaire. Sa formule associe céréales floconnées, luzerne et matières grasses végétales.\n\nIl s’intègre dans une ration construite autour d’un fourrage de qualité, d’eau propre à volonté et d’un travail adapté. Toute évolution de ration doit être progressive et tenir compte de l’état corporel, de l’activité et des recommandations du vétérinaire ou du nutritionniste équin.",
+    benefits: [
+      'Aliment floconné pour chevaux adultes',
+      'Apport de protéines brutes : 12 %',
+      'Matières grasses brutes : 10 %',
+      'Amidon déclaré : 17 %',
+      'Disponible en lots de 80 kg ou 1 000 kg',
+      'Transition alimentaire progressive recommandée',
+    ],
+    composition: [
+      { label: 'Matières premières', value: 'Son, luzerne déshydratée, maïs floconné, huile de colza, orge floconnée, mélasse, orge soufflée, pois floconnés, pulpe de betterave, graines de lin extrudées et cuites, chicorée, minéraux et argiles.' },
+      { label: 'Protéines brutes', value: '12 %' },
+      { label: 'Matières grasses brutes', value: '10 %' },
+      { label: 'Cellulose brute', value: '9 %' },
+      { label: 'Cendres brutes', value: '7 %' },
+      { label: 'Amidon', value: '17 %' },
+    ],
+    posologie:
+      "Repère indicatif fabricant : environ 3,5 à 4,8 kg par jour pour un cheval adulte de 450 à 600 kg, selon l’intensité du travail. Fractionner la ration, maintenir un accès permanent au fourrage et à l’eau, et introduire tout nouvel aliment progressivement sur 7 à 14 jours. Adapter impérativement les quantités à l’état corporel, au fourrage distribué et à l’avis d’un professionnel de santé équine.",
+    nutritionAnalysis: {
+      analytical: [
+        { label: 'Protéines brutes', value: '12 %' },
+        { label: 'Matières grasses brutes', value: '10 %' },
+        { label: 'Cellulose brute', value: '9 %' },
+        { label: 'Cendres brutes', value: '7 %' },
+      ],
+      energy: [
+        { label: 'Amidon', value: '17 %' },
+      ],
+      notes:
+        'Les informations de formule et de distribution doivent toujours être vérifiées sur l’étiquette du lot livré.',
+    },
+    image: '/images/products/lambey-master-builder-stallion.jpg',
+  },
+  {
     id: '1',
     slug: 'cmv-entretien-performance',
     sku: 'CE2012',

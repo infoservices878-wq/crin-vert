@@ -33,6 +33,8 @@ export interface Product {
   reviewCount: number
   format: string
   sizes: string[]
+  /** Prix TTC par conditionnement lorsque la règle linéaire ne s'applique pas. */
+  sizePrices?: Record<string, number>
   description: string
   descriptionHtml?: string
   benefits: string[]

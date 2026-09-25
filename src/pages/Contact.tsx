@@ -72,7 +72,7 @@ export function Contact() {
 
       <div className="mt-10 grid gap-4 sm:grid-cols-3">
         <ContactInfoCard icon={Mail} title="Par e-mail" detail={CONTACT_EMAIL} />
-        <ContactInfoCard icon={Phone} title="Par Appel" detail="+33 7 48 24 88 69" />
+        <ContactInfoCard icon={Phone} title="Par appel" detail="+33 7 48 24 88 69" />
         <ContactInfoCard icon={Clock3} title="Notre délai" detail="Réponse sous 24 h ouvrées" />
       </div>
 

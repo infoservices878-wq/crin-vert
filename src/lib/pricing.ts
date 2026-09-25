@@ -37,7 +37,13 @@ export function calculateAdjustedPrice(
   basePrice: number,
   format: string,
   selectedSize: string,
+  sizePrices?: Record<string, number>,
 ): number {
+  const explicitPrice = sizePrices?.[selectedSize]
+  if (typeof explicitPrice === 'number' && Number.isFinite(explicitPrice)) {
+    return explicitPrice
+  }
+
   const baseMultiplier = extractSizeMultiplier(format)
   const selectedMultiplier = extractSizeMultiplier(selectedSize)
   let price = (basePrice * selectedMultiplier) / baseMultiplier
